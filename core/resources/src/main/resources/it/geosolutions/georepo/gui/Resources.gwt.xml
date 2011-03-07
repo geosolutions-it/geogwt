@@ -1,0 +1,15 @@
+  <!-- Inherit the core Web Toolkit stuff. -->
+<module>
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name='com.extjs.gxt.ui.GXT' />
+	<!--  
+	<inherits name="com.google.gwt.i18n.I18N"/>
+	
+	<extend-property name="locale" values="en"/>
+     -->
+     
+     <entry-point class='it.geosolutions.geogwt.gui.client.ResourcesEntryPoint' />
+     
+	<source path="client" />
+	
+</module>
