@@ -7,7 +7,7 @@
         <version>0.1-SNAPSHOT</version>
 	</parent>
     
-    <groupId>it.geosolutions.geogwt</groupId>
+    <groupId>it.geosolutions.geogwt.core</groupId>
     <artifactId>geogwt-core</artifactId>
 	<packaging>pom</packaging>
     <name>GeoGWT - Core</name>

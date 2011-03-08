@@ -58,4 +58,22 @@ public class GeoGWTEvents {
     /** The Constant INIT_MAPS_UI_MODULE. */
     public static final EventType INIT_MAPS_UI_MODULE = new EventType();
 
+    public static final EventType ATTACH_MAP_WIDGET = new EventType();
+
+    public static final EventType UPDATE_MAP_SIZE = new EventType();
+
+    public static final EventType ATTACH_TOOLBAR = new EventType();
+
+    public static final EventType ACTIVATE_DRAW_FEATURES = new EventType();
+
+    public static final EventType DEACTIVATE_DRAW_FEATURES = new EventType();
+
+    public static final EventType ERASE_FEATURES = new EventType();
+
+    public static final EventType ENABLE_DRAW_BUTTON = new EventType();
+
+    public static final EventType DISABLE_DRAW_BUTTON = new EventType();
+
+    public static final EventType ZOOM_TO_CENTER = new EventType();
+
 }

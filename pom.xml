@@ -24,6 +24,8 @@
 
     <modules>
         <module>core</module>
+		<module>widgets</module>
+		<module>web</module>
     </modules>
 
     <organization>
@@ -77,18 +79,28 @@
         <dependencies>
 
 	    <!-- =========================================================== -->
-	    <!--     GeoGWT GUI MODULES                                     -->
+	    <!--     GeoGWT Modules                                          -->
 	    <!-- =========================================================== -->
             <dependency>
-                <groupId>it.geosolutions.geogwt</groupId>
+                <groupId>it.geosolutions.geogwt.core</groupId>
                 <artifactId>geogwt-core</artifactId>
                 <version>${geogwt-version}</version>
             </dependency>
             <dependency>
-                <groupId>it.geosolutions.geogwt</groupId>
+                <groupId>it.geosolutions.geogwt.core</groupId>
                 <artifactId>geogwt-resources</artifactId>
                 <version>${geogwt-version}</version>
             </dependency>
+
+			
+	    <!-- =========================================================== -->
+	    <!--     GeoGWT Widgets                                          -->
+	    <!-- =========================================================== -->
+			<dependency>
+				<groupId>it.geosolutions.geogwt.widgets.map</groupId>
+				<artifactId>mappanel</artifactId>
+                <version>${geogwt-version}</version>
+			</dependency>
 
 	    <!-- =========================================================== -->
 	    <!--     Spring                                                  -->
@@ -167,7 +179,6 @@
                 <version>${spring.version}</version>
             </dependency>
 
-
 			<!-- SCOPE TEST -->
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -219,7 +230,7 @@
                 <version>2.1.1</version>
             </dependency>
 
-      <!-- GeoAPI and its dependencies -->
+			<!-- GeoAPI and its dependencies -->
             <dependency>
                 <groupId>org.opengis</groupId>
                 <artifactId>geoapi</artifactId>
@@ -242,8 +253,8 @@
             </dependency>
 			
 			<!-- =========================================================== -->
-	    <!--     GEOTOOLS                                                -->
-	    <!-- =========================================================== -->			
+			<!--     GEOTOOLS                                                -->
+			<!-- =========================================================== -->			
 	        <dependency>
 	            <groupId>org.geotools</groupId>
 	            <artifactId>gt-main</artifactId>

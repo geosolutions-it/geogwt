@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+	<!-- pick up all spring application contexts -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+	           classpath*:/applicationContext-common.xml
+	           classpath:applicationContext-client.xml
+	           classpath*:applicationContext.xml
+	       </param-value>
+	</context-param>
+	  
+  	<!-- Servlets -->
+	<servlet>
+	  <servlet-name>remoteLoggingServiceImpl</servlet-name>
+	  <servlet-class>com.google.gwt.libideas.logging.server.RemoteLoggingServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	  <servlet-name>remoteLoggingServiceImpl</servlet-name>
+	  <url-pattern>/mappanel_div/logging</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>GwtOpenlayersProxy</servlet-name>
+		<servlet-class>
+			org.gwtopenmaps.openlayers.server.GwtOpenLayersProxyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GwtOpenlayersProxy</servlet-name>
+		<url-pattern>/gwtOpenLayersProxy/*</url-pattern>
+	</servlet-mapping>
+		
+  	<!-- Default page to serve -->
+	<welcome-file-list>
+	  <welcome-file>Mappanel_div.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>

@@ -3,15 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>it.geosolutions.geogwt</groupId>
+		<groupId>it.geosolutions.geogwt.core</groupId>
 		<artifactId>geogwt-core</artifactId>
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>it.geosolutions.geogwt</groupId>
+	<groupId>it.geosolutions.geogwt.core</groupId>
 	<artifactId>geogwt-resources</artifactId>
 	<packaging>jar</packaging>
-
 	<name>GeoGWT - Resources</name>
 
 	<properties>
@@ -47,6 +46,30 @@
 			<version>1.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- GXT -->
+		<dependency>
+			<groupId>com.extjs</groupId>
+			<artifactId>gxt</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-incubator</artifactId>
+		</dependency>
+
+		<!-- GWT-OL Resources -->
+		<dependency>
+			<groupId>org.gwtopenmaps.openlayers</groupId>
+			<artifactId>openlayers_gwt</artifactId>
+			<version>0.6</version>
+		</dependency>
+
 		<!-- logging dependencies, delegate all to slf4j and use logback -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -78,7 +101,6 @@
 		<dependency>
 			<groupId>javax.xml.ws</groupId>
 			<artifactId>jaxws-api</artifactId>
-<!--			<version>2.1</version>-->
 		</dependency>
 
 		<dependency>
@@ -107,12 +129,14 @@
 
 	<build>
 		<plugins>
-			<!-- ... or ask the plugin to detect them based on gwt modules files and 
-				copy the required java sources -->
+			<!--
+				... or ask the plugin to detect them based on gwt modules files and
+				copy the required java sources
+			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
-        <artifactId>gwt-maven-plugin</artifactId>
-        <version>2.1.0-1</version>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>2.1.0-1</version>
 				<executions>
 					<!-- GWT version detected from dependencyManagement -->
 					<execution>

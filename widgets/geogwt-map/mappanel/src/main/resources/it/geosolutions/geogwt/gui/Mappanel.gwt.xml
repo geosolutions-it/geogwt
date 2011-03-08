@@ -1,0 +1,21 @@
+  <!-- Inherit the core Web Toolkit stuff. -->
+<module>
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name='com.extjs.gxt.ui.GXT' />
+	<inherits name='com.google.gwt.widgetideas.WidgetIdeas'/>
+	<inherits name='org.gwtopenmaps.openlayers.OpenLayers' />
+
+    <inherits name='it.geosolutions.geogwt.gui.Resources' />
+
+	<entry-point class='it.geosolutions.geogwt.gui.client.Mappanel' />
+
+	<source path="client" />
+
+	<script src="lib/proj4js-compressed.js" />
+	<script src="lib/projCode/tmerc.js" />
+	<script src="lib/projCode/merc.js" />
+	<script src="lib/projCode/utm.js" />
+	<script src="lib/defs/EPSG4326.js" />
+	<script src="lib/defs/EPSG900913.js" />
+	
+</module>

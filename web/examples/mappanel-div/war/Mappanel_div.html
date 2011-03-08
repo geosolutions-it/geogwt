@@ -1,0 +1,74 @@
+<!doctype html>
+<!-- The DOCTYPE declaration above will set the    -->
+<!-- browser's rendering engine into               -->
+<!-- "Standards Mode". Replacing this declaration  -->
+<!-- with a "Quirks Mode" doctype may lead to some -->
+<!-- differences in layout.                        -->
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <!--                                                               -->
+    <!-- Consider inlining CSS to reduce the number of requested files -->
+    <!--                                                               -->
+    <link type="text/css" rel="stylesheet" href="mappanel_div/resources/css/gxt-all.css" />
+    <link type="text/css" rel="stylesheet" href="Mappanel_div.css">
+	<script language='javascript' src='mappanel_div/lib/OpenLayers.js'></script>
+
+    <!--                                           -->
+    <!-- Any title is fine                         -->
+    <!--                                           -->
+    <title>Web Application Starter Project</title>
+    
+    <!--                                           -->
+    <!-- This script loads your compiled module.   -->
+    <!-- If you add any GWT meta tags, they must   -->
+    <!-- be added before this line.                -->
+    <!--                                           -->
+    <script type="text/javascript" language="javascript" src="mappanel_div/mappanel_div.nocache.js"></script>
+    
+    <!-- custom properties ================================================= -->
+	<script src="https://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+	
+  </head>
+
+  <!--                                           -->
+  <!-- The body can have arbitrary html, or      -->
+  <!-- you can leave the body empty if you want  -->
+  <!-- to create a completely dynamic UI.        -->
+  <!--                                           -->
+  <body style="overflow: hidden"> 
+
+    <!-- OPTIONAL: include this if you want history support -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
+    
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+
+    <h1 align="left">GeoGWT Web Examples - mappanel-div</h1>
+	<p align="left">
+		This example shows the how to create a MapPanel with a map that has already been created. See mappanel-window.html for an example that creates the MapPanel without creating the map first.
+		<br/>
+		The source code is available here.
+		<br/>
+	</p>
+
+	<div id="loading">
+		<div class="loading-indicator">
+			<!-- img src="mappanel_div/resources/images/gxt/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/ -->
+			<a href="http://extjs.com">GeoGWT 0.1-SNAPSHOT</a><br />
+			<span id="loading-msg">Loading&nbsp;app...</span>
+		</div>
+	</div>
+	
+	<div id="mappanel" style="height: 333px; width: 558px;">
+	</div>
+	
+  </body>
+</html>
