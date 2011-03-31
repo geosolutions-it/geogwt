@@ -57,6 +57,7 @@ public class MapController extends Controller {
                 GeoGWTEvents.ATTACH_TOOLBAR,
                 GeoGWTEvents.ACTIVATE_DRAW_FEATURES, 
                 GeoGWTEvents.DEACTIVATE_DRAW_FEATURES,
+                GeoGWTEvents.DRAW_AOI_ON_MAP,
                 GeoGWTEvents.ERASE_FEATURES, 
                 GeoGWTEvents.ENABLE_DRAW_BUTTON,
                 GeoGWTEvents.DISABLE_DRAW_BUTTON, 

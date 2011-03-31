@@ -41,7 +41,7 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.button.ButtonBar;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -53,7 +53,7 @@ public class MapView extends View {
     private MapLayoutWidget mapLayout;
 
     /** The button bar. */
-    private ButtonBar buttonBar;
+    private LayoutContainer buttonBar;
 
     /**
      * Instantiates a new map view.
@@ -74,6 +74,11 @@ public class MapView extends View {
      */
     @Override
     protected void handleEvent(AppEvent event) {
+    	
+//        if (event.getType() == GeoGWTEvents.INIT_MAPS_UI_MODULE) {
+//            this.mapLayout.onAddToPanel((ContentPanel) event.getData());
+//        }
+    	
         if (event.getType() == GeoGWTEvents.ATTACH_MAP_WIDGET) {
             this.mapLayout.onAddToPanel((ContentPanel) event.getData());
         }
@@ -82,6 +87,18 @@ public class MapView extends View {
             this.mapLayout.updateMapSize();
         }
 
+//        if (event.getType() == GeoGWTEvents.INIT_TOOLBAR) {
+//        	onInitToolbar(event);
+//        }            
+                
+//        if (event.getType() == GeoGWTEvents.ATTACH_TOOLBAR) {
+//        	onAttachToolbar(event);
+//        } 
+
+        if (event.getType() == GeoGWTEvents.DRAW_AOI_ON_MAP) {
+            onDrawAoiOnMap(event);
+        }        
+        
         if (event.getType() == GeoGWTEvents.ACTIVATE_DRAW_FEATURES) {
             onActivateDrawFeature();
         }
@@ -138,11 +155,22 @@ public class MapView extends View {
     }
 
     /**
+     * On draw aoi on map.
+     * 
+     * @param event
+     *            the event
+     */
+    private void onDrawAoiOnMap(AppEvent event) {
+        this.mapLayout.drawAoiOnMap((String) event.getData());
+//        Dispatcher.forwardEvent(GeoRepoEvents.SEND_INFO_MESSAGE, new String[] { "AOI Service",
+//                "Zoom to selected AOI." });
+    }    
+    
+    /**
      * On activate draw feature.
      */
     private void onActivateDrawFeature() {
         this.mapLayout.activateDrawFeature();
-
     }
 
     /**
@@ -150,7 +178,6 @@ public class MapView extends View {
      */
     private void onDeactivateDrawFeature() {
         this.mapLayout.deactivateDrawFeature();
-
-    }
+    }    
 
 }

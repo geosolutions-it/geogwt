@@ -104,7 +104,7 @@ public class MapLayoutWidget extends LayoutContainer {
      */
     public MapLayoutWidget() {
         super();
-        this.createMapOption(true);
+        this.createMapOption(false);
     }
 
     /**
@@ -126,6 +126,7 @@ public class MapLayoutWidget extends LayoutContainer {
                     20037508.34));
             this.defaultMapOptions.setMaxResolution(new Double(156543.0339).floatValue());
         } else {
+        	this.defaultMapOptions.setUnits(MapUnits.DEGREES);
             this.defaultMapOptions.setProjection("EPSG:4326");
         }
 
@@ -150,15 +151,20 @@ public class MapLayoutWidget extends LayoutContainer {
             // this.createBaseGoogleLayer();
         } else {
             WMSParams wmsParams = new WMSParams();
-            wmsParams.setFormat("image/png");
-            wmsParams.setLayers("basic");
+            wmsParams.setFormat("image/jpeg");
+            wmsParams.setLayers("world.topo.bathy.2004");
             wmsParams.setStyles("");
 
             WMSOptions wmsLayerParams = new WMSOptions();
             wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
+            wmsLayerParams.setBuffer(0);
 
-            layer = new WMS("Basic WMS", "http://labs.metacarta.com/wms/vmap0", wmsParams,
-                    wmsLayerParams);
+//            layer = new WMS("Basic WMS", "http://labs.metacarta.com/wms/vmap0", wmsParams,
+//                    wmsLayerParams);
+            
+            layer = new WMS("Blue Marble NG topographic & bathymetric shading", "http://demo1.geo-solutions.it/playground/wms",
+            		wmsParams, wmsLayerParams);            
+                        
             this.map.addLayer(layer);
         }
 
@@ -192,7 +198,7 @@ public class MapLayoutWidget extends LayoutContainer {
         this.vector = new Vector("GeoRepo Vector Layer", vectorOption);
         this.map.addLayer(vector);
 
-        this.initDrawFeatures(isGoogle);
+        //this.initDrawFeatures(isGoogle);
     }
 
     /**
@@ -251,7 +257,8 @@ public class MapLayoutWidget extends LayoutContainer {
         center.add(mapWidget);
         center.layout();
 
-        this.map.setCenter(new LonLat(0, 0), 3);
+        //this.map.zoomToExtent(new Bounds(5, 35, 20 ,45));
+        this.map.setCenter(new LonLat(10, 40), 5);
     }
 
     /**
@@ -262,8 +269,8 @@ public class MapLayoutWidget extends LayoutContainer {
      */
     public void drawAoiOnMap(String wkt) {
         this.eraseFeatures();
-        MultiPolygon geom = MultiPolygon.narrowToMultiPolygon(Geometry.fromWKT(wkt).getJSObject());
-        geom.transform(new Projection("EPSG:4326"), new Projection("EPSG:900913"));
+        Geometry geom = Geometry.narrowToGeometry(Geometry.fromWKT(wkt).getJSObject());
+        //geom.transform(new Projection("EPSG:4326"), new Projection("EPSG:900913"));
         VectorFeature vectorFeature = new VectorFeature(geom);
         this.vector.addFeature(vectorFeature);
         this.map.zoomToExtent(geom.getBounds());

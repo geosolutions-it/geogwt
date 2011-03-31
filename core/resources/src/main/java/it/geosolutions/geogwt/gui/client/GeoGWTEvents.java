@@ -62,8 +62,10 @@ public class GeoGWTEvents {
 
     public static final EventType UPDATE_MAP_SIZE = new EventType();
 
-    public static final EventType ATTACH_TOOLBAR = new EventType();
+    public static final EventType INIT_TOOLBAR = new EventType();
 
+    public static final EventType ATTACH_TOOLBAR = new EventType();
+    
     public static final EventType ACTIVATE_DRAW_FEATURES = new EventType();
 
     public static final EventType DEACTIVATE_DRAW_FEATURES = new EventType();
@@ -75,5 +77,7 @@ public class GeoGWTEvents {
     public static final EventType DISABLE_DRAW_BUTTON = new EventType();
 
     public static final EventType ZOOM_TO_CENTER = new EventType();
+
+	public static final EventType DRAW_AOI_ON_MAP = new EventType();
 
 }
