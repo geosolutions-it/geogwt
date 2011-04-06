@@ -65,29 +65,35 @@ public class GeoGWTEvents {
     public static final EventType INIT_TOOLBAR = new EventType();
 
     public static final EventType ATTACH_TOOLBAR = new EventType();
-    	
+
     public static final EventType ENABLE_DRAW_BUTTON = new EventType();
 
     public static final EventType DISABLE_DRAW_BUTTON = new EventType();
 
+    public static final EventType ZOOM_TO_MAX_EXTENT = new EventType();
+
     public static final EventType ZOOM_TO_CENTER = new EventType();
-    
-	/** MAP LAYER MANAGEMENT EVENTS**/
-	
-	public static final EventType ADD_LAYER = new EventType();
-	
-	public static final EventType REMOVE_LAYER = new EventType();
-	
-	public static final EventType UPDATE_LAYER = new EventType();
+
+    public static final EventType ZOOM = new EventType();
+
+    public static final EventType SET_MAP_CENTER = new EventType();
+
+    /** MAP LAYER MANAGEMENT EVENTS **/
+
+    public static final EventType ADD_LAYER = new EventType();
+
+    public static final EventType REMOVE_LAYER = new EventType();
+
+    public static final EventType UPDATE_LAYER = new EventType();
 
     /** LAYER FEATURES MANAGEMENT EVENTS **/
-	
+
     public static final EventType ACTIVATE_DRAW_FEATURES = new EventType();
 
     public static final EventType DEACTIVATE_DRAW_FEATURES = new EventType();
 
     public static final EventType ERASE_FEATURES = new EventType();
 
-	public static final EventType DRAW_AOI_ON_MAP = new EventType();
-	
+    public static final EventType DRAW_WKT_ON_MAP = new EventType();
+
 }

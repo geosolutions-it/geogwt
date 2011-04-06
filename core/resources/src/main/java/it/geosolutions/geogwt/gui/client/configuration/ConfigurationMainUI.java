@@ -39,15 +39,15 @@ package it.geosolutions.geogwt.gui.client.configuration;
 public enum ConfigurationMainUI {
 
     /** The CENTER. */
-    CENTER("CENTER_PANEL"), 
- 
- /** The EAST. */
-    EAST("EAST_PANEL"), 
- 
- /** The SOUTH. */
-    SOUTH("SOUTH_PANEL"), 
- 
- /** The VIEWPORT. */
+    CENTER("CENTER_PANEL"),
+
+    /** The EAST. */
+    EAST("EAST_PANEL"),
+
+    /** The SOUTH. */
+    SOUTH("SOUTH_PANEL"),
+
+    /** The VIEWPORT. */
     VIEWPORT("VIEWPORT");
 
     /** The value. */

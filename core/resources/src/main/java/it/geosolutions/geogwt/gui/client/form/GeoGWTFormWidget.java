@@ -197,6 +197,6 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
 
     public void injectEvent() {
         // TODO Auto-generated method stub
-        
+
     }
 }

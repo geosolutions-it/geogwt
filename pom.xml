@@ -28,6 +28,17 @@
 		<module>web</module>
     </modules>
 
+	<distributionManagement>
+		  <!--..................................-->
+		  <!--      GeoSolutions Repository     -->
+		  <!--..................................-->
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>geosolutions</id>
+            <url>ftp://maven.geo-solutions.it</url>
+        </repository>
+    </distributionManagement>
+	
     <organization>
         <name>GeoSolutions</name>
         <url>http://www.geo-solutions.it</url>
@@ -447,5 +458,52 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <plugins>
+            <!-- compilation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <debug>true</debug>
+                    <encoding>UTF-8</encoding>
+					       <!--
+					           On the win32 build box the compiler oom's due to the compiler accumulating
+					           too many classes in the permanent generation, similar to GEOT-2462
+					       -->
+                    <fork>true</fork>
+                    <meminitial>64M</meminitial>
+                    <maxmem>1512M</maxmem>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>false</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ftp</artifactId>
+                <version>1.0-beta-6</version>
+            </extension>
+        </extensions>
+
+    </build>
 	
 </project>

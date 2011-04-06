@@ -57,7 +57,7 @@ public interface GeoGWTIcons extends ImageBundle {
      */
     @Resource("arrow_down.png")
     AbstractImagePrototype arrowDown();
-    
+
     /**
      * Arrow up.
      * 

@@ -53,15 +53,24 @@ public class MapController extends Controller {
         registerEventTypes(
                 GeoGWTEvents.INIT_MAPS_UI_MODULE, 
                 GeoGWTEvents.ATTACH_MAP_WIDGET,
-                GeoGWTEvents.UPDATE_MAP_SIZE, 
+                
+                GeoGWTEvents.UPDATE_MAP_SIZE,
+                
                 GeoGWTEvents.ATTACH_TOOLBAR,
+                
                 GeoGWTEvents.ACTIVATE_DRAW_FEATURES, 
                 GeoGWTEvents.DEACTIVATE_DRAW_FEATURES,
-                GeoGWTEvents.DRAW_AOI_ON_MAP,
-                GeoGWTEvents.ERASE_FEATURES, 
-                GeoGWTEvents.ENABLE_DRAW_BUTTON,
-                GeoGWTEvents.DISABLE_DRAW_BUTTON, 
-                GeoGWTEvents.ZOOM_TO_CENTER 
+                GeoGWTEvents.DRAW_WKT_ON_MAP, 
+                GeoGWTEvents.ERASE_FEATURES,
+                GeoGWTEvents.ENABLE_DRAW_BUTTON, 
+                GeoGWTEvents.DISABLE_DRAW_BUTTON,
+                
+                GeoGWTEvents.ADD_LAYER,
+                GeoGWTEvents.REMOVE_LAYER,
+                GeoGWTEvents.ZOOM_TO_MAX_EXTENT,
+                GeoGWTEvents.ZOOM_TO_CENTER,
+                GeoGWTEvents.ZOOM,
+                GeoGWTEvents.SET_MAP_CENTER
         );
     }
 

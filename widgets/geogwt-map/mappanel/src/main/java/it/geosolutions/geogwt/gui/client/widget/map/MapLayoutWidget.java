@@ -35,10 +35,10 @@ package it.geosolutions.geogwt.gui.client.widget.map;
 import it.geosolutions.geogwt.gui.client.configuration.GenericClientTool;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.gwtopenmaps.openlayers.client.Bounds;
-import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapUnits;
@@ -51,17 +51,12 @@ import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
-import org.gwtopenmaps.openlayers.client.geometry.MultiPolygon;
 import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.OSM;
 import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
-import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
-import org.gwtopenmaps.openlayers.client.layer.WMS;
-import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
-import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
@@ -82,10 +77,7 @@ public class MapLayoutWidget extends LayoutContainer {
     private Map map;
 
     /** The layer. */
-    private Layer layer;
-
-    /** The osm. */
-    private Layer osm;
+    private List<Layer> layers;
 
     /** The center. */
     private ContentPanel center;
@@ -103,10 +95,19 @@ public class MapLayoutWidget extends LayoutContainer {
      * Instantiates a new map layout widget.
      */
     public MapLayoutWidget() {
-        super();
-        this.createMapOption(false);
+        this(false);
     }
 
+    public MapLayoutWidget(boolean isGoogle) {
+        super();
+        this.createMapOption(isGoogle);
+    }
+    
+    public MapLayoutWidget(MapOptions mapOptions) {
+        super();
+        this.initMapWidget(mapOptions, false);
+    }
+    
     /**
      * Creates the map option.
      * 
@@ -126,7 +127,7 @@ public class MapLayoutWidget extends LayoutContainer {
                     20037508.34));
             this.defaultMapOptions.setMaxResolution(new Double(156543.0339).floatValue());
         } else {
-        	this.defaultMapOptions.setUnits(MapUnits.DEGREES);
+            this.defaultMapOptions.setUnits(MapUnits.DEGREES);
             this.defaultMapOptions.setProjection("EPSG:4326");
         }
 
@@ -144,30 +145,13 @@ public class MapLayoutWidget extends LayoutContainer {
      */
     private void initMapWidget(MapOptions defaultMapOptions, boolean isGoogle) {
         mapWidget = new MapWidget("100%", "100%", defaultMapOptions);
-        this.map = mapWidget.getMap();
+        this.setMap(mapWidget.getMap());
         // this.map.addControl(new LayerSwitcher());
         if (isGoogle) {
             this.createOSM();
             // this.createBaseGoogleLayer();
-        } else {
-            WMSParams wmsParams = new WMSParams();
-            wmsParams.setFormat("image/jpeg");
-            wmsParams.setLayers("world.topo.bathy.2004");
-            wmsParams.setStyles("");
-
-            WMSOptions wmsLayerParams = new WMSOptions();
-            wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
-            wmsLayerParams.setBuffer(0);
-
-//            layer = new WMS("Basic WMS", "http://labs.metacarta.com/wms/vmap0", wmsParams,
-//                    wmsLayerParams);
-            
-            layer = new WMS("Blue Marble NG topographic & bathymetric shading", "http://demo1.geo-solutions.it/playground/wms",
-            		wmsParams, wmsLayerParams);            
-                        
-            this.map.addLayer(layer);
         }
-
+        
         this.initVectorLayer(isGoogle);
     }
 
@@ -179,11 +163,110 @@ public class MapLayoutWidget extends LayoutContainer {
         // osmOption.setDisplayOutsideMaxExtent(true);
         // osmOption.setWrapDateLine(true);
 
-        this.osm = OSM.THIS("OpenStreetMap", OpenLayers.getProxyHost()
-                + "http://tile.openstreetmap.org/${z}/${x}/${y}.png", osmOption);// OSM.Mapnik("OpenStreetMap",
+        if (this.getLayers() == null) {
+            this.setLayers(new LinkedList<Layer>());
+        }
+        this.getLayers().add(OSM.THIS("OpenStreetMap", OpenLayers.getProxyHost()
+                + "http://tile.openstreetmap.org/${z}/${x}/${y}.png", osmOption));// OSM.Mapnik("OpenStreetMap",
         // osmOption);
-        this.map.addLayer(osm);
+        
+        this.getMap().addLayers(this.getLayers().toArray(new Layer[1]));
     }
+
+    /**
+     * On add to center panel.
+     * 
+     * @param center
+     *            the center
+     */
+    public void onAddToPanel(ContentPanel center) {
+        this.center = center;
+        center.add(mapWidget);
+        center.layout();
+
+        if (this.getMap() != null && this.getLayers() != null && this.getLayers().size() > 0) {
+            // this.map.zoomToExtent(new Bounds(5, 35, 20 ,45));
+            // this.map.setCenter(new LonLat(10, 40));
+            // this.map.zoomTo(5);
+        }
+    }
+    
+    // ////////////////////////////////////////////////////////////////////////
+    //
+    // Mapping Utility Methods
+    //
+    // ////////////////////////////////////////////////////////////////////////
+    
+    /**
+     * Update map size.
+     */
+    public void updateMapSize() {
+        this.getMap().updateSize();
+        this.center.layout();
+    }
+
+    // private void createBaseGoogleLayer() {
+    // GoogleOptions option = new GoogleOptions();
+    // option.setType(GMapType.G_NORMAL_MAP);
+    // option.setSphericalMercator(true);
+    //
+    // layer = new Google("Google Normal", option);
+    // this.map.addLayer(layer);
+    // }
+
+    /**
+     * Add a layer to the map
+     */
+    public void addLayer(Layer layer) {
+        if (this.map != null) {
+            if (this.layers == null) {
+                this.layers = new LinkedList<Layer>();
+            }
+            
+            this.layers.add(layer);
+            
+            this.map.addLayer(layer);
+        }
+    }
+
+    /**
+     * Remove layer from the map
+     */
+    public void removeLayer(Layer layer) {
+        if (this.map != null) {
+            if (this.layers != null) {
+                for (Layer l : this.layers) {
+                    if (l.getId().equals(layer.getId()) || 
+                            l.getName().equals(layer.getName())) {
+                        this.map.removeLayer(l);
+                        this.layers.remove(l);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Creates the style.
+     * 
+     * @return the style
+     */
+    private Style createDefaultStyle() {
+        Style style = new Style();
+        style.setStrokeColor("#000000");
+        style.setStrokeWidth(1);
+        style.setFillColor("#FF0000");
+        style.setFillOpacity(0.5);
+        style.setPointRadius(5);
+        style.setStrokeOpacity(1.0);
+        return style;
+    }
+    
+    // ////////////////////////////////////////////////////////////////////////
+    //
+    // Mapping Vectorial Methods
+    //
+    // ////////////////////////////////////////////////////////////////////////
 
     /**
      * Inits the vector layer.
@@ -193,12 +276,12 @@ public class MapLayoutWidget extends LayoutContainer {
      */
     private void initVectorLayer(boolean isGoogle) {
         VectorOptions vectorOption = new VectorOptions();
-        vectorOption.setStyle(this.createStyle());
+        vectorOption.setStyle(this.createDefaultStyle());
         vectorOption.setDisplayInLayerSwitcher(false);
         this.vector = new Vector("GeoRepo Vector Layer", vectorOption);
-        this.map.addLayer(vector);
+        this.getMap().addLayer(vector);
 
-        //this.initDrawFeatures(isGoogle);
+        // this.initDrawFeatures(isGoogle);
     }
 
     /**
@@ -207,7 +290,7 @@ public class MapLayoutWidget extends LayoutContainer {
      * @param isGoogle
      *            the is google
      */
-    private void initDrawFeatures(final boolean isGoogle) {
+    private void initDrawFeaturesControl(final boolean isGoogle) {
         FeatureAddedListener listener = new FeatureAddedListener() {
             public void onFeatureAdded(VectorFeature vf) {
                 org.gwtopenmaps.openlayers.client.geometry.Polygon aoi = org.gwtopenmaps.openlayers.client.geometry.Polygon
@@ -227,54 +310,52 @@ public class MapLayoutWidget extends LayoutContainer {
 
         this.drawPolygon = new DrawFeature(vector, new PolygonHandler(), drawPolygonFeatureOptions);
 
-        this.map.addControl(this.drawPolygon);
+        this.getMap().addControl(this.drawPolygon);
     }
-
+    
     /**
-     * Creates the style.
-     * 
-     * @return the style
+     * Activate draw feature.
      */
-    private Style createStyle() {
-        Style style = new Style();
-        style.setStrokeColor("#000000");
-        style.setStrokeWidth(1);
-        style.setFillColor("#FF0000");
-        style.setFillOpacity(0.5);
-        style.setPointRadius(5);
-        style.setStrokeOpacity(1.0);
-        return style;
+    public void activateDrawFeature() {
+        this.drawPolygon.activate();
     }
 
     /**
-     * On add to center panel.
-     * 
-     * @param center
-     *            the center
+     * Deactivate draw feature.
      */
-    public void onAddToPanel(ContentPanel center) {
-        this.center = center;
-        center.add(mapWidget);
-        center.layout();
-
-        //this.map.zoomToExtent(new Bounds(5, 35, 20 ,45));
-        this.map.setCenter(new LonLat(10, 40), 5);
+    public void deactivateDrawFeature() {
+        this.drawPolygon.deactivate();
     }
 
     /**
-     * Draw aoi on map.
+     * Erase features.
+     */
+    public void eraseFeatures() {
+        this.vector.destroyFeatures();
+    }
+
+    /**
+     * Draw WKT Geometry on map.
      * 
      * @param wkt
      *            the wkt
      */
-    public void drawAoiOnMap(String wkt) {
-        this.eraseFeatures();
-        Geometry geom = Geometry.narrowToGeometry(Geometry.fromWKT(wkt).getJSObject());
-        //geom.transform(new Projection("EPSG:4326"), new Projection("EPSG:900913"));
-        VectorFeature vectorFeature = new VectorFeature(geom);
-        this.vector.addFeature(vectorFeature);
-        this.map.zoomToExtent(geom.getBounds());
+    public void drawWKTOnMap(String wkt) {
+        if (this.vector != null) {
+            this.eraseFeatures();
+            Geometry geom = Geometry.narrowToGeometry(Geometry.fromWKT(wkt).getJSObject());
+            // geom.transform(new Projection("EPSG:4326"), new Projection("EPSG:900913"));
+            VectorFeature vectorFeature = new VectorFeature(geom);
+            this.vector.addFeature(vectorFeature);
+            this.getMap().zoomToExtent(geom.getBounds());
+        }
     }
+    
+    // ////////////////////////////////////////////////////////////////////////
+    //
+    // Getters and Setters
+    //
+    // ////////////////////////////////////////////////////////////////////////
 
     /**
      * Gets the map.
@@ -292,30 +373,6 @@ public class MapLayoutWidget extends LayoutContainer {
      */
     public MapWidget getMapWidget() {
         return mapWidget;
-    }
-
-    /**
-     * Update map size.
-     */
-    public void updateMapSize() {
-        this.map.updateSize();
-        this.center.layout();
-    }
-
-    // private void createBaseGoogleLayer() {
-    // GoogleOptions option = new GoogleOptions();
-    // option.setType(GMapType.G_NORMAL_MAP);
-    // option.setSphericalMercator(true);
-    //
-    // layer = new Google("Google Normal", option);
-    // this.map.addLayer(layer);
-    // }
-
-    /**
-     * Erase features.
-     */
-    public void eraseFeatures() {
-        this.vector.destroyFeatures();
     }
 
     /**
@@ -339,17 +396,24 @@ public class MapLayoutWidget extends LayoutContainer {
     }
 
     /**
-     * Activate draw feature.
+     * @param map the map to set
      */
-    public void activateDrawFeature() {
-        this.drawPolygon.activate();
+    public void setMap(Map map) {
+        this.map = map;
     }
 
     /**
-     * Deactivate draw feature.
+     * @param layers the layers to set
      */
-    public void deactivateDrawFeature() {
-        this.drawPolygon.deactivate();
+    public void setLayers(List<Layer> layers) {
+        this.layers = layers;
+    }
+
+    /**
+     * @return the layers
+     */
+    public List<Layer> getLayers() {
+        return layers;
     }
 
 }

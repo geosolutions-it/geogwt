@@ -50,12 +50,8 @@ public class MessagesController extends Controller {
      * Instantiates a new messages controller.
      */
     public MessagesController() {
-        registerEventTypes(
-                GeoGWTEvents.INIT_RESOURCES_MODULE, 
-                GeoGWTEvents.SEND_ALERT_MESSAGE,
-                GeoGWTEvents.SEND_ERROR_MESSAGE, 
-                GeoGWTEvents.SEND_INFO_MESSAGE
-        );
+        registerEventTypes(GeoGWTEvents.INIT_RESOURCES_MODULE, GeoGWTEvents.SEND_ALERT_MESSAGE,
+                GeoGWTEvents.SEND_ERROR_MESSAGE, GeoGWTEvents.SEND_INFO_MESSAGE);
     }
 
     /*

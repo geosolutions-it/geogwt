@@ -47,6 +47,7 @@ public interface ApplicationMessages extends Messages {
     public String applicationName();
 
     public String deleteButtonLabel();
+
     public String drawFeatureToolTip();
 
     public String foundLabel();
@@ -54,17 +55,23 @@ public interface ApplicationMessages extends Messages {
     public String pleaseWaitMessage();
 
     public String recordLabel();
+
     public String recordPluralLabel();
+
     public String recordNotFoundMessage();
+
     public String remoteServiceName();
+
     public String resetLabel();
 
     public String savePending();
+
     public String saveToolTip();
 
     public String wktAbbreviation();
 
     public String zoomInToolTip();
+
     public String zoomOutToolTip();
 
     // ///////////////////////////
