@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="it.geosolutions.geogwt.web.examples" />
+
+	<!-- Startup service -->
+	<bean id="geogwtStartupService" class="it.geosolutions.geogwt.web.examples.service.impl.StartupService">
+	</bean>
+	
+	<!-- Toolbar configuration -->
+	<bean name="toolbarItemManager" class="it.geosolutions.geogwt.gui.client.ToolbarItemManager">
+		<property name="clientTools">
+			<list>
+				<ref bean="toolbarSeparator" />
+				<ref bean="zoomIn" />
+				<ref bean="zoomOut" />
+				<ref bean="drawFeature" />
+			</list>
+		</property>
+	</bean>
+
+	<bean name="zoomIn"
+		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
+		<property name="id" value="zoomIn" />
+		<property name="type" value="button" />
+		<property name="enabled" value="true" />
+		<property name="order" value="10" />
+	</bean>
+
+	<bean name="zoomOut"
+		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
+		<property name="id" value="zoomOut" />
+		<property name="type" value="button" />
+		<property name="enabled" value="true" />
+		<property name="order" value="20" />
+	</bean>
+
+	<bean name="toolbarSeparator"
+		class="it.geosolutions.geogwt.gui.client.configuration.GenericClientTool">
+		<property name="id" value="ToolbarSeparator" />
+		<property name="order" value="30" />
+	</bean>
+
+	<bean name="drawFeature"
+		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
+		<property name="id" value="drawFeature" />
+		<property name="type" value="toggle" />
+		<property name="enabled" value="false" />
+		<property name="order" value="50" />
+	</bean>
+
+</beans>
