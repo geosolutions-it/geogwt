@@ -55,6 +55,12 @@ public class GeoGWTEvents {
     /** The Constant SEND_INFO_MESSAGE. */
     public static final EventType SEND_INFO_MESSAGE = new EventType();
 
+    
+    public static final EventType SAVE = new EventType();
+    
+    public static final EventType LOGOUT = new EventType();
+
+  
     /** The Constant INIT_MAPS_UI_MODULE. */
     public static final EventType INIT_MAPS_UI_MODULE = new EventType();
 

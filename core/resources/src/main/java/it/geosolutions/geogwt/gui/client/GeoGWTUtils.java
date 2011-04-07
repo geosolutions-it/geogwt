@@ -44,7 +44,7 @@ public class GeoGWTUtils {
     private static GeoGWTUtils INSTANCE;
 
     /** The global configuration. */
-    private IGeoGWTConfiguration globalConfiguration;
+    private IGeoGWTConfiguration geoGWTGlobalConfiguration;
 
     /**
      * Gets the single instance of GeoGWTUtils.
@@ -64,17 +64,17 @@ public class GeoGWTUtils {
      * @return the global configuration
      */
     public IGeoGWTConfiguration getGlobalConfiguration() {
-        return globalConfiguration;
+        return geoGWTGlobalConfiguration;
     }
 
     /**
      * Sets the global configuration.
      * 
-     * @param globalConfiguration
+     * @param geoGWTGlobalConfiguration
      *            the new global configuration
      */
     public void setGlobalConfiguration(IGeoGWTConfiguration globalConfiguration) {
-        this.globalConfiguration = globalConfiguration;
+        this.geoGWTGlobalConfiguration = globalConfiguration;
     }
 
 }

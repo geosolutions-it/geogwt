@@ -68,15 +68,13 @@ public class Mappanel_div implements EntryPoint {
         /* base layer */
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
-        //wmsParams.setLayers("basic");
         wmsParams.setLayers("GeoSolutions:ne_shaded");
         wmsParams.setStyles("");
 
         WMSOptions wmsLayerParams = new WMSOptions();
         wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
 
-        //WMS layer = new WMS("Basic WMS", "http://labs.metacarta.com/wms/vmap0", wmsParams, wmsLayerParams);
-        WMS layer = new WMS("Basic WMS", "http://demo1.geo-solutions.it/playground/wms", wmsParams, wmsLayerParams);
+        WMS layer = new WMS("GeoSolutions Natural Earth", "http://demo1.geo-solutions.it/playground/wms", wmsParams, wmsLayerParams);
         Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
 
         

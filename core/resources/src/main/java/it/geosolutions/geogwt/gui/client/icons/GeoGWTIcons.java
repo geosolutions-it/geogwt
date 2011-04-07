@@ -67,6 +67,14 @@ public interface GeoGWTIcons extends ImageBundle {
     AbstractImagePrototype arrowUp();
 
     /**
+     * Clean dg watch menu.
+     * 
+     * @return the abstract image prototype
+     */
+    @Resource("eraser_minus.png")
+    AbstractImagePrototype cleanMenu();
+    
+    /**
      * Connect.
      * 
      * @return the abstract image prototype
@@ -98,6 +106,14 @@ public interface GeoGWTIcons extends ImageBundle {
     @Resource("features_get.png")
     AbstractImagePrototype getFeatures();
 
+    /**
+     * Info.
+     * 
+     * @return the abstract image prototype
+     */
+    @Resource("about.png")
+    AbstractImagePrototype info();
+    
     /**
      * Logout.
      * 
@@ -170,6 +186,14 @@ public interface GeoGWTIcons extends ImageBundle {
     @Resource("file_upload_icon.png")
     AbstractImagePrototype upload();
 
+    /**
+     * Upload shp.
+     * 
+     * @return the abstract image prototype
+     */
+    @Resource("file_upload_icon.png")
+    AbstractImagePrototype uploadSHP();
+    
     /**
      * User.
      * 

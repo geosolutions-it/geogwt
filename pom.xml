@@ -113,6 +113,12 @@
                 <version>${geogwt-version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>it.geosolutions.geogwt.widgets.map</groupId>
+				<artifactId>maptoolbar</artifactId>
+                <version>${geogwt-version}</version>
+			</dependency>
+			
 	    <!-- =========================================================== -->
 	    <!--     Spring                                                  -->
 	    <!-- =========================================================== -->
