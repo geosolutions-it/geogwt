@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.widget.GeoGWTGridWidget,v. 0.1 25-gen-2011 11.24.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.44 $
+ * $ Header: it.geosolutions.geogwt.gui.client.widget.GeoGWTEditGridWidget,v. 0.1 7-apr-2011 16.58.11 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.58.11 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -44,7 +45,7 @@ import com.extjs.gxt.ui.client.widget.grid.Grid;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class GeoGWTGridWidget.
+ * The Class GeoGWTEditGridWidget.
  * 
  * @param <T>
  *            the generic type
@@ -58,7 +59,7 @@ public abstract class GeoGWTEditGridWidget<T extends BaseModel> extends GeoGWTFo
     protected Grid<T> grid;
 
     /**
-     * Instantiates a new geo repo grid widget.
+     * Instantiates a new geo gwt edit grid widget.
      */
     public GeoGWTEditGridWidget() {
         createStore();
@@ -66,7 +67,7 @@ public abstract class GeoGWTEditGridWidget<T extends BaseModel> extends GeoGWTFo
     }
 
     /**
-     * Instantiates a new geo repo grid widget.
+     * Instantiates a new geo gwt edit grid widget.
      * 
      * @param models
      *            the models

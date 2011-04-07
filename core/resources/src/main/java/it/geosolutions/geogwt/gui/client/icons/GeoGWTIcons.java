@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.icons.GeoGWTIcons,v. 0.1 31-gen-2011 12.46.28 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 31-gen-2011 12.46.28 $
+ * $ Header: it.geosolutions.geogwt.gui.client.icons.GeoGWTIcons,v. 0.1 7-apr-2011 16.58.12 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.58.12 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -67,7 +68,7 @@ public interface GeoGWTIcons extends ImageBundle {
     AbstractImagePrototype arrowUp();
 
     /**
-     * Clean dg watch menu.
+     * Clean menu.
      * 
      * @return the abstract image prototype
      */
@@ -179,7 +180,7 @@ public interface GeoGWTIcons extends ImageBundle {
     AbstractImagePrototype trigger();
 
     /**
-     * Upload shp.
+     * Upload.
      * 
      * @return the abstract image prototype
      */

@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.mvc.MaptoolbarView,v. 0.1 25-gen-2011 11.30.32 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.30.32 $
+ * $ Header: it.geosolutions.geogwt.gui.client.mvc.MaptoolbarView,v. 0.1 7-apr-2011 17.01.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 17.01.44 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -48,14 +49,14 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
  */
 public class MaptoolbarView extends View {
 
-    /** The button bar. */
+    /** The map tool bar. */
     private MapToolBar mapToolBar;
     
-    /** The map widget **/
+    /** The map. */
     private MapLayoutWidget map;
 
     /**
-     * Instantiates a new map view.
+     * Instantiates a new maptoolbar view.
      * 
      * @param controller
      *            the controller
@@ -129,28 +130,38 @@ public class MaptoolbarView extends View {
     }
 
     /**
-     * @param map the map to set
+     * Sets the map widget *.
+     * 
+     * @param map
+     *            the new map widget *
      */
     public void setMap(MapLayoutWidget map) {
         this.map = map;
     }
 
     /**
-     * @return the map
+     * Gets the map widget *.
+     * 
+     * @return the map widget *
      */
     public MapLayoutWidget getMap() {
         return map;
     }
 
     /**
-     * @param mapToolBar the mapToolBar to set
+     * Sets the button bar.
+     * 
+     * @param mapToolBar
+     *            the new button bar
      */
     public void setButtonBar(MapToolBar mapToolBar) {
         this.mapToolBar = mapToolBar;
     }
 
     /**
-     * @return the mapToolBar
+     * Gets the button bar.
+     * 
+     * @return the button bar
      */
     public MapToolBar getButtonBar() {
         return mapToolBar;

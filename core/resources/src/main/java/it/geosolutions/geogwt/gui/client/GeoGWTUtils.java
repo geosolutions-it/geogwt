@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.GeoGWTUtils,v. 0.1 25-gen-2011 11.24.45 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.45 $
+ * $ Header: it.geosolutions.geogwt.gui.client.GeoGWTUtils,v. 0.1 7-apr-2011 16.58.10 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.58.10 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -45,7 +46,7 @@ public class GeoGWTUtils {
     /** The INSTANCE. */
     private static GeoGWTUtils INSTANCE;
 
-    /** The global configuration. */
+    /** The geo gwt global configuration. */
     @Autowired
     private IGeoGWTConfiguration geoGWTGlobalConfiguration;
 
@@ -73,7 +74,7 @@ public class GeoGWTUtils {
     /**
      * Sets the global configuration.
      * 
-     * @param geoGWTGlobalConfiguration
+     * @param globalConfiguration
      *            the new global configuration
      */
     public void setGlobalConfiguration(IGeoGWTConfiguration globalConfiguration) {

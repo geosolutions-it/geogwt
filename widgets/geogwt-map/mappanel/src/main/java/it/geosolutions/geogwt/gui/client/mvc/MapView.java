@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.mvc.MapView,v. 0.1 25-gen-2011 11.30.32 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.30.32 $
+ * $ Header: it.geosolutions.geogwt.gui.client.mvc.MapView,v. 0.1 7-apr-2011 16.59.50 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.59.50 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -160,34 +161,42 @@ public class MapView extends View {
     //
     // ////////////////////////////////////////////////////////////////////////
 
+    /**
+     * On init toolbar.
+     * 
+     * @param event
+     *            the event
+     */
     private void onInitToolbar(AppEvent event) {
         ButtonBar buttonBar = (ButtonBar) event.getData();
         buttonBar.setMapLayoutWidget(this.mapLayout);
     }
 
     /**
-     * Adding a Layer to the Map
+     * On add layer to map.
      * 
      * @param layer
+     *            the layer
      */
     private void onAddLayerToMap(Layer layer) {
         this.mapLayout.addLayer(layer);
     }
 
     /**
-     * Removing Layer from the map
+     * On remove layer from map.
      * 
      * @param layer
+     *            the layer
      */
     private void onRemoveLayerFromMap(Layer layer) {
         this.mapLayout.removeLayer(layer);
     }
 
     /**
-     * Sets the center of the map.
-     * Accepts a Double array representing the Longitude and the Latitude of the center point
+     * On set map center.
      * 
      * @param centerCoords
+     *            the center coords
      */
     private void onSetMapCenter(Double[] centerCoords) {
         LonLat lonlat = new LonLat(centerCoords[0], centerCoords[1]);
@@ -195,14 +204,17 @@ public class MapView extends View {
     }
 
     /**
-     * Zooming to Max Extent
+     * On zoom to max extent.
      */
     private void onZoomToMaxExtent() {
         this.mapLayout.getMap().zoomToMaxExtent();
     }
 
     /**
-     * Sets the Zoom level of the map 
+     * On zoom.
+     * 
+     * @param zoomLevel
+     *            the zoom level
      */
     private void onZoom(Integer zoomLevel) {
         this.mapLayout.getMap().zoomTo(zoomLevel);
@@ -238,7 +250,7 @@ public class MapView extends View {
     }
 
     /**
-     * On draw aoi on map.
+     * On draw wkt on map.
      * 
      * @param event
      *            the event

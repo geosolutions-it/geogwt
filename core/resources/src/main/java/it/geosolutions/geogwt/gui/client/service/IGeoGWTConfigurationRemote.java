@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.georepo.gui.client.service.ConfigurationRemote,v. 0.1 14-gen-2011 19.27.37 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 14-gen-2011 19.27.37 $
+ * $ Header: it.geosolutions.geogwt.gui.client.service.IGeoGWTConfigurationRemote,v. 0.1 7-apr-2011 16.58.12 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.58.12 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -40,7 +41,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface ConfigurationRemote.
+ * The Interface IGeoGWTConfigurationRemote.
  */
 public interface IGeoGWTConfigurationRemote extends RemoteService {
 
@@ -70,7 +71,7 @@ public interface IGeoGWTConfigurationRemote extends RemoteService {
     /**
      * Inits the server configuration.
      * 
-     * @return the geo repo global configuration
+     * @return the i geo gwt configuration
      */
     public IGeoGWTConfiguration initServerConfiguration();
 

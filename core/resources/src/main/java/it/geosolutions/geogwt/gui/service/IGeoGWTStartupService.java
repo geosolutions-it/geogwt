@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.georepo.gui.server.service.impl.StartupService,v. 0.1 14-gen-2011 19.27.51 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 14-gen-2011 19.27.51 $
+ * $ Header: it.geosolutions.geogwt.gui.service.IGeoGWTStartupService,v. 0.1 7-apr-2011 16.58.11 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.58.11 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -36,10 +37,15 @@ import it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class StartupService.
+ * The Interface IGeoGWTStartupService.
  */
 public interface IGeoGWTStartupService {
 
+    /**
+     * Inits the server configuration.
+     * 
+     * @return the i geo gwt configuration
+     */
     public IGeoGWTConfiguration initServerConfiguration();
 
 }

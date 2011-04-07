@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.form.GeoGWTFormWidget,v. 0.1 25-gen-2011 11.24.45 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.45 $
+ * $ Header: it.geosolutions.geogwt.gui.client.form.GeoGWTFormWidget,v. 0.1 7-apr-2011 16.58.12 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.58.12 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -70,7 +71,7 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
     protected SaveStaus saveStatus;
 
     /**
-     * Instantiates a new geo repo form widget.
+     * Instantiates a new geo gwt form widget.
      */
     public GeoGWTFormWidget() {
         this.initializeWindow();
@@ -195,6 +196,9 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
      */
     public abstract void cancel();
 
+    /**
+     * Inject event.
+     */
     public void injectEvent() {
         // TODO Auto-generated method stub
 

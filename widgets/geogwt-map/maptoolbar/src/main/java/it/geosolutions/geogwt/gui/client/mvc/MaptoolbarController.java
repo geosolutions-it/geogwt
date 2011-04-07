@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.mvc.MaptoolbarController,v. 0.1 25-gen-2011 11.30.32 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.30.32 $
+ * $ Header: it.geosolutions.geogwt.gui.client.mvc.MaptoolbarController,v. 0.1 7-apr-2011 17.01.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 17.01.44 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -43,11 +44,11 @@ import com.extjs.gxt.ui.client.mvc.Controller;
  */
 public class MaptoolbarController extends Controller {
 
-    /** The map view. */
+    /** The maptoolbar view. */
     private MaptoolbarView maptoolbarView;
 
     /**
-     * Instantiates a new map controller.
+     * Instantiates a new maptoolbar controller.
      */
     public MaptoolbarController() {
         registerEventTypes(

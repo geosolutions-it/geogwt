@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.georepo.gui.client.action.application.GeoRepoInfoAppAction,v. 0.1 25-gen-2011 11.30.33 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.30.33 $
+ * $ Header: it.geosolutions.geogwt.gui.client.widget.map.action.app.AppInfoAction,v. 0.1 7-apr-2011 17.01.45 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 17.01.45 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -45,7 +46,7 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 public class AppInfoAction extends ToolbarApplicationAction {
 
     /**
-     * Instantiates a new geo repo info app action.
+     * Instantiates a new app info action.
      */
     public AppInfoAction() {
         super(I18nProvider.getMessages().applicationName(), Category.GEOGWT_INFO);

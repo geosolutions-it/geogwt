@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.georepo.gui.client.Category,v. 0.1 25-gen-2011 11.30.33 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.30.33 $
+ * $ Header: it.geosolutions.geogwt.gui.client.model.Category,v. 0.1 7-apr-2011 16.58.10 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.58.10 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -41,25 +42,25 @@ public enum Category {
     /** The DELET e_ content. */
     DELETE_CONTENT,
     
-    /** The GEOGWT o_ clean. */
+    /** The GEOGW t_ clean. */
     GEOGWT_CLEAN,
     
-    /** The GEOGWT o_ draw. */
+    /** The GEOGW t_ draw. */
     GEOGWT_DRAW,
     
-    /** The GEOGWT o_ info. */
+    /** The GEOGW t_ info. */
     GEOGWT_INFO,
     
-    /** The GEOGWT o_ pan. */
+    /** The GEOGW t_ pan. */
     GEOGWT_PAN,
     
-    /** The GEOGWT o_ zoo m_ in. */
+    /** The GEOGW t_ zoo m_ in. */
     GEOGWT_ZOOM_IN,
     
-    /** The GEOGWT o_ zoo m_ out. */
+    /** The GEOGW t_ zoo m_ out. */
     GEOGWT_ZOOM_OUT,
     
-    /** The GEOGWT o_ uploa d_ shp. */
+    /** The GEOGW t_ uploa d_ shp. */
     GEOGWT_UPLOAD_SHP,
     
     /** The LOGOUT. */
@@ -68,6 +69,7 @@ public enum Category {
     /** The SAVE. */
     SAVE,
     
+    /** The SYNCH. */
     SYNCH
 
 }

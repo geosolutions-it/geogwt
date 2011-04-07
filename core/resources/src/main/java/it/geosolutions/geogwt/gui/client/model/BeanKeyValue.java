@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.model.BeanKeyValue,v. 0.1 25-gen-2011 16.50.11 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 16.50.11 $
+ * $ Header: it.geosolutions.geogwt.gui.client.model.BeanKeyValue,v. 0.1 7-apr-2011 16.58.10 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.58.10 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -50,7 +51,7 @@ public enum BeanKeyValue {
     /** The LAYER. */
     LAYER("layer"),
 
-    /** The DATE creation. */
+    /** The DAT e_ creation. */
     DATE_CREATION("dateCreation"),
 
     /** The NAME. */
@@ -59,7 +60,7 @@ public enum BeanKeyValue {
     /** The DESCRIPTION. */
     DESCRIPTION("description"),
 
-    /** The BASE url. */
+    /** The BAS e_ url. */
     BASE_URL("baseUrl"),
 
     /** The INSTANCE. */
@@ -68,21 +69,28 @@ public enum BeanKeyValue {
     /** The PATH. */
     PATH("path"),
 
-    /** The password. */
+    /** The PASSWORD. */
     PASSWORD("password"),
 
+    /** The ATT r_ name. */
     ATTR_NAME("attr_name"),
 
+    /** The ATT r_ type. */
     ATTR_TYPE("attr_type"),
 
+    /** The ATT r_ access. */
     ATTR_ACCESS("attr_access"),
 
+    /** The STYLE s_ combo. */
     STYLES_COMBO("styles_combo"),
 
+    /** The STYL e_ enabled. */
     STYLE_ENABLED("style_enable"),
 
+    /** The ALLOWE d_ area. */
     ALLOWED_AREA("allowed_area"),
 
+    /** The CQL. */
     CQL("cql");
 
     /** The value. */

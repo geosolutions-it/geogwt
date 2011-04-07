@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.i18n.ApplicationMessages,v. 0.1 25-gen-2011 11.24.43 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.43 $
+ * $ Header: it.geosolutions.geogwt.gui.client.i18n.ApplicationMessages,v. 0.1 7-apr-2011 16.58.11 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.58.11 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -44,34 +45,109 @@ public interface ApplicationMessages extends Messages {
     // PLEASE KEEP THIS FILE SORTED ALPHABETICALLY! Thank you.
     // ///////////////////////////
 
+    /**
+     * Application name.
+     * 
+     * @return the string
+     */
     public String applicationName();
 
+    /**
+     * Delete button label.
+     * 
+     * @return the string
+     */
     public String deleteButtonLabel();
 
+    /**
+     * Draw feature tool tip.
+     * 
+     * @return the string
+     */
     public String drawFeatureToolTip();
 
+    /**
+     * Found label.
+     * 
+     * @return the string
+     */
     public String foundLabel();
 
+    /**
+     * Please wait message.
+     * 
+     * @return the string
+     */
     public String pleaseWaitMessage();
 
+    /**
+     * Record label.
+     * 
+     * @return the string
+     */
     public String recordLabel();
 
+    /**
+     * Record plural label.
+     * 
+     * @return the string
+     */
     public String recordPluralLabel();
 
+    /**
+     * Record not found message.
+     * 
+     * @return the string
+     */
     public String recordNotFoundMessage();
 
+    /**
+     * Remote service name.
+     * 
+     * @return the string
+     */
     public String remoteServiceName();
 
+    /**
+     * Reset label.
+     * 
+     * @return the string
+     */
     public String resetLabel();
 
+    /**
+     * Save pending.
+     * 
+     * @return the string
+     */
     public String savePending();
 
+    /**
+     * Save tool tip.
+     * 
+     * @return the string
+     */
     public String saveToolTip();
 
+    /**
+     * Wkt abbreviation.
+     * 
+     * @return the string
+     */
     public String wktAbbreviation();
 
+    /**
+     * Zoom in tool tip.
+     * 
+     * @return the string
+     */
     public String zoomInToolTip();
 
+    /**
+     * Zoom out tool tip.
+     * 
+     * @return the string
+     */
     public String zoomOutToolTip();
 
     // ///////////////////////////

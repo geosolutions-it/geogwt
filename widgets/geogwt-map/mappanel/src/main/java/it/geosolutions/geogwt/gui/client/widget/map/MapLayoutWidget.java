@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.widget.map.MapLayoutWidget,v. 0.1 25-gen-2011 11.30.33 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.30.33 $
+ * $ Header: it.geosolutions.geogwt.gui.client.widget.map.MapLayoutWidget,v. 0.1 7-apr-2011 16.59.50 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.59.50 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -76,7 +77,7 @@ public class MapLayoutWidget extends LayoutContainer {
     /** The map. */
     private Map map;
 
-    /** The layer. */
+    /** The layers. */
     private List<Layer> layers;
 
     /** The center. */
@@ -98,11 +99,23 @@ public class MapLayoutWidget extends LayoutContainer {
         this(false);
     }
 
+    /**
+     * Instantiates a new map layout widget.
+     * 
+     * @param isGoogle
+     *            the is google
+     */
     public MapLayoutWidget(boolean isGoogle) {
         super();
         this.createMapOption(isGoogle);
     }
     
+    /**
+     * Instantiates a new map layout widget.
+     * 
+     * @param mapOptions
+     *            the map options
+     */
     public MapLayoutWidget(MapOptions mapOptions) {
         super();
         this.initMapWidget(mapOptions, false);
@@ -174,7 +187,7 @@ public class MapLayoutWidget extends LayoutContainer {
     }
 
     /**
-     * On add to center panel.
+     * On add to panel.
      * 
      * @param center
      *            the center
@@ -215,7 +228,10 @@ public class MapLayoutWidget extends LayoutContainer {
     // }
 
     /**
-     * Add a layer to the map
+     * Adds the layer.
+     * 
+     * @param layer
+     *            the layer
      */
     public void addLayer(Layer layer) {
         if (this.map != null) {
@@ -230,7 +246,10 @@ public class MapLayoutWidget extends LayoutContainer {
     }
 
     /**
-     * Remove layer from the map
+     * Removes the layer.
+     * 
+     * @param layer
+     *            the layer
      */
     public void removeLayer(Layer layer) {
         if (this.map != null) {
@@ -247,7 +266,7 @@ public class MapLayoutWidget extends LayoutContainer {
     }
 
     /**
-     * Creates the style.
+     * Creates the default style.
      * 
      * @return the style
      */
@@ -285,7 +304,7 @@ public class MapLayoutWidget extends LayoutContainer {
     }
 
     /**
-     * Inits the draw features.
+     * Inits the draw features control.
      * 
      * @param isGoogle
      *            the is google
@@ -343,7 +362,7 @@ public class MapLayoutWidget extends LayoutContainer {
     }
 
     /**
-     * Draw WKT Geometry on map.
+     * Draw wkt on map.
      * 
      * @param wkt
      *            the wkt
@@ -404,21 +423,29 @@ public class MapLayoutWidget extends LayoutContainer {
     }
 
     /**
-     * @param map the map to set
+     * Sets the map.
+     * 
+     * @param map
+     *            the new map
      */
     public void setMap(Map map) {
         this.map = map;
     }
 
     /**
-     * @param layers the layers to set
+     * Sets the layer.
+     * 
+     * @param layers
+     *            the new layer
      */
     public void setLayers(List<Layer> layers) {
         this.layers = layers;
     }
 
     /**
-     * @return the layers
+     * Gets the layer.
+     * 
+     * @return the layer
      */
     public List<Layer> getLayers() {
         return layers;

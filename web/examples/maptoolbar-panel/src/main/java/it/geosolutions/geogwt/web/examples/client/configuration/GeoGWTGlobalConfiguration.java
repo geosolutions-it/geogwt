@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.georepo.gui.client.configuration.GeoRepoGlobalConfiguration,v. 0.1 14-gen-2011 19.27.01 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 14-gen-2011 19.27.01 $
+ * $ Header: it.geosolutions.geogwt.web.examples.client.configuration.GeoGWTGlobalConfiguration,v. 0.1 7-apr-2011 17.02.22 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 17.02.22 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -63,8 +64,8 @@ public class GeoGWTGlobalConfiguration implements IGeoGWTConfiguration {
         return toolbarItemManager;
     }
 
-    /**
-     * @param toolbarItemManager the toolbarItemManager to set
+    /* (non-Javadoc)
+     * @see it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration#setToolbarItemManager(it.geosolutions.geogwt.gui.client.configuration.IToolbarItemManager)
      */
     public void setToolbarItemManager(IToolbarItemManager toolbarItemManager) {
         this.toolbarItemManager = toolbarItemManager;

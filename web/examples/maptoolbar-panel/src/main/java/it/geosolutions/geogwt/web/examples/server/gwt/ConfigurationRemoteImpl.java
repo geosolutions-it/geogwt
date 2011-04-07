@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.georepo.gui.server.gwt.ConfigurationRemoteImpl,v. 0.1 14-gen-2011 19.27.45 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 14-gen-2011 19.27.45 $
+ * $ Header: it.geosolutions.geogwt.web.examples.server.gwt.ConfigurationRemoteImpl,v. 0.1 7-apr-2011 17.02.22 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 17.02.22 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception

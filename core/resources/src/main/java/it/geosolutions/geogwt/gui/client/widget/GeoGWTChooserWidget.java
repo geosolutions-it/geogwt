@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.widget.GeoGWTChooserWidget,v. 0.1 25-gen-2011 11.24.45 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.45 $
+ * $ Header: it.geosolutions.geogwt.gui.client.widget.GeoGWTChooserWidget,v. 0.1 7-apr-2011 16.58.10 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 7-apr-2011 16.58.10 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -126,7 +127,7 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
     protected String searchText;
 
     /**
-     * Instantiates a new geo repo chooser widget.
+     * Instantiates a new geo gwt chooser widget.
      */
     public GeoGWTChooserWidget() {
         createTemplate();
