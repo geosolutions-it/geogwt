@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration,v. 0.1 25-gen-2011 11.24.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.georepo.gui.client.action.application.GeoRepoInfoAppAction,v. 0.1 25-gen-2011 11.30.33 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.44 $
+ * $ Date: 25-gen-2011 11.30.33 $
  *
  * ====================================================================
  *
@@ -30,28 +30,35 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.client.configuration;
+package it.geosolutions.geogwt.gui.client.widget.map.action.app;
 
-import java.io.Serializable;
+import it.geosolutions.geogwt.gui.client.i18n.I18nProvider;
+import it.geosolutions.geogwt.gui.client.model.Category;
+import it.geosolutions.geogwt.gui.client.widget.map.action.ToolbarApplicationAction;
+
+import com.extjs.gxt.ui.client.event.BaseEvent;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IGeoGWTConfiguration.
+ * The Class AppInfoAction.
  */
-public interface IGeoGWTConfiguration extends Serializable {
+public class AppInfoAction extends ToolbarApplicationAction {
 
     /**
-     * Gets the toolbar item manager.
-     * 
-     * @return the toolbar item manager
+     * Instantiates a new geo repo info app action.
      */
-    public IToolbarItemManager getToolbarItemManager();
-    
-    /**
-     * Sets the toolbar item manager.
+    public AppInfoAction() {
+        super(I18nProvider.getMessages().applicationName(), Category.GEOGWT_INFO);
+        // TODO Auto-generated constructor stub
+    }
+
+    /*
+     * (non-Javadoc)
      * 
-     * @param toolbarItemManager
+     * @see
+     * com.extjs.gxt.ui.client.event.Listener#handleEvent(com.extjs.gxt.ui.client.event.BaseEvent)
      */
-    public void setToolbarItemManager(IToolbarItemManager toolbarItemManager);
+    public void handleEvent(BaseEvent be) {
+    }
 
 }

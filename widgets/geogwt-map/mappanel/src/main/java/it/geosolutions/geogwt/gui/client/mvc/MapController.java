@@ -56,6 +56,7 @@ public class MapController extends Controller {
                 
                 GeoGWTEvents.UPDATE_MAP_SIZE,
                 
+                GeoGWTEvents.INIT_TOOLBAR,
                 GeoGWTEvents.ATTACH_TOOLBAR,
                 
                 GeoGWTEvents.ACTIVATE_DRAW_FEATURES, 

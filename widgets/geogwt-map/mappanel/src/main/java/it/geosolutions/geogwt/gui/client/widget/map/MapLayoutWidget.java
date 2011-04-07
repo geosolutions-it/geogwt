@@ -317,6 +317,10 @@ public class MapLayoutWidget extends LayoutContainer {
      * Activate draw feature.
      */
     public void activateDrawFeature() {
+        if (this.drawPolygon == null) {
+            initDrawFeaturesControl(false);
+        }
+        
         this.drawPolygon.activate();
     }
 
@@ -324,6 +328,10 @@ public class MapLayoutWidget extends LayoutContainer {
      * Deactivate draw feature.
      */
     public void deactivateDrawFeature() {
+        if (this.drawPolygon == null) {
+            initDrawFeaturesControl(false);
+        }
+        
         this.drawPolygon.deactivate();
     }
 

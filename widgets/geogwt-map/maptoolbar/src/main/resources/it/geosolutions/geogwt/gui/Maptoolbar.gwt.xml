@@ -1,0 +1,14 @@
+  <!-- Inherit the core Web Toolkit stuff. -->
+<module>
+	<inherits name='com.google.gwt.user.User' />
+	<inherits name='com.extjs.gxt.ui.GXT' />
+	<inherits name='com.google.gwt.widgetideas.WidgetIdeas'/>
+
+    <inherits name='it.geosolutions.geogwt.gui.Resources' />
+    <inherits name="it.geosolutions.geogwt.gui.Mappanel"/>
+
+	<entry-point class='it.geosolutions.geogwt.gui.client.Maptoolbar' />
+
+	<source path="client" />
+
+</module>

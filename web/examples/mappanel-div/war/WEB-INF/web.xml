@@ -20,16 +20,19 @@
 	  <servlet-name>remoteLoggingServiceImpl</servlet-name>
 	  <servlet-class>com.google.gwt.libideas.logging.server.RemoteLoggingServiceImpl</servlet-class>
 	</servlet>
-	<servlet-mapping>
-	  <servlet-name>remoteLoggingServiceImpl</servlet-name>
-	  <url-pattern>/mappanel_div/logging</url-pattern>
-	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>GwtOpenlayersProxy</servlet-name>
 		<servlet-class>
 			org.gwtopenmaps.openlayers.server.GwtOpenLayersProxyServlet</servlet-class>
 	</servlet>
+
+  	<!-- Servlet Mappings -->
+	<servlet-mapping>
+	  <servlet-name>remoteLoggingServiceImpl</servlet-name>
+	  <url-pattern>/mappanel_div/logging</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>GwtOpenlayersProxy</servlet-name>
 		<url-pattern>/gwtOpenLayersProxy/*</url-pattern>

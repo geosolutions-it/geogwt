@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.mvc.MessagesController,v. 0.1 25-gen-2011 11.24.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.geogwt.gui.client.mvc.MaptoolbarController,v. 0.1 25-gen-2011 11.30.32 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.44 $
+ * $ Date: 25-gen-2011 11.30.32 $
  *
  * ====================================================================
  *
@@ -39,22 +39,24 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class MessagesController.
+ * The Class MaptoolbarController.
  */
-public class MessagesController extends Controller {
+public class MaptoolbarController extends Controller {
 
-    /** The messages view. */
-    private MessagesView messagesView;
+    /** The map view. */
+    private MaptoolbarView maptoolbarView;
 
     /**
-     * Instantiates a new messages controller.
+     * Instantiates a new map controller.
      */
-    public MessagesController() {
+    public MaptoolbarController() {
         registerEventTypes(
-                GeoGWTEvents.INIT_RESOURCES_MODULE, 
-                GeoGWTEvents.SEND_ALERT_MESSAGE,
-                GeoGWTEvents.SEND_ERROR_MESSAGE, 
-                GeoGWTEvents.SEND_INFO_MESSAGE
+                GeoGWTEvents.INIT_MAPS_UI_MODULE, 
+                
+                GeoGWTEvents.ATTACH_TOOLBAR,
+                
+                GeoGWTEvents.ENABLE_DRAW_BUTTON, 
+                GeoGWTEvents.DISABLE_DRAW_BUTTON
         );
     }
 
@@ -64,8 +66,8 @@ public class MessagesController extends Controller {
      * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
      */
     @Override
-    protected void initialize() {
-        this.messagesView = new MessagesView(this);
+    public void initialize() {
+        this.maptoolbarView = new MaptoolbarView(this);
     }
 
     /*
@@ -76,6 +78,7 @@ public class MessagesController extends Controller {
      */
     @Override
     public void handleEvent(AppEvent event) {
-        forwardToView(messagesView, event);
+        forwardToView(maptoolbarView, event);
     }
+
 }

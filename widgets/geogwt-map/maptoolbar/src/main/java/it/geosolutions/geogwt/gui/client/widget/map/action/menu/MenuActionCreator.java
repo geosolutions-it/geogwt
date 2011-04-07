@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration,v. 0.1 25-gen-2011 11.24.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.georepo.gui.client.action.menu.MenuActionCreator,v. 0.1 25-gen-2011 11.30.32 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.44 $
+ * $ Date: 25-gen-2011 11.30.32 $
  *
  * ====================================================================
  *
@@ -30,28 +30,19 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.client.configuration;
-
-import java.io.Serializable;
+package it.geosolutions.geogwt.gui.client.widget.map.action.menu;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IGeoGWTConfiguration.
+ * The Interface MenuActionCreator.
  */
-public interface IGeoGWTConfiguration extends Serializable {
+public interface MenuActionCreator {
 
     /**
-     * Gets the toolbar item manager.
+     * Creates the action.
      * 
-     * @return the toolbar item manager
+     * @return the menu action
      */
-    public IToolbarItemManager getToolbarItemManager();
-    
-    /**
-     * Sets the toolbar item manager.
-     * 
-     * @param toolbarItemManager
-     */
-    public void setToolbarItemManager(IToolbarItemManager toolbarItemManager);
+    public MenuAction createAction();
 
 }

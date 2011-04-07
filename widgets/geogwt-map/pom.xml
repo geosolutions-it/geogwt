@@ -14,6 +14,7 @@
 
 	<modules>
 		<module>mappanel</module>
+		<module>maptoolbar</module>
 	</modules>
 
   <build>

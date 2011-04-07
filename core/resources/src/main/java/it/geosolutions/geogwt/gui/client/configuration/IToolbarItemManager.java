@@ -1,5 +1,5 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.configuration.IToolbarItemManager,v. 0.1 25-gen-2011 11.24.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.georepo.gui.client.configuration.IToolbarItemManager,v. 0.1 25-gen-2011 11.24.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1 $
  * $ Date: 25-gen-2011 11.24.44 $
  *

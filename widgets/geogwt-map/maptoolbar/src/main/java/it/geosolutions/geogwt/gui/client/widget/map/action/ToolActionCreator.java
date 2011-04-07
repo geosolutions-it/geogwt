@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.georepo.gui.client.configuration.GeoRepoGlobalConfiguration,v. 0.1 14-gen-2011 19.27.01 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.georepo.gui.client.action.ToolActionCreator,v. 0.1 25-gen-2011 11.30.32 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1 $
- * $ Date: 14-gen-2011 19.27.01 $
+ * $ Date: 25-gen-2011 11.30.32 $
  *
  * ====================================================================
  *
@@ -30,34 +30,23 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.client.configuration;
+package it.geosolutions.geogwt.gui.client.widget.map.action;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.gwtopenmaps.openlayers.client.MapWidget;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class GeoGWTGlobalConfiguration.
+ * The Interface ToolActionCreator.
  */
-@Component("georepoGlobalConfiguration")
-public class GeoGWTGlobalConfiguration implements IGeoGWTConfiguration {
+public interface ToolActionCreator {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -3377836318526396981L;
-
-    /** The toolbar item manager. */
-    @Autowired
-    private IToolbarItemManager toolbarItemManager;
-
-    /*
-     * (non-Javadoc)
+    /**
+     * Creates the action tool.
      * 
-     * @see
-     * it.geosolutions.georepo.gui.client.configuration.GeoRepoConfiguration#getToolbarItemManager
-     * ()
+     * @param mapWidget
+     *            the map widget
+     * @return the toolbar action
      */
-    public IToolbarItemManager getToolbarItemManager() {
-        return toolbarItemManager;
-    }
+    public ToolbarAction createActionTool(MapWidget mapWidget);
 
 }

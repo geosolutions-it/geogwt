@@ -10,12 +10,4 @@ http://www.springframework.org/schema/context
 
 	<context:annotation-config />
 
-	<!-- Startup service -->
-	<bean id="startupService" class="it.geosolutions.geogwt.gui.service.GeoGWTStartupService">
-	</bean>
-
-	<bean id="geogwtRemoteService" class="it.geosolutions.geogwt.gui.service.GeoGWTRemoteService">
-		<!-- example: property name="loginService" ref="mainLoginService" / -->
-	</bean>
-
 </beans>

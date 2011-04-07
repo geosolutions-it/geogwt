@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.georepo.gui.server.service.impl.StartupService,v. 0.1 14-gen-2011 19.27.51 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.geogwt.gui.client.Mappanel,v. 0.1 25-gen-2011 11.30.32 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1 $
- * $ Date: 14-gen-2011 19.27.51 $
+ * $ Date: 25-gen-2011 11.30.32 $
  *
  * ====================================================================
  *
@@ -30,30 +30,32 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.service;
+package it.geosolutions.geogwt.gui.client;
 
-import it.geosolutions.geogwt.gui.client.configuration.GeoGWTGlobalConfiguration;
+import it.geosolutions.geogwt.gui.client.mvc.MaptoolbarController;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.google.gwt.core.client.EntryPoint;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class StartupService.
+ * The Class Maptoolbar.
  */
-public class GeoGWTStartupService {
+public class Maptoolbar implements EntryPoint {
 
-    /** The georepo global configuration. */
-    @Autowired
-    private GeoGWTGlobalConfiguration geoGWTGlobalConfiguration;
+    /** The dispatcher. */
+    private Dispatcher dispatcher;
 
     /*
      * (non-Javadoc)
      * 
-     * @see it.geosolutions.georepo.gui.server.service.IStartupService#initServerConfiguration()
+     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
      */
-    public GeoGWTGlobalConfiguration initServerConfiguration() {
-        // TODO Auto-generated method stub
-        return geoGWTGlobalConfiguration;
+    public void onModuleLoad() {
+        dispatcher = Dispatcher.get();
+
+        dispatcher.addController(new MaptoolbarController());
+
     }
 
 }

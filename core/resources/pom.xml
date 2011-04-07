@@ -71,7 +71,7 @@
 		</dependency>
 
 		<!-- logging dependencies, delegate all to slf4j and use logback -->
-		<dependency>
+		<!-- dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.5.8</version>
@@ -90,7 +90,7 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>0.9.9</version>
-		</dependency>
+		</dependency -->
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -109,6 +109,11 @@
 			<version>1.10</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		
 		<!-- SCOPE TEST -->
 		<dependency>
 			<groupId>org.springframework</groupId>

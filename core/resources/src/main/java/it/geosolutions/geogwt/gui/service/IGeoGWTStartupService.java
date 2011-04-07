@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration,v. 0.1 25-gen-2011 11.24.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.georepo.gui.server.service.impl.StartupService,v. 0.1 14-gen-2011 19.27.51 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.44 $
+ * $ Date: 14-gen-2011 19.27.51 $
  *
  * ====================================================================
  *
@@ -30,28 +30,16 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.client.configuration;
+package it.geosolutions.geogwt.gui.service;
 
-import java.io.Serializable;
+import it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IGeoGWTConfiguration.
+ * The Class StartupService.
  */
-public interface IGeoGWTConfiguration extends Serializable {
+public interface IGeoGWTStartupService {
 
-    /**
-     * Gets the toolbar item manager.
-     * 
-     * @return the toolbar item manager
-     */
-    public IToolbarItemManager getToolbarItemManager();
-    
-    /**
-     * Sets the toolbar item manager.
-     * 
-     * @param toolbarItemManager
-     */
-    public void setToolbarItemManager(IToolbarItemManager toolbarItemManager);
+    public IGeoGWTConfiguration initServerConfiguration();
 
 }

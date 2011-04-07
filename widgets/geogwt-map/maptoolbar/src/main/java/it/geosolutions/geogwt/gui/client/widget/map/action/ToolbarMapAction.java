@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration,v. 0.1 25-gen-2011 11.24.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.georepo.gui.client.action.ToolbarMapAction,v. 0.1 25-gen-2011 11.30.33 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.44 $
+ * $ Date: 25-gen-2011 11.30.33 $
  *
  * ====================================================================
  *
@@ -30,28 +30,48 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.client.configuration;
+package it.geosolutions.geogwt.gui.client.widget.map.action;
 
-import java.io.Serializable;
+import it.geosolutions.geogwt.gui.client.model.Category;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IGeoGWTConfiguration.
+ * The Class ToolbarMapAction.
  */
-public interface IGeoGWTConfiguration extends Serializable {
+public abstract class ToolbarMapAction extends ToolbarAction {
+
+    /** The tooltip. */
+    private String tooltip;
 
     /**
-     * Gets the toolbar item manager.
+     * Instantiates a new toolbar map action.
      * 
-     * @return the toolbar item manager
+     * @param tooltip
+     *            the tooltip
+     * @param category
+     *            the category
      */
-    public IToolbarItemManager getToolbarItemManager();
-    
-    /**
-     * Sets the toolbar item manager.
-     * 
-     * @param toolbarItemManager
-     */
-    public void setToolbarItemManager(IToolbarItemManager toolbarItemManager);
+    public ToolbarMapAction(String tooltip, Category category) {
+        super(category);
+        this.tooltip = tooltip;
+    }
 
+    /**
+     * Gets the tooltip.
+     * 
+     * @return the tooltip
+     */
+    public String getTooltip() {
+        return tooltip;
+    }
+
+    /**
+     * Sets the tooltip.
+     * 
+     * @param tooltip
+     *            the new tooltip
+     */
+    public void setTooltip(String tooltip) {
+        this.tooltip = tooltip;
+    }
 }

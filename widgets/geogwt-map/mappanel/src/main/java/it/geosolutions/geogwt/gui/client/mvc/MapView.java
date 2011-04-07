@@ -33,6 +33,7 @@
 package it.geosolutions.geogwt.gui.client.mvc;
 
 import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
+import it.geosolutions.geogwt.gui.client.widget.map.ButtonBar;
 import it.geosolutions.geogwt.gui.client.widget.map.MapLayoutWidget;
 
 import org.gwtopenmaps.openlayers.client.LonLat;
@@ -43,7 +44,6 @@ import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 import com.extjs.gxt.ui.client.mvc.View;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -53,9 +53,6 @@ public class MapView extends View {
 
     /** The map layout. */
     private MapLayoutWidget mapLayout;
-
-    /** The button bar. */
-    private LayoutContainer buttonBar;
 
     /**
      * Instantiates a new map view.
@@ -100,13 +97,9 @@ public class MapView extends View {
             this.mapLayout.updateMapSize();
         }
 
-        // if (event.getType() == GeoGWTEvents.INIT_TOOLBAR) {
-        // onInitToolbar(event);
-        // }
-
-        // if (event.getType() == GeoGWTEvents.ATTACH_TOOLBAR) {
-        // onAttachToolbar(event);
-        // }
+         if (event.getType() == GeoGWTEvents.INIT_TOOLBAR) {
+             onInitToolbar(event);
+         }
 
         /** Mapping Feature Handling Events **/
         if (event.getType() == GeoGWTEvents.DRAW_WKT_ON_MAP) {
@@ -167,6 +160,11 @@ public class MapView extends View {
     //
     // ////////////////////////////////////////////////////////////////////////
 
+    private void onInitToolbar(AppEvent event) {
+        ButtonBar buttonBar = (ButtonBar) event.getData();
+        buttonBar.setMapLayoutWidget(this.mapLayout);
+    }
+
     /**
      * Adding a Layer to the Map
      * 
@@ -182,6 +180,7 @@ public class MapView extends View {
      * @param layer
      */
     private void onRemoveLayerFromMap(Layer layer) {
+        this.mapLayout.removeLayer(layer);
     }
 
     /**

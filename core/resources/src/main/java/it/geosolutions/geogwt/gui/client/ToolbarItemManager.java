@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.ResourcesEntryPoint,v. 0.1 25-gen-2011 11.24.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.georepo.gui.client.ToolbarItemManager,v. 0.1 25-gen-2011 11.30.33 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1 $
- * $ Date: 25-gen-2011 11.24.44 $
+ * $ Date: 25-gen-2011 11.30.33 $
  *
  * ====================================================================
  *
@@ -32,31 +32,41 @@
  */
 package it.geosolutions.geogwt.gui.client;
 
-import it.geosolutions.geogwt.gui.client.mvc.MessagesController;
+import it.geosolutions.geogwt.gui.client.configuration.GenericClientTool;
+import it.geosolutions.geogwt.gui.client.configuration.IToolbarItemManager;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.google.gwt.core.client.EntryPoint;
+import java.util.List;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ResourcesEntryPoint.
+ * The Class ToolbarItemManager.
  */
-public class ResourcesEntryPoint implements EntryPoint {
+public class ToolbarItemManager implements IToolbarItemManager {
 
-    /** The dispatcher. */
-    private Dispatcher dispatcher;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = -1501328199018303376L;
+
+    /** The client tools. */
+    private List<GenericClientTool> clientTools;
 
     /*
      * (non-Javadoc)
      * 
-     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+     * @see it.geosolutions.georepo.gui.client.configuration.IToolbarItemManager#getClientTools()
      */
-    public void onModuleLoad() {
-
-        dispatcher = Dispatcher.get();
-
-        dispatcher.addController(new MessagesController());
-
-        dispatcher.dispatch(GeoGWTEvents.INIT_RESOURCES_MODULE);
+    public List<GenericClientTool> getClientTools() {
+        return clientTools;
     }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * it.geosolutions.georepo.gui.client.configuration.IToolbarItemManager#setClientTools(java.
+     * util.List)
+     */
+    public void setClientTools(List<GenericClientTool> clientTools) {
+        this.clientTools = clientTools;
+    }
+
 }

@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.service.GeoGWTRemoteService,v. 0.1 26-gen-2011 17.25.38 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.georepo.gui.client.action.ToolbarApplicationAction,v. 0.1 25-gen-2011 11.30.33 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1 $
- * $ Date: 26-gen-2011 17.25.38 $
+ * $ Date: 25-gen-2011 11.30.33 $
  *
  * ====================================================================
  *
@@ -30,22 +30,49 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.service;
+package it.geosolutions.geogwt.gui.client.widget.map.action;
+
+import it.geosolutions.geogwt.gui.client.model.Category;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class GeoGWTRemoteService.
+ * The Class ToolbarApplicationAction.
  */
-public class GeoGWTRemoteService {
+public abstract class ToolbarApplicationAction extends ToolbarAction {
+
+    /** The button name. */
+    private String buttonName;
 
     /**
-     * Example: The login service.
+     * Instantiates a new toolbar application action.
      * 
-     * private LoginService loginService;
+     * @param buttonName
+     *            the button name
+     * @param category
+     *            the category
+     */
+    public ToolbarApplicationAction(String buttonName, Category category) {
+        super(category);
+        this.buttonName = buttonName;
+    }
+
+    /**
+     * Gets the button name.
      * 
-     * public LoginService getLoginService() { return loginService; }
+     * @return the button name
+     */
+    public String getButtonName() {
+        return buttonName;
+    }
+
+    /**
+     * Sets the button name.
      * 
-     * public void setLoginService(LoginService loginService) { this.loginService = loginService; }
-     **/
+     * @param buttonName
+     *            the new button name
+     */
+    public void setButtonName(String buttonName) {
+        this.buttonName = buttonName;
+    }
 
 }

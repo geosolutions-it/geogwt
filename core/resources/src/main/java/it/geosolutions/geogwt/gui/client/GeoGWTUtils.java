@@ -32,6 +32,8 @@
  */
 package it.geosolutions.geogwt.gui.client;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration;
 
 // TODO: Auto-generated Javadoc
@@ -44,6 +46,7 @@ public class GeoGWTUtils {
     private static GeoGWTUtils INSTANCE;
 
     /** The global configuration. */
+    @Autowired
     private IGeoGWTConfiguration geoGWTGlobalConfiguration;
 
     /**
