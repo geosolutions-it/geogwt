@@ -33,19 +33,21 @@
  */
 package it.geosolutions.geogwt.gui.service;
 
-import it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration;
+import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
+
+import org.springframework.beans.factory.InitializingBean;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface IGeoGWTStartupService.
  */
-public interface IGeoGWTStartupService {
+public abstract class IGeoGWTStartupService implements InitializingBean {
 
     /**
      * Inits the server configuration.
      * 
      * @return the i geo gwt configuration
      */
-    public IGeoGWTConfiguration initServerConfiguration();
+    public abstract GeoGWTConfiguration initServerConfiguration();
 
 }

@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.web.examples.client.configuration.GeoGWTGlobalConfiguration,v. 0.1 7-apr-2011 17.02.22 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration,v. 0.1 7-apr-2011 16.58.10 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1-SNAPSHOT $
- * $ Date: 7-apr-2011 17.02.22 $
+ * $ Date: 7-apr-2011 16.58.10 $
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
@@ -31,41 +31,43 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.web.examples.client.configuration;
+package it.geosolutions.geogwt.gui.client.configuration;
 
-import it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration;
-import it.geosolutions.geogwt.gui.client.configuration.IToolbarItemManager;
+import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class GeoGWTGlobalConfiguration.
+ * The Interface IGeoGWTConfiguration.
  */
 @Component("geoGWTGlobalConfiguration")
-public class GeoGWTGlobalConfiguration implements IGeoGWTConfiguration {
+public class GeoGWTConfiguration implements Serializable {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -3377836318526396981L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5499778990303186671L;
 
     /** The toolbar item manager. */
     @Autowired
     private IToolbarItemManager toolbarItemManager;
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Gets the toolbar item manager.
      * 
-     * @see
-     * it.geosolutions.georepo.gui.client.configuration.GeoRepoConfiguration#getToolbarItemManager
-     * ()
+     * @return the toolbar item manager
      */
     public IToolbarItemManager getToolbarItemManager() {
         return toolbarItemManager;
     }
 
-    /* (non-Javadoc)
-     * @see it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration#setToolbarItemManager(it.geosolutions.geogwt.gui.client.configuration.IToolbarItemManager)
+    /**
+     * Sets the toolbar item manager.
+     * 
+     * @param toolbarItemManager
+     *            the new toolbar item manager
      */
     public void setToolbarItemManager(IToolbarItemManager toolbarItemManager) {
         this.toolbarItemManager = toolbarItemManager;

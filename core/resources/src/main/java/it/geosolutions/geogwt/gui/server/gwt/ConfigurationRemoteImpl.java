@@ -31,12 +31,12 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.web.examples.server.gwt;
+package it.geosolutions.geogwt.gui.server.gwt;
 
-import it.geosolutions.geogwt.gui.client.service.IGeoGWTConfigurationRemote;
+import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
+import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
 import it.geosolutions.geogwt.gui.service.IGeoGWTStartupService;
 import it.geosolutions.geogwt.gui.spring.ApplicationContextUtil;
-import it.geosolutions.geogwt.web.examples.client.configuration.GeoGWTGlobalConfiguration;
 
 import java.util.logging.Logger;
 
@@ -53,7 +53,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
  * The Class ConfigurationRemoteImpl.
  */
 public class ConfigurationRemoteImpl extends RemoteServiceServlet implements
-        IGeoGWTConfigurationRemote {
+        GeoGWTConfigurationRemote {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -6320939080552026131L;
@@ -90,8 +90,8 @@ public class ConfigurationRemoteImpl extends RemoteServiceServlet implements
      * @see it.geosolutions.georepo.gui.client.service.ConfigurationRemote#
      * initServerConfiguration()
      */
-    public GeoGWTGlobalConfiguration initServerConfiguration() {
-        return (GeoGWTGlobalConfiguration) startupService.initServerConfiguration();
+    public GeoGWTConfiguration initServerConfiguration() {
+        return (GeoGWTConfiguration) startupService.initServerConfiguration();
     }
 
 }

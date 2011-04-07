@@ -35,14 +35,8 @@ package it.geosolutions.geogwt.web.examples.client;
 
 import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
 import it.geosolutions.geogwt.gui.client.GeoGWTUtils;
-import it.geosolutions.geogwt.gui.client.ToolbarItemManager;
-import it.geosolutions.geogwt.gui.client.configuration.ActionClientTool;
-import it.geosolutions.geogwt.gui.client.configuration.GenericClientTool;
-import it.geosolutions.geogwt.gui.client.widget.map.ButtonBar;
-import it.geosolutions.geogwt.web.examples.client.configuration.GeoGWTGlobalConfiguration;
-
-import java.util.ArrayList;
-import java.util.List;
+import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
+import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
 
 import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapUnits;
@@ -59,10 +53,12 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 // TODO: Auto-generated Javadoc
@@ -86,25 +82,15 @@ public class Maptoolbar_panel implements EntryPoint {
     public void onModuleLoad() {
         GXT.hideLoadingPanel("loading");
 
-        loadConfiguration();
-
         /**
          * Adding widgets to Viewport panels
          */
         this.main = new ContentPanel();
         this.main.setLayout(new BorderLayout());
+        this.main.setHeaderVisible(true);
+        this.main.setHeading("GeoGWT MapToolbar Example");
 
-        createCenter();
-        createNorth();
-
-        /**
-         * Must be done after the dispatch...
-         */
-        main.setWidth(558);
-        main.setHeight(333);
-        
-        RootPanel.get("maptoolbar").add(main);
-
+        loadConfiguration();
     }
 
     /**
@@ -112,23 +98,32 @@ public class Maptoolbar_panel implements EntryPoint {
      */
     private void loadConfiguration() {
         /** Example: trying to load toolbar components from applicationContext automatically **/
-        /* IGeoGWTConfigurationRemote.Util.getInstance().initServerConfiguration(
-                new AsyncCallback<IGeoGWTConfiguration>() {
+        GeoGWTConfigurationRemote.Util.getInstance().initServerConfiguration(
+                new AsyncCallback<GeoGWTConfiguration>() {
 
-                    public void onSuccess(IGeoGWTConfiguration result) {
+                    public void onSuccess(GeoGWTConfiguration result) {
                         GeoGWTUtils.getInstance().setGlobalConfiguration(result);
+                        
+                        createCenter();
+                        createNorth();
+
+                        /**
+                         * Must be done after the dispatch...
+                         */
+                        main.setWidth(558);
+                        main.setHeight(333);
+                        
+                        RootPanel.get("maptoolbar").add(main);
+
                     }
 
                     public void onFailure(Throwable caught) {
                         Info.display("Configuration Service Error", caught.getMessage());
                     }
-                }); */
+                });
         
-        if (GeoGWTUtils.getInstance().getGlobalConfiguration() == null) {
-            GeoGWTUtils.getInstance().setGlobalConfiguration(new GeoGWTGlobalConfiguration());
-        }
-        
-        ToolbarItemManager toolbarItemManager = new ToolbarItemManager();
+        /** Example: loading toolbar manually **/
+        /* ToolbarItemManager toolbarItemManager = new ToolbarItemManager();
         
         // defining toolbar tools
         GenericClientTool toolbarSeparator = new GenericClientTool();
@@ -161,7 +156,15 @@ public class Maptoolbar_panel implements EntryPoint {
         
         toolbarItemManager.setClientTools(clientTools);
         
-        GeoGWTUtils.getInstance().getGlobalConfiguration().setToolbarItemManager(toolbarItemManager);
+        GeoGWTUtils.getInstance().getGlobalConfiguration().setToolbarItemManager(toolbarItemManager); 
+        
+        createCenter();
+        createNorth();
+
+        main.setWidth(558);
+        main.setHeight(333);
+        
+        RootPanel.get("maptoolbar").add(main); */
     }
 
     /**

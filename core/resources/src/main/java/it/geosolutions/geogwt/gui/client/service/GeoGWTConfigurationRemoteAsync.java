@@ -1,5 +1,5 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration,v. 0.1 7-apr-2011 16.58.10 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemoteAsync,v. 0.1 7-apr-2011 16.58.10 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1-SNAPSHOT $
  * $ Date: 7-apr-2011 16.58.10 $
  *
@@ -31,29 +31,24 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.client.configuration;
+package it.geosolutions.geogwt.gui.client.service;
 
-import java.io.Serializable;
+import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Interface IGeoGWTConfiguration.
+ * The Interface GeoGWTConfigurationRemoteAsync.
  */
-public interface IGeoGWTConfiguration extends Serializable {
+public interface GeoGWTConfigurationRemoteAsync {
 
     /**
-     * Gets the toolbar item manager.
+     * Inits the server configuration.
      * 
-     * @return the toolbar item manager
+     * @param callback
+     *            the callback
      */
-    public IToolbarItemManager getToolbarItemManager();
-    
-    /**
-     * Sets the toolbar item manager.
-     * 
-     * @param toolbarItemManager
-     *            the new toolbar item manager
-     */
-    public void setToolbarItemManager(IToolbarItemManager toolbarItemManager);
+    public void initServerConfiguration(AsyncCallback<GeoGWTConfiguration> callback);
 
 }

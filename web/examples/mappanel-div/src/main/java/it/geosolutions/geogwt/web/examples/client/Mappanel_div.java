@@ -70,7 +70,7 @@ public class Mappanel_div implements EntryPoint {
         ContentPanel mappanel_div = new ContentPanel();
         mappanel_div.setLayout(new FitLayout());
         mappanel_div.setHeaderVisible(true);
-        mappanel_div.setHeading("GeoGWT MapPanel");
+        mappanel_div.setHeading("GeoGWT MapPanel Example");
         mappanel_div.addListener(Events.Resize, new Listener<BaseEvent>() {
 
             public void handleEvent(BaseEvent be) {

@@ -33,9 +33,9 @@
  */
 package it.geosolutions.geogwt.gui.client;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
 
-import it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -48,7 +48,7 @@ public class GeoGWTUtils {
 
     /** The geo gwt global configuration. */
     @Autowired
-    private IGeoGWTConfiguration geoGWTGlobalConfiguration;
+    private GeoGWTConfiguration geoGWTGlobalConfiguration;
 
     /**
      * Gets the single instance of GeoGWTUtils.
@@ -67,7 +67,7 @@ public class GeoGWTUtils {
      * 
      * @return the global configuration
      */
-    public IGeoGWTConfiguration getGlobalConfiguration() {
+    public GeoGWTConfiguration getGlobalConfiguration() {
         return geoGWTGlobalConfiguration;
     }
 
@@ -77,7 +77,7 @@ public class GeoGWTUtils {
      * @param globalConfiguration
      *            the new global configuration
      */
-    public void setGlobalConfiguration(IGeoGWTConfiguration globalConfiguration) {
+    public void setGlobalConfiguration(GeoGWTConfiguration globalConfiguration) {
         this.geoGWTGlobalConfiguration = globalConfiguration;
     }
 

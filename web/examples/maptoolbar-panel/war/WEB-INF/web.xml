@@ -9,16 +9,26 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-	           classpath*:/applicationContext-common.xml
-	           classpath:applicationContext-client.xml
-	           classpath*:applicationContext.xml
-	       </param-value>
+            classpath*:/applicationContext-common.xml
+            classpath:applicationContext-client.xml
+            classpath*:applicationContext.xml
+        </param-value>
 	</context-param>
-	  
+
+	<!-- spring context loader -->
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    	  
   	<!-- Servlets -->
 	<servlet>
 		<servlet-name>ConfigurationRemote</servlet-name>
-		<servlet-class>it.geosolutions.geogwt.web.examples.server.gwt.ConfigurationRemoteImpl</servlet-class>
+		<servlet-class>it.geosolutions.geogwt.gui.server.gwt.ConfigurationRemoteImpl</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet>

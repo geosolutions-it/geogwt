@@ -31,11 +31,11 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.web.examples.service.impl;
+package it.geosolutions.geogwt.gui.service.impl;
 
-import it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration;
+import it.geosolutions.geogwt.gui.client.GeoGWTUtils;
+import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
 import it.geosolutions.geogwt.gui.service.IGeoGWTStartupService;
-import it.geosolutions.geogwt.web.examples.client.configuration.GeoGWTGlobalConfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,17 +43,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * The Class StartupService.
  */
-public class StartupService implements IGeoGWTStartupService {
+public class StartupService extends IGeoGWTStartupService {
     
     /** The geo gwt global configuration. */
     @Autowired
-    private GeoGWTGlobalConfiguration geoGWTGlobalConfiguration;
+    protected GeoGWTConfiguration geoGWTGlobalConfiguration;
 
     /* (non-Javadoc)
      * @see it.geosolutions.geogwt.gui.service.IGeoGWTStartupService#initServerConfiguration()
      */
-    public IGeoGWTConfiguration initServerConfiguration() {
-        return geoGWTGlobalConfiguration;
+    public GeoGWTConfiguration initServerConfiguration() {
+        return this.geoGWTGlobalConfiguration;
+    }
+
+    public void afterPropertiesSet() throws Exception {
+        if (this.geoGWTGlobalConfiguration != null) {
+            GeoGWTUtils.getInstance().setGlobalConfiguration(this.geoGWTGlobalConfiguration);
+        }
     }
 
 }

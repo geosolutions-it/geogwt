@@ -33,7 +33,7 @@
  */
 package it.geosolutions.geogwt.gui.client.service;
 
-import it.geosolutions.geogwt.gui.client.configuration.IGeoGWTConfiguration;
+import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -43,7 +43,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 /**
  * The Interface IGeoGWTConfigurationRemote.
  */
-public interface IGeoGWTConfigurationRemote extends RemoteService {
+public interface GeoGWTConfigurationRemote extends RemoteService {
 
     /**
      * The Class Util.
@@ -51,16 +51,16 @@ public interface IGeoGWTConfigurationRemote extends RemoteService {
     public static class Util {
 
         /** The instance. */
-        private static IGeoGWTConfigurationRemoteAsync instance;
+        private static GeoGWTConfigurationRemoteAsync instance;
 
         /**
          * Gets the instance.
          * 
          * @return the instance
          */
-        public static IGeoGWTConfigurationRemoteAsync getInstance() {
+        public static GeoGWTConfigurationRemoteAsync getInstance() {
             if (instance == null) {
-                instance = (IGeoGWTConfigurationRemoteAsync) GWT.create(IGeoGWTConfigurationRemote.class);
+                instance = (GeoGWTConfigurationRemoteAsync) GWT.create(GeoGWTConfigurationRemote.class);
                 ServiceDefTarget target = (ServiceDefTarget) instance;
                 target.setServiceEntryPoint(GWT.getModuleBaseURL() + "ConfigurationRemote");
             }
@@ -73,6 +73,6 @@ public interface IGeoGWTConfigurationRemote extends RemoteService {
      * 
      * @return the i geo gwt configuration
      */
-    public IGeoGWTConfiguration initServerConfiguration();
+    public GeoGWTConfiguration initServerConfiguration();
 
 }

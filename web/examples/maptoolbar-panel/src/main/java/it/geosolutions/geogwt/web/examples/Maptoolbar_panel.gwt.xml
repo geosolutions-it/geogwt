@@ -23,6 +23,6 @@
 
 	<!-- Servlet path -->
 	<servlet path="/ConfigurationRemote"
-		class="it.geosolutions.geogwt.web.examples.server.gwt.ConfigurationRemoteImpl" />
+		class="it.geosolutions.geogwt.gui.server.gwt.ConfigurationRemoteImpl" />
 		
 </module>
