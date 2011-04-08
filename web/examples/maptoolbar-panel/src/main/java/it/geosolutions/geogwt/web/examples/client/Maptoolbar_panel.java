@@ -130,6 +130,12 @@ public class Maptoolbar_panel implements EntryPoint {
         GenericClientTool toolbarSeparator = new GenericClientTool();
         toolbarSeparator.setId(ButtonBar.TOOLBAR_SEPARATOR);
         toolbarSeparator.setOrder(30);
+
+        ActionClientTool zoomBox = new ActionClientTool();
+        zoomBox.setId("zoomBox");
+        zoomBox.setEnabled(true);
+        zoomBox.setType("toggle");
+        zoomBox.setOrder(0);
         
         ActionClientTool zoomIn = new ActionClientTool();
         zoomIn.setId("zoomIn");
@@ -150,6 +156,7 @@ public class Maptoolbar_panel implements EntryPoint {
         drawFeature.setOrder(50);
         
         List<GenericClientTool> clientTools = new ArrayList<GenericClientTool>();
+        clientTools.add(zoomBox);
         clientTools.add(zoomIn);
         clientTools.add(zoomOut);
         clientTools.add(toolbarSeparator);

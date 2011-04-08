@@ -108,7 +108,6 @@ public class GeoGWTEvents {
     public static final EventType UPDATE_LAYER = new EventType();
 
     /** The Constant ACTIVATE_DRAW_FEATURES. */
-
     public static final EventType ACTIVATE_DRAW_FEATURES = new EventType();
 
     /** The Constant DEACTIVATE_DRAW_FEATURES. */
@@ -119,5 +118,11 @@ public class GeoGWTEvents {
 
     /** The Constant DRAW_WKT_ON_MAP. */
     public static final EventType DRAW_WKT_ON_MAP = new EventType();
+
+    /** The Constant ACTIVATE_ZOOM_BOX. */
+    public static final EventType ACTIVATE_ZOOM_BOX = new EventType();
+
+    /** The Constant DEACTIVATE_ZOOM_BOX. */
+    public static final EventType DEACTIVATE_ZOOM_BOX = new EventType();
 
 }

@@ -218,4 +218,12 @@ public interface GeoGWTIcons extends ImageBundle {
      */
     @Resource("zoom-out.png")
     AbstractImagePrototype zoomOut();
+
+    /**
+     * Zoom box.
+     * 
+     * @return the abstract image prototype
+     */
+    @Resource("zoom.png")
+    AbstractImagePrototype zoomBox();
 }

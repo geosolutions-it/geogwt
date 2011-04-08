@@ -59,6 +59,9 @@ public enum Category {
     
     /** The GEOGW t_ zoo m_ out. */
     GEOGWT_ZOOM_OUT,
+
+    /** The GEOGW t_ zoo m_ box. */
+    GEOGWT_ZOOM_BOX,
     
     /** The GEOGW t_ uploa d_ shp. */
     GEOGWT_UPLOAD_SHP,

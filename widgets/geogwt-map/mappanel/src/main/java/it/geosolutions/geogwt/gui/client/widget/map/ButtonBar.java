@@ -121,6 +121,9 @@ public abstract class ButtonBar extends LayoutContainer implements Listener<AppE
         case GEOGWT_INFO:
             button.setIcon(Resources.ICONS.info());
             break;
+        case GEOGWT_ZOOM_BOX:
+            button.setIcon(Resources.ICONS.zoomBox());
+            break;        
         case GEOGWT_ZOOM_IN:
             button.setIcon(Resources.ICONS.zoomIn());
             break;

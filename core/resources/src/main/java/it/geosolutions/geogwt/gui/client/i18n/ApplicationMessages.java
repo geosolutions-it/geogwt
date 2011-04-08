@@ -137,6 +137,13 @@ public interface ApplicationMessages extends Messages {
     public String wktAbbreviation();
 
     /**
+     * Zoom box tool tip.
+     * 
+     * @return the string
+     */
+    public String zoomBoxToolTip();
+
+    /**
      * Zoom in tool tip.
      * 
      * @return the string

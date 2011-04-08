@@ -47,6 +47,7 @@ import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.OpenLayers;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.Style;
+import org.gwtopenmaps.openlayers.client.control.Control;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature;
 import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
 import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListener;
@@ -80,6 +81,9 @@ public class MapLayoutWidget extends LayoutContainer {
     /** The layers. */
     private List<Layer> layers;
 
+    /** The controls **/
+    private List<Control> controls;
+    
     /** The center. */
     private ContentPanel center;
 
@@ -449,6 +453,20 @@ public class MapLayoutWidget extends LayoutContainer {
      */
     public List<Layer> getLayers() {
         return layers;
+    }
+
+    /**
+     * @param controls the controls to set
+     */
+    public void setControls(List<Control> controls) {
+        this.controls = controls;
+    }
+
+    /**
+     * @return the controls
+     */
+    public List<Control> getControls() {
+        return controls;
     }
 
 }

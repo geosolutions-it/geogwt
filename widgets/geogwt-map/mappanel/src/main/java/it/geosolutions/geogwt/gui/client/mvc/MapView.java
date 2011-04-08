@@ -37,8 +37,12 @@ import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
 import it.geosolutions.geogwt.gui.client.widget.map.ButtonBar;
 import it.geosolutions.geogwt.gui.client.widget.map.MapLayoutWidget;
 
+import java.util.LinkedList;
+
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapOptions;
+import org.gwtopenmaps.openlayers.client.control.Control;
+import org.gwtopenmaps.openlayers.client.control.ZoomBox;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 
 import com.extjs.gxt.ui.client.mvc.AppEvent;
@@ -145,6 +149,14 @@ public class MapView extends View {
             onZoomToCenter();
         }
 
+        if (event.getType() == GeoGWTEvents.ACTIVATE_ZOOM_BOX) {
+            onActivateZoomBox();
+        }
+
+        if (event.getType() == GeoGWTEvents.DEACTIVATE_ZOOM_BOX) {
+            onDeactivateZoomBox();
+        }
+        
         if (event.getType() == GeoGWTEvents.ZOOM) {
             onZoom((Integer) event.getData());
         }
@@ -228,6 +240,48 @@ public class MapView extends View {
         this.mapLayout.getMap().setCenter(center, 3);
     }
 
+
+    /**
+     * On deactivate ZoomBox
+     */
+    private void onDeactivateZoomBox() {
+        boolean deactivated = false;
+        
+        if (this.mapLayout.getControls() != null) {
+            for(Control zoomBox : this.mapLayout.getControls()) {
+                if (zoomBox instanceof ZoomBox) {
+                    deactivated = zoomBox.deactivate();
+                }
+            }
+        }
+    }
+
+    /**
+     * On activate ZoomBox
+     */
+    private void onActivateZoomBox() {
+        boolean activated = false;
+        
+        if (this.mapLayout.getControls() != null) {
+            for(Control zoomBox : this.mapLayout.getControls()) {
+                if (zoomBox instanceof ZoomBox) {
+                    activated = zoomBox.activate();
+                }
+            }
+        }
+        
+        if (!activated) {
+            if (this.mapLayout.getControls() == null) {
+                this.mapLayout.setControls(new LinkedList<Control>());
+            }
+
+            Control zoomBox = new ZoomBox();
+            this.mapLayout.getControls().add(zoomBox);
+            this.mapLayout.getMap().addControl(zoomBox);
+            zoomBox.activate();
+        }
+    }
+    
     /**
      * On disable draw button.
      */

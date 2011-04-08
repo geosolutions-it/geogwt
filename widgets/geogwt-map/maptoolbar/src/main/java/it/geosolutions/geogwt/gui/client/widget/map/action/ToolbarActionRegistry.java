@@ -35,6 +35,7 @@ package it.geosolutions.geogwt.gui.client.widget.map.action;
 
 import it.geosolutions.geogwt.gui.client.widget.map.action.app.AppInfoAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.DrawFeatureAction;
+import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomBoxAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomInAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomOutAction;
 
@@ -62,6 +63,13 @@ public final class ToolbarActionRegistry {
             }
         });
 
+        REGISTRY.put("zoomBox", new ToolActionCreator() {
+
+            public ToolbarAction createActionTool(MapWidget mapWidget) {
+                return new ZoomBoxAction(mapWidget);
+            }
+        });
+        
         REGISTRY.put("zoomIn", new ToolActionCreator() {
 
             public ToolbarAction createActionTool(MapWidget mapWidget) {
