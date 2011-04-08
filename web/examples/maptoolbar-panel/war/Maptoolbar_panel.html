@@ -1,74 +1,283 @@
-<!doctype html>
-<!-- The DOCTYPE declaration above will set the    -->
-<!-- browser's rendering engine into               -->
-<!-- "Standards Mode". Replacing this declaration  -->
-<!-- with a "Quirks Mode" doctype may lead to some -->
-<!-- differences in layout.                        -->
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>GeoGWT - Examples</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link type="text/css" rel="stylesheet" href="./geogwt-examples/all.min.css">
+		<link type="text/css" rel="stylesheet" href="./geogwt-examples/overrides.css">
+		<script src="./geogwt-examples/ga.js" async="true"></script>
 
-    <!--                                                               -->
-    <!-- Consider inlining CSS to reduce the number of requested files -->
-    <!--                                                               -->
-    <link type="text/css" rel="stylesheet" href="maptoolbar_panel/resources/css/gxt-all.css" />
-    <link type="text/css" rel="stylesheet" href="Maptoolbar_panel.css">
-	<script language='javascript' src='maptoolbar_panel/lib/OpenLayers.js'></script>
-
-    <!--                                           -->
-    <!-- Any title is fine                         -->
-    <!--                                           -->
-    <title>Web Application Starter Project</title>
-    
-    <!--                                           -->
-    <!-- This script loads your compiled module.   -->
-    <!-- If you add any GWT meta tags, they must   -->
-    <!-- be added before this line.                -->
-    <!--                                           -->
-    <script type="text/javascript" language="javascript" src="maptoolbar_panel/maptoolbar_panel.nocache.js"></script>
-    
-    <!-- custom properties ================================================= -->
-	<script src="https://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+	    <!--                                                               -->
+	    <!-- Consider inlining CSS to reduce the number of requested files -->
+	    <!--                                                               -->
+	    <link type="text/css" rel="stylesheet" href="maptoolbar_panel/resources/css/gxt-all.css" />
+	    <link type="text/css" rel="stylesheet" href="Maptoolbar_panel.css">
+		<script language='javascript' src='maptoolbar_panel/lib/OpenLayers.js'></script>
 	
-  </head>
+	    <!--                                           -->
+	    <!-- Any title is fine                         -->
+	    <!--                                           -->
+	    <title>Web Application Starter Project</title>
+	    
+	    <!--                                           -->
+	    <!-- This script loads your compiled module.   -->
+	    <!-- If you add any GWT meta tags, they must   -->
+	    <!-- be added before this line.                -->
+	    <!--                                           -->
+	    <script type="text/javascript" language="javascript" src="maptoolbar_panel/maptoolbar_panel.nocache.js"></script>
+	    
+	    <!-- custom properties ================================================= -->
+		<script src="https://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
 
-  <!--                                           -->
-  <!-- The body can have arbitrary html, or      -->
-  <!-- you can leave the body empty if you want  -->
-  <!-- to create a completely dynamic UI.        -->
-  <!--                                           -->
-  <body style="overflow: hidden"> 
-
-    <!-- OPTIONAL: include this if you want history support -->
-    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
-    
-    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
-    <noscript>
-      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-        Your web browser must have JavaScript enabled
-        in order for this application to display correctly.
-      </div>
-    </noscript>
-
-    <h1 align="left">GeoGWT Web Examples - maptoolbar-panel</h1>
-	<p align="left">
-		This example shows the how to create a MapPanel with a map and a toolbar with several widgets.
-		<br/>
-		The source code is available here.
-		<br/>
-	</p>
-
-	<div id="loading">
-		<div class="loading-indicator">
-			<!-- img src="maptoolbar_panel/resources/images/gxt/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/ -->
-			<a href="http://extjs.com">GeoGWT 0.1-SNAPSHOT</a><br />
-			<span id="loading-msg">Loading&nbsp;app...</span>
-		</div>
-	</div>
+	</head>
 	
-	<div id="maptoolbar" style="height: 333px; width: 558px;">
-	</div>
-	
-  </body>
+	<body id="tryit">
+		<div id="main">
+			<div class="mainblock">
+				<div class="block">
+					<div id="twocolumns">
+						<div class="content">
+							<div id="content-header">
+								<h1>GeoGWT - MapPanel with ToolBar</h1>
+							</div>
+
+							<div class="content-body">
+								<div class="tabs">
+									<a id="demo_tab" class="active" href="#"><span class="application">View Example</span></a>
+									<a id="source_tab" href="#" class=""><span class="code">View Source</span></a>
+									<br style="clear:both">
+								</div>
+
+								<div class="demo_content">
+									<div id="view" style="display: block; ">
+										<p>This example shows the how to create a MapPanel with a map and a toolbar with several widgets.</p>
+
+										<div id="loading">
+											<div class="loading-indicator">
+												<!-- img src="maptoolbar_panel/resources/images/gxt/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/ -->
+												<a href="http://extjs.com">GeoGWT 0.1-SNAPSHOT</a><br />
+												<span id="loading-msg">Loading&nbsp;app...</span>
+											</div>
+										</div>
+										
+										<div id="maptoolbar" style="height: 333px; width: 558px;"></div>
+										
+									</div>
+
+									<div id="source" class="hidden" style="display: none; ">
+										<h2>Source</h2>
+										<p>Below is all you need to setup the example.</p>
+										<pre class="js prettyprint">public class Maptoolbar_panel implements EntryPoint {
+
+    /** The main. */
+    private ContentPanel main;
+
+    /** The center. */
+    protected ContentPanel center;
+
+    /** The north. */
+    protected ContentPanel north;
+
+    /* (non-Javadoc)
+     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+     */
+    public void onModuleLoad() {
+        GXT.hideLoadingPanel("loading");
+
+        /**
+         * Adding widgets to Viewport panels
+         */
+        this.main = new ContentPanel();
+        this.main.setLayout(new BorderLayout());
+        this.main.setHeaderVisible(true);
+        this.main.setHeading("GeoGWT MapToolbar Example");
+
+        loadConfiguration();
+    }
+
+    /**
+     * Load configuration.
+     */
+    private void loadConfiguration() {
+        /** Example: trying to load toolbar components from applicationContext automatically **/
+        GeoGWTConfigurationRemote.Util.getInstance().initServerConfiguration(
+                new AsyncCallback<GeoGWTConfiguration>() {
+
+                    public void onSuccess(GeoGWTConfiguration result) {
+                        GeoGWTUtils.getInstance().setGlobalConfiguration(result);
+                        
+                        createCenter();
+                        createNorth();
+
+                        /**
+                         * Must be done after the dispatch...
+                         */
+                        main.setWidth(558);
+                        main.setHeight(333);
+                        
+                        RootPanel.get("maptoolbar").add(main);
+
+                    }
+
+                    public void onFailure(Throwable caught) {
+                        Info.display("Configuration Service Error", caught.getMessage());
+                    }
+                });
+        
+        /** Example: loading toolbar manually **/
+        /* ToolbarItemManager toolbarItemManager = new ToolbarItemManager();
+        
+        // defining toolbar tools
+        GenericClientTool toolbarSeparator = new GenericClientTool();
+        toolbarSeparator.setId(ButtonBar.TOOLBAR_SEPARATOR);
+        toolbarSeparator.setOrder(30);
+        
+        ActionClientTool zoomIn = new ActionClientTool();
+        zoomIn.setId("zoomIn");
+        zoomIn.setEnabled(true);
+        zoomIn.setType("button");
+        zoomIn.setOrder(10);
+        
+        ActionClientTool zoomOut = new ActionClientTool();
+        zoomOut.setId("zoomOut");
+        zoomOut.setEnabled(true);
+        zoomOut.setType("button");
+        zoomOut.setOrder(20);
+        
+        ActionClientTool drawFeature = new ActionClientTool();
+        drawFeature.setId("drawFeature");
+        drawFeature.setEnabled(true);
+        drawFeature.setType("toggle");
+        drawFeature.setOrder(50);
+        
+        List<GenericClientTool> clientTools = new ArrayList<GenericClientTool>();
+        clientTools.add(zoomIn);
+        clientTools.add(zoomOut);
+        clientTools.add(toolbarSeparator);
+        clientTools.add(drawFeature);
+        
+        toolbarItemManager.setClientTools(clientTools);
+        
+        GeoGWTUtils.getInstance().getGlobalConfiguration().setToolbarItemManager(toolbarItemManager); 
+        
+        createCenter();
+        createNorth();
+
+        main.setWidth(558);
+        main.setHeight(333);
+        
+        RootPanel.get("maptoolbar").add(main); */
+    }
+
+    /**
+     * Creates the north.
+     */
+    private void createNorth() {
+        north = new ContentPanel();
+        north.setHeaderVisible(false);
+        north.addListener(Events.Resize, new Listener<BaseEvent>() {
+
+            public void handleEvent(BaseEvent be) {
+                Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
+            }
+        });
+
+        BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, 30);
+        data.setMargins(new Margins(0, 5, 0, 5));
+        data.setSplit(true);
+
+        main.add(north, data);
+
+        Dispatcher.forwardEvent(GeoGWTEvents.ATTACH_TOOLBAR, this.north);
+    }
+
+    /**
+     * Creates the center.
+     */
+    private void createCenter() {
+        center = new ContentPanel();
+        center.setHeaderVisible(false);
+        center.setLayout(new BorderLayout());
+
+        ContentPanel maptoolbar_panel = new ContentPanel();
+        maptoolbar_panel.setLayout(new FitLayout());
+        maptoolbar_panel.setHeaderVisible(false);
+        maptoolbar_panel.setHeading("GeoGWT MapView");
+        maptoolbar_panel.addListener(Events.Resize, new Listener<BaseEvent>() {
+
+            public void handleEvent(BaseEvent be) {
+                Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
+            }
+        });
+        maptoolbar_panel.addListener(Events.Move, new Listener<BaseEvent>() {
+
+            public void handleEvent(BaseEvent be) {
+                Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
+            }
+        });
+        maptoolbar_panel.setMonitorWindowResize(true);
+        maptoolbar_panel.setLayoutOnChange(true);
+
+        BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
+        data.setCollapsible(false);
+        data.setFloatable(false);
+        data.setSplit(true);
+        data.setMargins(new Margins(0));
+
+        // add map to center region of center panel
+        center.add(maptoolbar_panel, data);
+
+        data = new BorderLayoutData(LayoutRegion.CENTER);
+        data.setMargins(new Margins(5, 5, 5, 5));
+        data.setCollapsible(true);
+        data.setSplit(true);
+
+        // add center panel to center region of viewport
+        main.add(center, data);
+
+        /* map options */
+        MapOptions mapOptions = new MapOptions();
+        mapOptions.setUnits(MapUnits.DEGREES);
+        mapOptions.setProjection("EPSG:4326");
+
+        Dispatcher.forwardEvent(GeoGWTEvents.INIT_MAPS_UI_MODULE, mapOptions);
+
+        /* base layer */
+        WMSParams wmsParams = new WMSParams();
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers("GeoSolutions:ne_shaded");
+        wmsParams.setStyles("");
+
+        WMSOptions wmsLayerParams = new WMSOptions();
+        wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
+
+        WMS layer = new WMS("GeoSolutions Natural Earth",
+                "http://demo1.geo-solutions.it/playground/wms", wmsParams, wmsLayerParams);
+        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
+
+        Dispatcher.forwardEvent(GeoGWTEvents.ATTACH_MAP_WIDGET, maptoolbar_panel);
+
+        // Adjusting the Zoom level
+        // Dispatcher.forwardEvent(GeoGWTEvents.ZOOM_TO_MAX_EXTENT);
+        Dispatcher.forwardEvent(GeoGWTEvents.SET_MAP_CENTER, new Double[] { 13.0, 42.0 });
+        Dispatcher.forwardEvent(GeoGWTEvents.ZOOM, 5);
+    }
+}</pre>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="bottom-line"></div>
+				</div>
+
+			</div> <!-- /mainblock -->
+		</div> <!-- /main -->
+
+		<script type="text/javascript" src="./geogwt-examples/prettify.js"></script>
+		<script type="text/javascript" src="./geogwt-examples/jquery.min.js"></script>
+		<script type="text/javascript" src="./geogwt-examples/all.min.js"></script>
+
+	</body>
 </html>
