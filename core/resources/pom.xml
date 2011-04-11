@@ -18,7 +18,13 @@
 	</properties>
 
 	<dependencies>
+		<!-- GeoSolutions -->
+		<dependency>
+			<groupId>it.geosolutions</groupId>
+			<artifactId>geoserver-manager</artifactId>
+		</dependency>
 
+		<!-- GWT -->		
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>

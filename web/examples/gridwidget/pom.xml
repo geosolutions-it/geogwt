@@ -9,9 +9,9 @@
 	</parent>
 
 	<groupId>it.geosolutions.geogwt.web.examples</groupId>
-    <artifactId>mappanel-div</artifactId>
+    <artifactId>gridwidget</artifactId>
 	<packaging>war</packaging>
-    <name>GeoGWT - Web - Examples - mappanel-div</name>
+    <name>GeoGWT - Web - Examples - gridwidget</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,7 +34,7 @@
 
 
 	<dependencies>
-	
+
 		<!-- =============================================================== -->
 		<!-- 4J UTILS -->
 		<!-- =============================================================== -->
@@ -69,7 +69,12 @@
 			<artifactId>gwt-user</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
 		<!-- GXT -->
 		<dependency>
 			<groupId>com.extjs</groupId>
@@ -88,6 +93,43 @@
 			<version>0.6</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+						
 		<!-- SCOPE TEST -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -105,10 +147,6 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>

@@ -13,6 +13,7 @@
     <name>GeoGWT - Web - Examples</name>
 
 	<modules>
+		<module>gridwidget</module>
 		<module>mappanel-div</module>
 		<module>maptoolbar-panel</module>
 	</modules>

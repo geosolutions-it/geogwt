@@ -40,6 +40,7 @@ import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
+import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -53,13 +54,24 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
     /** The store. */
     protected ListStore<T> store;
 
+    /** The tool bar. */
+    private PagingToolBar toolBar;
+    
     /** The grid. */
     protected Grid<T> grid;
 
+    /** */
+    private int gridDimension;
+
     /**
      * Instantiates a new geo gwt grid widget.
+     * 
+     * @param pageSize 
      */
-    public GeoGWTGridWidget() {
+    public GeoGWTGridWidget(int pageSize, int gridDimension) {
+        this.toolBar = new PagingToolBar(pageSize);
+        this.setGridDimension(gridDimension);
+        
         createStore();
         initGrid();
     }
@@ -70,7 +82,10 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
      * @param models
      *            the models
      */
-    public GeoGWTGridWidget(List<T> models) {
+    public GeoGWTGridWidget(List<T> models, int pageSize, int gridDimension) {
+        this.toolBar = new PagingToolBar(pageSize);
+        this.setGridDimension(gridDimension);
+        
         createStore();
         this.store.add(models);
         initGrid();
@@ -96,6 +111,15 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
     }
 
     /**
+     * Clear grid elements.
+     */
+    public void clearGridElements() {
+        this.store.removeAll();
+        this.toolBar.clear();
+        this.toolBar.disable();
+    }
+    
+    /**
      * Sets the grid properties.
      */
     public abstract void setGridProperties();
@@ -107,6 +131,11 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
      */
     public abstract ColumnModel prepareColumnModel();
 
+    /**
+     * Sets the up load listener.
+     */
+    public abstract void setUpLoadListener();
+    
     /**
      * Creates the store.
      */
@@ -130,4 +159,24 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
         return store;
     }
 
+    /**
+     * @return the toolBar
+     */
+    public PagingToolBar getToolBar() {
+        return toolBar;
+    }
+
+    /**
+     * @param gridDimension the gridDimension to set
+     */
+    public void setGridDimension(int gridDimension) {
+        this.gridDimension = gridDimension;
+    }
+
+    /**
+     * @return the gridDimension
+     */
+    public int getGridDimension() {
+        return gridDimension;
+    }
 }

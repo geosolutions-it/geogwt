@@ -4,6 +4,10 @@
 *target
 *bin
 
+*gridwidget/war/WEB-INF/classes
+*gridwidget/war/WEB-INF/lib
+*gridwidget/war/gridwidget
+
 *mappanel-div/war/WEB-INF/classes
 *mappanel-div/war/WEB-INF/lib
 *mappanel-div/war/mappanel_div

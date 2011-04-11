@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>GeoGWT - Examples</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link type="text/css" rel="stylesheet" href="./geogwt-examples/all.min.css">
+		<link type="text/css" rel="stylesheet" href="./geogwt-examples/overrides.css">
+		<script src="./geogwt-examples/ga.js" async="true"></script>
+
+	    <!--                                                               -->
+	    <!-- Consider inlining CSS to reduce the number of requested files -->
+	    <!--                                                               -->
+	    <link type="text/css" rel="stylesheet" href="./gridwidget/resources/css/gxt-all.css" />
+	    <link type="text/css" rel="stylesheet" href="./Gridwidget.css">
+		<script language='javascript' src='./gridwidget/lib/OpenLayers.js'></script>
+	
+	    <!--                                           -->
+	    <!-- This script loads your compiled module.   -->
+	    <!-- If you add any GWT meta tags, they must   -->
+	    <!-- be added before this line.                -->
+	    <!--                                           -->
+	    <script type="text/javascript" language="javascript" src="./gridwidget/gridwidget.nocache.js"></script>
+	    
+	    <!-- custom properties ================================================= -->
+		<script src="https://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+
+	</head>
+	
+	<body id="tryit">
+		<div id="main">
+			<div class="mainblock">
+				<div class="block">
+					<div id="twocolumns">
+						<div class="content">
+							<div id="content-header">
+								<h1>GeoGWT - GridWidget</h1>
+							</div>
+
+							<div class="content-body">
+								<div class="tabs">
+									<a id="demo_tab" class="active" href="#"><span class="application">View Example</span></a>
+									<a id="source_tab" href="#" class=""><span class="code">View Source</span></a>
+									<br style="clear:both">
+								</div>
+
+								<div class="demo_content">
+									<div id="view" style="display: block; ">
+										<p>This example shows the how to create a GridWidget associated to a custom GeoServer REST service to get a paginated list of layers.</p>
+
+										<div id="loading">
+											<div class="loading-indicator">
+												<!-- img src="maptoolbar_panel/resources/images/gxt/shared/large-loading.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/ -->
+												<a href="http://extjs.com">GeoGWT 0.1-SNAPSHOT</a><br />
+												<span id="loading-msg">Loading&nbsp;app...</span>
+											</div>
+										</div>
+										
+										<div id="gridpanel" style="height: 333px; width: 558px;"></div>
+										
+									</div>
+
+									<div id="source" class="hidden" style="display: none; ">
+										<h2>Source</h2>
+										<p>Below is all you need to setup the example.</p>
+										<pre class="js prettyprint">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+	xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd&quot;
+	default-autowire=&quot;byName&quot;&gt;
+
+	&lt;context:annotation-config /&gt;
+
+	&lt;context:component-scan base-package=&quot;it.geosolutions.geogwt.web.examples&quot; /&gt;
+
+	&lt;!-- GWT Configuration --&gt;
+	&lt;bean id=&quot;geoGWTGlobalConfiguration&quot; class=&quot;it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration&quot; lazy-init=&quot;false&quot;&gt;
+	&lt;/bean&gt;
+
+	&lt;!-- Startup service --&gt;
+	&lt;bean id=&quot;geogwtStartupService&quot; class=&quot;it.geosolutions.geogwt.gui.service.impl.StartupService&quot; lazy-init=&quot;false&quot;&gt;
+	&lt;/bean&gt;
+
+	&lt;!-- Toolbar configuration --&gt;
+	&lt;bean name=&quot;toolbarItemManager&quot; class=&quot;it.geosolutions.geogwt.gui.client.ToolbarItemManager&quot;&gt;
+		&lt;property name=&quot;clientTools&quot;&gt;
+			&lt;list&gt;
+			&lt;/list&gt;
+		&lt;/property&gt;
+	&lt;/bean&gt;
+	
+	&lt;!-- Layers Manager Service configuration --&gt;
+	&lt;bean name=&quot;layersManagerServiceGWT&quot; class=&quot;it.geosolutions.geogwt.web.examples.server.service.impl.LayersManagerServiceImpl&quot;&gt;
+		&lt;property name=&quot;geoServerUrl&quot; value=&quot;http://demo1.geo-solutions.it/playground&quot;/&gt;
+		&lt;!-- property name=&quot;geoServerUser&quot; value=&quot;admin&quot;/&gt;
+		&lt;property name=&quot;geoServerPassword&quot; value=&quot;*******&quot;/ --&gt;
+	&lt;/bean&gt;
+	
+&lt;/beans&gt;</pre>
+
+<pre class="js prettyprint">/**
+ * The Class Gridwidget.
+ */
+public class Gridwidget implements EntryPoint {
+
+    /** The main. */
+    private ContentPanel main;
+
+    private LayerGridWidget layerGridWidget;
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+     */
+    public void onModuleLoad() {
+        GXT.hideLoadingPanel("loading");
+
+        GeoGWTConfigurationRemote.Util.getInstance().initServerConfiguration(
+        new AsyncCallback<GeoGWTConfiguration>() {
+
+            public void onSuccess(GeoGWTConfiguration result) {
+                GeoGWTUtils.getInstance().setGlobalConfiguration(result);
+                
+                /**
+                 * Adding widgets to Viewport panels
+                 */
+                main = new ContentPanel();
+                main.setLayout(new BorderLayout());
+                main.setHeaderVisible(true);
+                main.setHeading("GeoGWT GridWidget Example");
+
+                createCenter();
+
+                main.setWidth(558);
+                main.setHeight(333);
+
+                RootPanel.get("gridpanel").add(main);
+
+            }
+
+            public void onFailure(Throwable caught) {
+                Info.display("Configuration Service Error", caught.getMessage());
+            }
+        });
+    }
+
+    /**
+     * Creates the center.
+     */
+    private void createCenter() {
+        ContentPanel layerGridPanel = new ContentPanel();
+
+        layerGridPanel.setMonitorWindowResize(true);
+        layerGridPanel.setHeaderVisible(false);
+        layerGridPanel.setFrame(true);
+        layerGridPanel.setLayout(new FitLayout());
+        layerGridPanel.setScrollMode(Scroll.NONE);
+        layerGridPanel.setAutoWidth(true);
+        layerGridPanel.setHeight(333 - 25);
+
+        this.layerGridWidget = new LayerGridWidget(10, 333, LayersManagerServiceRemote.Util
+                .getInstance());
+
+        layerGridPanel.setBottomComponent(this.layerGridWidget.getToolBar());
+        layerGridPanel.add(this.layerGridWidget.getGrid());
+
+        this.layerGridWidget.getLoader().load();
+        
+        main.add(layerGridPanel);
+    }
+}</pre>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="bottom-line"></div>
+				</div>
+
+			</div> <!-- /mainblock -->
+		</div> <!-- /main -->
+
+		<script type="text/javascript" src="./geogwt-examples/prettify.js"></script>
+		<script type="text/javascript" src="./geogwt-examples/jquery.min.js"></script>
+		<script type="text/javascript" src="./geogwt-examples/all.min.js"></script>
+
+	</body>
+</html>

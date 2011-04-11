@@ -18,6 +18,8 @@
         <commonsFileuploadVersion>1.2.1</commonsFileuploadVersion>
         <commonsIoVersion>1.4</commonsIoVersion>
     
+		<geosolutions-gsmanager-version>1.1-SNAPSHOT</geosolutions-gsmanager-version>
+	
         <jaxws-version>2.1</jaxws-version>
         <cxf-version>2.3.2</cxf-version>
     </properties>
@@ -89,6 +91,15 @@
     <dependencyManagement>
         <dependencies>
 
+	    <!-- =========================================================== -->
+	    <!--     GeoSolutions                                            -->
+	    <!-- =========================================================== -->
+		<dependency>
+			<groupId>it.geosolutions</groupId>
+			<artifactId>geoserver-manager</artifactId>
+			<version>${geosolutions-gsmanager-version}</version>
+		</dependency>
+		
 	    <!-- =========================================================== -->
 	    <!--     GeoGWT Modules                                          -->
 	    <!-- =========================================================== -->

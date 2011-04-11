@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+	<!-- pick up all spring application contexts -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+            classpath*:/applicationContext-common.xml
+            classpath:applicationContext-client.xml
+            classpath*:applicationContext.xml
+        </param-value>
+	</context-param>
+
+	<!-- spring context loader -->
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    	  
+  	<!-- Servlets -->
+	<servlet>
+		<servlet-name>ConfigurationRemote</servlet-name>
+		<servlet-class>it.geosolutions.geogwt.gui.server.gwt.ConfigurationRemoteImpl</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet>
+	  <servlet-name>remoteLoggingServiceImpl</servlet-name>
+	  <servlet-class>com.google.gwt.libideas.logging.server.RemoteLoggingServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>GwtOpenlayersProxy</servlet-name>
+		<servlet-class>
+			org.gwtopenmaps.openlayers.server.GwtOpenLayersProxyServlet</servlet-class>
+	</servlet>
+
+	<!-- *****************************************************************************************  -->
+	<!-- **                             LAYERs SERVICE                                          **  -->
+	<!-- *****************************************************************************************  -->
+	<servlet>
+		<servlet-name>LayersManagerServiceRemote</servlet-name>
+		<servlet-class>it.geosolutions.geogwt.web.examples.server.gwt.LayersManagerServiceImpl</servlet-class>
+	</servlet>
+	
+  	<!-- Servlet Mappings -->
+	<servlet-mapping>
+		<servlet-name>ConfigurationRemote</servlet-name>
+		<url-pattern>/gridwidget/ConfigurationRemote</url-pattern>
+	</servlet-mapping>  	
+	
+	<servlet-mapping>
+	  <servlet-name>remoteLoggingServiceImpl</servlet-name>
+	  <url-pattern>/gridwidget/logging</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>GwtOpenlayersProxy</servlet-name>
+		<url-pattern>/gwtOpenLayersProxy/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- *****************************************************************************************  -->
+	<!-- **                    LAYERs SERVICE - Servlet Mapping                                 **  -->
+	<!-- *****************************************************************************************  -->
+	<servlet-mapping>
+		<servlet-name>LayersManagerServiceRemote</servlet-name>
+		<url-pattern>/gridwidget/LayersManagerServiceRemote</url-pattern>
+	</servlet-mapping>
+			
+  	<!-- Default page to serve -->
+	<welcome-file-list>
+	  <welcome-file>Gridwidget.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>
