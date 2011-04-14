@@ -1,5 +1,35 @@
-/**
+/*
+ * $ Header: it.geosolutions.geogwt.web.examples.client.widget.LayerGridWidget,v. 0.1 14-apr-2011 10.00.36 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 14-apr-2011 10.00.36 $
+ *
+ * ====================================================================
+ * GeoGWT 0.1-SNAPSHOT
  * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
+ * http://www.geo-solutions.it
+ *
+ * GPLv3 + Classpath exception
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. 
+ *
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by developers
+ * of GeoSolutions.  For more information on GeoSolutions, please see
+ * <http://www.geo-solutions.it/>.
+ *
  */
 package it.geosolutions.geogwt.web.examples.client.widget;
 
@@ -32,13 +62,13 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author Alessio
- * 
+ * The Class LayerGridWidget.
  */
 public class LayerGridWidget extends GeoGWTGridWidget<Layer> {
 
-    /** The gs users service. */
+    /** The layers service. */
     private LayersManagerServiceRemoteAsync layersService;
 
     /** The proxy. */
@@ -47,6 +77,16 @@ public class LayerGridWidget extends GeoGWTGridWidget<Layer> {
     /** The loader. */
     private PagingLoader<PagingLoadResult<ModelData>> loader;
 
+    /**
+     * Instantiates a new layer grid widget.
+     * 
+     * @param pageSize
+     *            the page size
+     * @param gridDimension
+     *            the grid dimension
+     * @param layersService
+     *            the layers service
+     */
     public LayerGridWidget(int pageSize, int gridDimension, 
             LayersManagerServiceRemoteAsync layersService) {
         super(pageSize, gridDimension);
@@ -54,6 +94,9 @@ public class LayerGridWidget extends GeoGWTGridWidget<Layer> {
         this.layersService = layersService;
     }
 
+    /* (non-Javadoc)
+     * @see it.geosolutions.geogwt.gui.client.widget.GeoGWTGridWidget#createStore()
+     */
     @Override
     public void createStore() {
         // Loader fro gsUsersService
@@ -98,6 +141,9 @@ public class LayerGridWidget extends GeoGWTGridWidget<Layer> {
         setUpLoadListener();
     }
 
+    /* (non-Javadoc)
+     * @see it.geosolutions.geogwt.gui.client.widget.GeoGWTGridWidget#prepareColumnModel()
+     */
     @Override
     public ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
@@ -137,6 +183,9 @@ public class LayerGridWidget extends GeoGWTGridWidget<Layer> {
         return new ColumnModel(configs);
     }
 
+    /* (non-Javadoc)
+     * @see it.geosolutions.geogwt.gui.client.widget.GeoGWTGridWidget#setUpLoadListener()
+     */
     @Override
     public void setUpLoadListener() {
         loader.addLoadListener(new LoadListener() {
@@ -174,6 +223,9 @@ public class LayerGridWidget extends GeoGWTGridWidget<Layer> {
         });
     }
 
+    /* (non-Javadoc)
+     * @see it.geosolutions.geogwt.gui.client.widget.GeoGWTGridWidget#setGridProperties()
+     */
     @Override
     public void setGridProperties() {
         grid.setHeight(getGridDimension() - 25);
@@ -190,6 +242,8 @@ public class LayerGridWidget extends GeoGWTGridWidget<Layer> {
     }
 
     /**
+     * Gets the loader.
+     * 
      * @return the loader
      */
     public PagingLoader<PagingLoadResult<ModelData>> getLoader() {

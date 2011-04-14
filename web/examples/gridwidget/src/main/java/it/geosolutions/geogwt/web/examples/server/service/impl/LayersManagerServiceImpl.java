@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.georepo.gui.server.service.impl.GsUsersManagerServiceImpl,v. 0.1 10-feb-2011 11.10.03 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 10-feb-2011 11.10.03 $
+ * $ Header: it.geosolutions.geogwt.web.examples.server.service.impl.LayersManagerServiceImpl,v. 0.1 14-apr-2011 10.00.37 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 14-apr-2011 10.00.37 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -62,10 +63,13 @@ public class LayersManagerServiceImpl implements ILayersManagerService {
     /** The logger. */
     private final Logger logger = Logger.getLogger(this.getClass().getName());
 
+    /** The geo server url. */
     private String geoServerUrl;
     
+    /** The geo server user. */
     private String geoServerUser;
     
+    /** The geo server password. */
     private String geoServerPassword;
     
     /*
@@ -130,42 +134,57 @@ public class LayersManagerServiceImpl implements ILayersManagerService {
     }
 
     /**
-     * @param geoServerUrl the geoServerUrl to set
+     * Sets the geo server url.
+     * 
+     * @param geoServerUrl
+     *            the new geo server url
      */
     public void setGeoServerUrl(String geoServerUrl) {
         this.geoServerUrl = geoServerUrl;
     }
 
     /**
-     * @return the geoServerUrl
+     * Gets the geo server url.
+     * 
+     * @return the geo server url
      */
     public String getGeoServerUrl() {
         return geoServerUrl;
     }
 
     /**
-     * @param geoServerUser the geoServerUser to set
+     * Sets the geo server user.
+     * 
+     * @param geoServerUser
+     *            the new geo server user
      */
     public void setGeoServerUser(String geoServerUser) {
         this.geoServerUser = geoServerUser;
     }
 
     /**
-     * @return the geoServerUser
+     * Gets the geo server user.
+     * 
+     * @return the geo server user
      */
     public String getGeoServerUser() {
         return geoServerUser;
     }
 
     /**
-     * @param geoServerPassword the geoServerPassword to set
+     * Sets the geo server password.
+     * 
+     * @param geoServerPassword
+     *            the new geo server password
      */
     public void setGeoServerPassword(String geoServerPassword) {
         this.geoServerPassword = geoServerPassword;
     }
 
     /**
-     * @return the geoServerPassword
+     * Gets the geo server password.
+     * 
+     * @return the geo server password
      */
     public String getGeoServerPassword() {
         return geoServerPassword;

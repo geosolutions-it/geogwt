@@ -1,11 +1,12 @@
 /*
- * $ Header: it.geosolutions.georepo.gui.server.service.IGsUsersManagerService,v. 0.1 10-feb-2011 11.09.23 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1 $
- * $ Date: 10-feb-2011 11.09.23 $
+ * $ Header: it.geosolutions.geogwt.web.examples.server.service.ILayersManagerService,v. 0.1 14-apr-2011 10.00.37 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1-SNAPSHOT $
+ * $ Date: 14-apr-2011 10.00.37 $
  *
  * ====================================================================
- *
- * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
+ * GeoGWT 0.1-SNAPSHOT
+ * 
+ * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -45,13 +46,11 @@ import com.extjs.gxt.ui.client.data.PagingLoadResult;
 public interface ILayersManagerService {
 
     /**
-     * Gets the gs users.
+     * Gets the layers.
      * 
      * @param config
      *            the config
-     * @param full
-     *            the full
-     * @return the gs users
+     * @return the layers
      * @throws ApplicationException
      *             the application exception
      */

@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.web.examples.client.model.Layer,v. 0.1 11-apr-2011 10.48.54 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.geogwt.web.examples.client.model.Layer,v. 0.1 14-apr-2011 10.00.37 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1-SNAPSHOT $
- * $ Date: 11-apr-2011 10.48.54 $
+ * $ Date: 14-apr-2011 10.00.37 $
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
@@ -263,7 +263,7 @@ public class Layer extends BeanModel {
         /** The LAYE r_ description. */
         LAYER_DESCRIPTION("description"), 
         
-        /** The LAYE r_ tytle. */
+        /** The LAYE r_ title. */
         LAYER_TITLE("title");
         
         /** The value. */

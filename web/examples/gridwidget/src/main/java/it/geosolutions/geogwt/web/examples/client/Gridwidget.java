@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.web.examples.client.Gridwidget,v. 0.1 11-apr-2011 10.48.54 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.geogwt.web.examples.client.Gridwidget,v. 0.1 14-apr-2011 10.00.37 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1-SNAPSHOT $
- * $ Date: 11-apr-2011 10.48.54 $
+ * $ Date: 14-apr-2011 10.00.37 $
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
@@ -58,6 +58,7 @@ public class Gridwidget implements EntryPoint {
     /** The main. */
     private ContentPanel main;
 
+    /** The layer grid widget. */
     private LayerGridWidget layerGridWidget;
 
     /*
