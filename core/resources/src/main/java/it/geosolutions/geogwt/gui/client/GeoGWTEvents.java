@@ -85,6 +85,9 @@ public class GeoGWTEvents {
     /** The Constant DISABLE_DRAW_BUTTON. */
     public static final EventType DISABLE_DRAW_BUTTON = new EventType();
 
+    /** The Constant ZOOM_TO_EXTENT. */
+    public static final EventType ZOOM_TO_EXTENT = null;
+
     /** The Constant ZOOM_TO_MAX_EXTENT. */
     public static final EventType ZOOM_TO_MAX_EXTENT = new EventType();
 

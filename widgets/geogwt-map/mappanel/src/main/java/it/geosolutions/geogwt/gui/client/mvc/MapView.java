@@ -39,6 +39,7 @@ import it.geosolutions.geogwt.gui.client.widget.map.MapLayoutWidget;
 
 import java.util.LinkedList;
 
+import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.control.Control;
@@ -149,6 +150,10 @@ public class MapView extends View {
             onZoomToCenter();
         }
 
+        if (event.getType() == GeoGWTEvents.ZOOM_TO_EXTENT) {
+            onZoomToExtent((Bounds) event.getData());
+        }
+        
         if (event.getType() == GeoGWTEvents.ACTIVATE_ZOOM_BOX) {
             onActivateZoomBox();
         }
@@ -215,6 +220,15 @@ public class MapView extends View {
         this.mapLayout.getMap().setCenter(lonlat);
     }
 
+    /**
+     * On zoom to box.
+     * 
+     * @param bounds 
+     */
+    private void onZoomToExtent(Bounds bounds) {
+        this.mapLayout.getMap().zoomToExtent(bounds);
+    }
+    
     /**
      * On zoom to max extent.
      */

@@ -244,8 +244,7 @@ public class MapLayoutWidget extends LayoutContainer {
             }
             
             this.layers.add(layer);
-            
-            this.map.addLayer(layer);
+            this.map.addLayers(new Layer[]{layer});
         }
     }
 
@@ -263,6 +262,7 @@ public class MapLayoutWidget extends LayoutContainer {
                             l.getName().equals(layer.getName())) {
                         this.map.removeLayer(l);
                         this.layers.remove(l);
+                        break;
                     }
                 }
             }

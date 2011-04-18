@@ -72,6 +72,7 @@ public class MapController extends Controller {
                 
                 GeoGWTEvents.ADD_LAYER,
                 GeoGWTEvents.REMOVE_LAYER,
+                GeoGWTEvents.ZOOM_TO_EXTENT,
                 GeoGWTEvents.ZOOM_TO_MAX_EXTENT,
                 GeoGWTEvents.ZOOM_TO_CENTER,
                 GeoGWTEvents.ZOOM,

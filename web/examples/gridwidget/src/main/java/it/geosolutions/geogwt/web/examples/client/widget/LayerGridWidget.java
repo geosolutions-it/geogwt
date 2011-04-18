@@ -99,7 +99,7 @@ public class LayerGridWidget extends GeoGWTGridWidget<Layer> {
      */
     @Override
     public void createStore() {
-        // Loader fro gsUsersService
+        // Loader for gsUsersService
         this.proxy = new RpcProxy<PagingLoadResult<Layer>>() {
 
             @Override

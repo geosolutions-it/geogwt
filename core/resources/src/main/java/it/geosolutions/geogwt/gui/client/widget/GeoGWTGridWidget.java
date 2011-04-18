@@ -94,7 +94,7 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
     /**
      * Inits the grid.
      */
-    private void initGrid() {
+    protected void initGrid() {
         ColumnModel cm = prepareColumnModel();
 
         grid = new Grid<T>(store, cm);
