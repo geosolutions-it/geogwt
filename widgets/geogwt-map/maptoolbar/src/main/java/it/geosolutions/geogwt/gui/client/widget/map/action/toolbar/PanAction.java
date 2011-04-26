@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.widget.map.action.app.AppInfoAction,v. 0.1 7-apr-2011 17.01.45 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomBoxAction,v. 0.1 8-apr-2011 15.48.16 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1-SNAPSHOT $
- * $ Date: 7-apr-2011 17.01.45 $
+ * $ Date: 8-apr-2011 15.48.16 $
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
@@ -31,35 +31,48 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.client.widget.map.action.app;
+package it.geosolutions.geogwt.gui.client.widget.map.action.toolbar;
 
+import it.geosolutions.geogwt.gui.client.Resources;
 import it.geosolutions.geogwt.gui.client.i18n.I18nProvider;
-import it.geosolutions.geogwt.gui.client.model.Category;
-import it.geosolutions.geogwt.gui.client.widget.map.action.ToolbarApplicationAction;
+import it.geosolutions.geogwt.gui.client.widget.map.action.ToolbarMapAction;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.widget.button.Button;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AppInfoAction.
+ * The Class ZoomOutAction.
  */
-public class AppInfoAction extends ToolbarApplicationAction {
+public class PanAction extends ToolbarMapAction {
+
 
     /**
-     * Instantiates a new app info action.
-     */
-    public AppInfoAction() {
-        super(I18nProvider.getMessages().applicationName(), Category.GEOGWT_INFO);
-        // TODO Auto-generated constructor stub
-    }
-
-    /*
-     * (non-Javadoc)
      * 
-     * @see
-     * com.extjs.gxt.ui.client.event.Listener#handleEvent(com.extjs.gxt.ui.client.event.BaseEvent)
      */
-    public void handleEvent(BaseEvent be) {
+    private static final long serialVersionUID = 6073943566904454476L;
+
+    /**
+     * Instantiates a new zoom out action.
+     * 
+     * @param mapWidget
+     *            the map widget
+     */
+    public PanAction() {
+        super();
     }
 
+    @Override
+    public boolean initialize() {
+        if (!isInitialized()) {
+            setTooltip(I18nProvider.getMessages().pan());
+            setIcon(Resources.ICONS.pan());
+            this.initialiazed = true;
+        } 
+        
+        return isInitialized();
+    }
+
+    @Override
+    public void performAction(Button button) {
+    }
 }

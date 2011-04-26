@@ -39,7 +39,12 @@ import it.geosolutions.geogwt.gui.client.ToolbarItemManager;
 import it.geosolutions.geogwt.gui.client.configuration.ActionClientTool;
 import it.geosolutions.geogwt.gui.client.configuration.GenericClientTool;
 import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
+import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
 import it.geosolutions.geogwt.gui.client.widget.map.ButtonBar;
+import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.DrawFeatureAction;
+import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomBoxAction;
+import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomInAction;
+import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomOutAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,10 +64,12 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
 // TODO: Auto-generated Javadoc
@@ -102,7 +109,7 @@ public class Maptoolbar_panel implements EntryPoint {
      */
     private void loadConfiguration() {
         /** Example: trying to load toolbar components from applicationContext automatically **/
-        /* GeoGWTConfigurationRemote.Util.getInstance().initServerConfiguration(
+        GeoGWTConfigurationRemote.Util.getInstance().initServerConfiguration(
                 new AsyncCallback<GeoGWTConfiguration>() {
 
                     public void onSuccess(GeoGWTConfiguration result) {
@@ -121,62 +128,62 @@ public class Maptoolbar_panel implements EntryPoint {
                     public void onFailure(Throwable caught) {
                         Info.display("Configuration Service Error", caught.getMessage());
                     }
-                }); */
+                });
         
-        /** Example: loading toolbar manually **/
-        ToolbarItemManager toolbarItemManager = new ToolbarItemManager();
-        
-        // defining toolbar tools
-        GenericClientTool toolbarSeparator = new GenericClientTool();
-        toolbarSeparator.setId(ButtonBar.TOOLBAR_SEPARATOR);
-        toolbarSeparator.setOrder(30);
-
-        ActionClientTool zoomBox = new ActionClientTool();
-        zoomBox.setId("zoomBox");
-        zoomBox.setEnabled(true);
-        zoomBox.setType("toggle");
-        zoomBox.setOrder(0);
-        
-        ActionClientTool zoomIn = new ActionClientTool();
-        zoomIn.setId("zoomIn");
-        zoomIn.setEnabled(true);
-        zoomIn.setType("button");
-        zoomIn.setOrder(10);
-        
-        ActionClientTool zoomOut = new ActionClientTool();
-        zoomOut.setId("zoomOut");
-        zoomOut.setEnabled(true);
-        zoomOut.setType("button");
-        zoomOut.setOrder(20);
-        
-        ActionClientTool drawFeature = new ActionClientTool();
-        drawFeature.setId("drawFeature");
-        drawFeature.setEnabled(true);
-        drawFeature.setType("toggle");
-        drawFeature.setOrder(50);
-        
-        List<GenericClientTool> clientTools = new ArrayList<GenericClientTool>();
-        clientTools.add(zoomBox);
-        clientTools.add(zoomIn);
-        clientTools.add(zoomOut);
-        clientTools.add(toolbarSeparator);
-        clientTools.add(drawFeature);
-        
-        toolbarItemManager.setClientTools(clientTools);
-        
-        if (GeoGWTUtils.getInstance().getGlobalConfiguration() == null) {
-            GeoGWTUtils.getInstance().setGlobalConfiguration(new GeoGWTConfiguration());
-        }
-        
-        GeoGWTUtils.getInstance().getGlobalConfiguration().setToolbarItemManager(toolbarItemManager); 
-        
-        createCenter();
-        createNorth();
-
-        main.setWidth(558);
-        main.setHeight(333);
-        
-        RootPanel.get("maptoolbar").add(main);
+//        /** Example: loading toolbar manually **/
+//        ToolbarItemManager toolbarItemManager = new ToolbarItemManager();
+//        
+//        // defining toolbar tools
+//        GenericClientTool toolbarSeparator = new GenericClientTool();
+//        toolbarSeparator.setId(ButtonBar.TOOLBAR_SEPARATOR);
+//        toolbarSeparator.setOrder(30);
+//
+//        ActionClientTool zoomBox = new ActionClientTool();
+//        zoomBox.setId("zoomBox");
+//        zoomBox.setEnabled(true);
+//        zoomBox.setType("toggle");
+//        zoomBox.setOrder(0);
+//        
+//        ActionClientTool zoomIn = new ActionClientTool();
+//        zoomIn.setId("zoomIn");
+//        zoomIn.setEnabled(true);
+//        zoomIn.setType("button");
+//        zoomIn.setOrder(10);
+//        
+//        ActionClientTool zoomOut = new ActionClientTool();
+//        zoomOut.setId("zoomOut");
+//        zoomOut.setEnabled(true);
+//        zoomOut.setType("button");
+//        zoomOut.setOrder(20);
+//        
+//        ActionClientTool drawFeature = new ActionClientTool();
+//        drawFeature.setId("drawFeature");
+//        drawFeature.setEnabled(true);
+//        drawFeature.setType("toggle");
+//        drawFeature.setOrder(50);
+//        
+//        List<GenericClientTool> clientTools = new ArrayList<GenericClientTool>();
+//        clientTools.add(zoomBox);
+//        clientTools.add(zoomIn);
+//        clientTools.add(zoomOut);
+//        clientTools.add(toolbarSeparator);
+//        clientTools.add(drawFeature);
+//        
+//        toolbarItemManager.setClientTools(clientTools);
+//        
+//        if (GeoGWTUtils.getInstance().getGlobalConfiguration() == null) {
+//            GeoGWTUtils.getInstance().setGlobalConfiguration(new GeoGWTConfiguration());
+//        }
+//        
+//        GeoGWTUtils.getInstance().getGlobalConfiguration().setToolbarItemManager(toolbarItemManager); 
+//        
+//        createCenter();
+//        createNorth();
+//
+//        main.setWidth(558);
+//        main.setHeight(333);
+//        
+//        RootPanel.get("maptoolbar").add(main);
     }
 
     /**

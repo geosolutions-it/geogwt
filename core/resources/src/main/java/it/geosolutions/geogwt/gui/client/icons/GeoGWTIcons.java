@@ -68,6 +68,126 @@ public interface GeoGWTIcons extends ImageBundle {
     AbstractImagePrototype arrowUp();
 
     /**
+     * 
+     * @return
+     */
+    @Resource("basket_add.png")
+    AbstractImagePrototype basketAdd();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("basket_delete.png")
+    AbstractImagePrototype basketDelete();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("basket_edit.png")
+    AbstractImagePrototype basketEdit();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("basket_error.png")
+    AbstractImagePrototype basketError();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("basket_go.png")
+    AbstractImagePrototype basketGo();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("basket_put.png")
+    AbstractImagePrototype basketPut();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("basket_remove.png")
+    AbstractImagePrototype basketRemove();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("basket.png")
+    AbstractImagePrototype basket();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("bullet_wrench.png")
+    AbstractImagePrototype bulletWrench();
+
+    /**
+     * 
+     * @return
+     */
+    @Resource("cart_add.png")
+    AbstractImagePrototype cartAdd();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("cart_delete.png")
+    AbstractImagePrototype cartDelete();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("cart_edit.png")
+    AbstractImagePrototype cartEdit();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("cart_error.png")
+    AbstractImagePrototype cartError();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("cart_go.png")
+    AbstractImagePrototype cartGo();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("cart_put.png")
+    AbstractImagePrototype cartPut();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("cart_remove.png")
+    AbstractImagePrototype cartRemove();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("cart.png")
+    AbstractImagePrototype cart();
+    
+    
+    /**
      * Clean menu.
      * 
      * @return the abstract image prototype
@@ -84,6 +204,13 @@ public interface GeoGWTIcons extends ImageBundle {
     AbstractImagePrototype connect();
 
     /**
+     * 
+     * @return
+     */
+    @Resource("decline.png")
+    AbstractImagePrototype decline();
+
+    /**
      * Delete.
      * 
      * @return the abstract image prototype
@@ -98,6 +225,18 @@ public interface GeoGWTIcons extends ImageBundle {
      */
     @Resource("draw-feature.png")
     AbstractImagePrototype drawFeature();
+
+    @Resource("email.png")
+    AbstractImagePrototype email();
+
+    @Resource("email_go.png")
+    AbstractImagePrototype emailGo();
+
+    @Resource("erase.png")
+    AbstractImagePrototype erase();
+
+    @Resource("folder_layer.png")
+    AbstractImagePrototype folderLayer();
 
     /**
      * Gets the features.
@@ -116,6 +255,17 @@ public interface GeoGWTIcons extends ImageBundle {
     AbstractImagePrototype info();
     
     /**
+     * Layers.
+     * 
+     * @return the abstract image prototype
+     */
+    @Resource("layers.png")
+    AbstractImagePrototype layers();
+
+    @Resource("layers_delete.png")
+    AbstractImagePrototype layers_delete();
+
+    /**
      * Logout.
      * 
      * @return the abstract image prototype
@@ -132,12 +282,53 @@ public interface GeoGWTIcons extends ImageBundle {
     AbstractImagePrototype pageEdit();
 
     /**
+     * Pan.
+     * 
+     * @return the abstract image prototype
+     */
+    @Resource("pan.png")
+    AbstractImagePrototype pan();
+    
+    @Resource("postgis.png")
+    AbstractImagePrototype postgis();
+    
+    @Resource("raster.png")
+    AbstractImagePrototype raster();
+    
+    @Resource("raster_add.png")
+    AbstractImagePrototype rasterAdd();
+    
+    @Resource("raster_delete.png")
+    AbstractImagePrototype rasterDelete();
+    
+    /**
      * Rss.
      * 
      * @return the abstract image prototype
      */
     @Resource("rss.png")
     AbstractImagePrototype rss();
+
+    /**
+     * 
+     * @return
+     */
+    @Resource("ruler_square.png")
+    AbstractImagePrototype rulerSquare();
+
+    /**
+     * 
+     * @return
+     */
+    @Resource("ruler_triangle.png")
+    AbstractImagePrototype rulerTriangle();
+
+    /**
+     * 
+     * @return
+     */
+    @Resource("ruler.png")
+    AbstractImagePrototype ruler();
 
     /**
      * Save.
@@ -162,6 +353,9 @@ public interface GeoGWTIcons extends ImageBundle {
      */
     @Resource("share.png")
     AbstractImagePrototype share();
+    
+    @Resource("stop.png")
+    AbstractImagePrototype stop();
 
     /**
      * Table.
@@ -203,6 +397,48 @@ public interface GeoGWTIcons extends ImageBundle {
     @Resource("user.gif")
     AbstractImagePrototype user();
 
+    /**
+     * 
+     * @return
+     */
+    @Resource("world_add.png")
+    AbstractImagePrototype worldAdd();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("world_delete.png")
+    AbstractImagePrototype worldDelete();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("world_edit.png")
+    AbstractImagePrototype worldEdit();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("world_go.png")
+    AbstractImagePrototype worldGo();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("world_link.png")
+    AbstractImagePrototype worldLink();
+    
+    /**
+     * 
+     * @return
+     */
+    @Resource("world.png")
+    AbstractImagePrototype world();
+    
     /**
      * Zoom in.
      * 

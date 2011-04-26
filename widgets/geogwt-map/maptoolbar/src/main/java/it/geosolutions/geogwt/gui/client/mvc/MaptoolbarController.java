@@ -55,6 +55,7 @@ public class MaptoolbarController extends Controller {
                 GeoGWTEvents.INIT_MAPS_UI_MODULE, 
                 
                 GeoGWTEvents.ATTACH_TOOLBAR,
+                GeoGWTEvents.TOGGLE_BUTTON_PRESSED,
                 
                 GeoGWTEvents.ENABLE_DRAW_BUTTON, 
                 GeoGWTEvents.DISABLE_DRAW_BUTTON

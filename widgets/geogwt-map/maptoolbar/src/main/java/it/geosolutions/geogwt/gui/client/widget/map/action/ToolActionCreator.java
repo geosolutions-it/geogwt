@@ -1,12 +1,11 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.widget.map.action.ToolActionCreator,v. 0.1 7-apr-2011 17.01.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1-SNAPSHOT $
- * $ Date: 7-apr-2011 17.01.44 $
+ * $ Header: it.geosolutions.georepo.gui.client.action.ToolActionCreator,v. 0.1 25-gen-2011 11.30.32 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1 $
+ * $ Date: 25-gen-2011 11.30.32 $
  *
  * ====================================================================
- * GeoGWT 0.1-SNAPSHOT
- * 
- * Copyright (C) 2011 GeoSolutions S.A.S.
+ *
+ * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -33,7 +32,7 @@
  */
 package it.geosolutions.geogwt.gui.client.widget.map.action;
 
-import org.gwtopenmaps.openlayers.client.MapWidget;
+import it.geosolutions.geogwt.gui.client.configuration.ToolbarAction;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -48,6 +47,6 @@ public interface ToolActionCreator {
      *            the map widget
      * @return the toolbar action
      */
-    public ToolbarAction createActionTool(MapWidget mapWidget);
+    public ToolbarAction createActionTool();
 
 }

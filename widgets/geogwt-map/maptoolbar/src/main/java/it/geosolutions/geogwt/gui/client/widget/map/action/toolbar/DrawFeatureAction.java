@@ -34,12 +34,12 @@
 package it.geosolutions.geogwt.gui.client.widget.map.action.toolbar;
 
 import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
+import it.geosolutions.geogwt.gui.client.Resources;
 import it.geosolutions.geogwt.gui.client.i18n.I18nProvider;
-import it.geosolutions.geogwt.gui.client.model.Category;
 import it.geosolutions.geogwt.gui.client.widget.map.action.ToolbarMapAction;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 
 // TODO: Auto-generated Javadoc
@@ -49,25 +49,34 @@ import com.extjs.gxt.ui.client.widget.button.ToggleButton;
 public class DrawFeatureAction extends ToolbarMapAction {
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = 6816900412306271139L;
+
+    /**
      * Instantiates a new draw feature action.
      */
     public DrawFeatureAction() {
-        super(I18nProvider.getMessages().drawFeatureToolTip(), Category.GEOGWT_DRAW);
+        super();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.extjs.gxt.ui.client.event.Listener#handleEvent(com.extjs.gxt.ui.client.event.BaseEvent)
-     */
-    public void handleEvent(BaseEvent baseEvent) {
-        ToggleButton button = (ToggleButton) baseEvent.getSource();
+    @Override
+    public boolean initialize() {
+        if (!isInitialized()) {
+            setTooltip(I18nProvider.getMessages().drawFeatureToolTip());
+            setIcon(Resources.ICONS.drawFeature());
+            this.initialiazed = true;
+        } 
+        
+        return isInitialized();
+    }
 
-        if (button.isPressed()) {
+    @Override
+    public void performAction(Button button) {
+        if (((ToggleButton)button).isPressed()) {
             Dispatcher.forwardEvent(GeoGWTEvents.ACTIVATE_DRAW_FEATURES);
         } else {
             Dispatcher.forwardEvent(GeoGWTEvents.DEACTIVATE_DRAW_FEATURES);
-        }
+        }        
     }
 }

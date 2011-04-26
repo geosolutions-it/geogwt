@@ -48,4 +48,5 @@ public interface Observer {
      *            the arg
      */
     void update(Observable o, Object arg);
+    
 }

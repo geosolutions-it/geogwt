@@ -49,7 +49,11 @@ public class GenericClientTool implements Comparable<GenericClientTool>, Seriali
 
     /** The order. */
     private int order;
-
+    
+    public GenericClientTool() {
+        super();
+    }
+    
     /**
      * Gets the id.
      * 
@@ -106,4 +110,5 @@ public class GenericClientTool implements Comparable<GenericClientTool>, Seriali
     public int compareTo(GenericClientTool o) {
         return getOrder() - o.getOrder();
     }
+
 }

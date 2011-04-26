@@ -33,7 +33,10 @@
  */
 package it.geosolutions.geogwt.gui.client.widget.map.action;
 
-import it.geosolutions.geogwt.gui.client.model.Category;
+import it.geosolutions.geogwt.gui.client.configuration.ToolbarAction;
+
+import org.gwtopenmaps.openlayers.client.MapWidget;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -41,20 +44,25 @@ import it.geosolutions.geogwt.gui.client.model.Category;
  */
 public abstract class ToolbarMapAction extends ToolbarAction {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -5602180768171129777L;
+
     /** The tooltip. */
     private String tooltip;
+
+    /** The map widget. */
+    private MapWidget mapWidget;
 
     /**
      * Instantiates a new toolbar map action.
      * 
      * @param tooltip
      *            the tooltip
-     * @param category
-     *            the category
      */
-    public ToolbarMapAction(String tooltip, Category category) {
-        super(category);
-        this.tooltip = tooltip;
+    public ToolbarMapAction() {
+        super();
     }
 
     /**
@@ -74,5 +82,19 @@ public abstract class ToolbarMapAction extends ToolbarAction {
      */
     public void setTooltip(String tooltip) {
         this.tooltip = tooltip;
+    }
+
+    /**
+     * @param mapWidget the mapWidget to set
+     */
+    public void setMapWidget(MapWidget mapWidget) {
+        this.mapWidget = mapWidget;
+    }
+
+    /**
+     * @return the mapWidget
+     */
+    public MapWidget getMapWidget() {
+        return mapWidget;
     }
 }

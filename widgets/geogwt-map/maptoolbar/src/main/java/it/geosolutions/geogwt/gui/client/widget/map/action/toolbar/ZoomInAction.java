@@ -33,14 +33,13 @@
  */
 package it.geosolutions.geogwt.gui.client.widget.map.action.toolbar;
 
+import it.geosolutions.geogwt.gui.client.Resources;
 import it.geosolutions.geogwt.gui.client.i18n.I18nProvider;
-import it.geosolutions.geogwt.gui.client.model.Category;
 import it.geosolutions.geogwt.gui.client.widget.map.action.ToolbarMapAction;
 
 import org.gwtopenmaps.openlayers.client.LonLat;
-import org.gwtopenmaps.openlayers.client.MapWidget;
 
-import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.widget.button.Button;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -48,9 +47,11 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
  */
 public class ZoomInAction extends ToolbarMapAction {
 
-    /** The map widget. */
-    private MapWidget mapWidget;
-
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4623000279200459853L;
+    
     /** The zoom factor. */
     private int zoomFactor = 1;
 
@@ -60,21 +61,25 @@ public class ZoomInAction extends ToolbarMapAction {
      * @param mapWidget
      *            the map widget
      */
-    public ZoomInAction(MapWidget mapWidget) {
-        super(I18nProvider.getMessages().zoomInToolTip(), Category.GEOGWT_ZOOM_IN);
-
-        this.mapWidget = mapWidget;
+    public ZoomInAction() {
+        super();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.extjs.gxt.ui.client.event.Listener#handleEvent(com.extjs.gxt.ui.client.event.BaseEvent)
-     */
-    public void handleEvent(BaseEvent baseEvent) {
-        LonLat center = this.mapWidget.getMap().getCenter();
-        int oldZoom = this.mapWidget.getMap().getZoom();
-        this.mapWidget.getMap().setCenter(center, oldZoom + this.zoomFactor);
+    @Override
+    public boolean initialize() {
+        if (!isInitialized()) {
+            setTooltip(I18nProvider.getMessages().zoomInToolTip());
+            setIcon(Resources.ICONS.zoomIn());
+            this.initialiazed = true;
+        } 
+        
+        return isInitialized();
+    }
+
+    @Override
+    public void performAction(Button button) {
+        LonLat center = this.getMapWidget().getMap().getCenter();
+        int oldZoom = this.getMapWidget().getMap().getZoom();
+        this.getMapWidget().getMap().setCenter(center, oldZoom + this.zoomFactor);
     }
 }

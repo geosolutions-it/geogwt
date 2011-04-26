@@ -1,5 +1,5 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.widget.map.action.menu.MenuAction,v. 0.1 7-apr-2011 17.01.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.geogwt.gui.client.widget.map.action.ToolbarAction,v. 0.1 7-apr-2011 17.01.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1-SNAPSHOT $
  * $ Date: 7-apr-2011 17.01.44 $
  *
@@ -31,82 +31,74 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.client.widget.map.action.menu;
+package it.geosolutions.geogwt.gui.client.configuration;
 
-import it.geosolutions.geogwt.gui.client.model.Category;
+import it.geosolutions.geogwt.gui.client.widget.GeoGWTButton;
 
-import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
+import java.io.Serializable;
+
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.widget.button.Button;
+import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class MenuAction.
+ * The Class ToolbarAction.
  */
-public abstract class MenuAction extends SelectionListener<MenuEvent> {
+public abstract class ToolbarAction implements Listener<BaseEvent>, Serializable {
 
-    /** The category. */
-    private Category category;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3914442116826097873L;
 
-    /** The title. */
-    private String title;
-
+    private AbstractImagePrototype icon;
+    
+    private GeoGWTButton button;
+    
     /** The id. */
     private String id;
 
     /** The enabled. */
     private boolean enabled;
 
-    /**
-     * Instantiates a new menu action.
-     * 
-     * @param title
-     *            the title
-     * @param category
-     *            the category
-     */
-    public MenuAction(String title, Category category) {
-        this.title = title;
-        this.category = category;
-    }
+    protected boolean initialiazed = false;
 
     /**
-     * Gets the category.
      * 
-     * @return the category
      */
-    public Category getCategory() {
-        return category;
+    public ToolbarAction() {
+        super();
     }
-
+    
     /**
-     * Sets the category.
      * 
-     * @param category
-     *            the new category
+     * @return
      */
-    public void setCategory(Category category) {
-        this.category = category;
+    public boolean isInitialized() {
+        return this.initialiazed;
     }
-
-    /**
-     * Gets the title.
+    
+    public abstract boolean initialize();
+    
+    public abstract void performAction(Button button);
+    
+    /*
+     * (non-Javadoc)
      * 
-     * @return the title
+     * @see
+     * com.extjs.gxt.ui.client.event.Listener#handleEvent(com.extjs.gxt.ui.client.event.BaseEvent)
      */
-    public String getTitle() {
-        return title;
-    }
+    public void handleEvent(BaseEvent baseEvent) {
+        getButton().isPressed();
+        getButton().notifyObservers();
+        
+        Button button = (Button) baseEvent.getSource();
 
-    /**
-     * Sets the title.
-     * 
-     * @param title
-     *            the new title
-     */
-    public void setTitle(String title) {
-        this.title = title;
+        performAction(button);
     }
-
+    
     /**
      * Gets the id.
      * 
@@ -143,6 +135,34 @@ public abstract class MenuAction extends SelectionListener<MenuEvent> {
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    /**
+     * @param icon the icon to set
+     */
+    public void setIcon(AbstractImagePrototype icon) {
+        this.icon = icon;
+    }
+
+    /**
+     * @return the icon
+     */
+    public AbstractImagePrototype getIcon() {
+        return icon;
+    }
+
+    /**
+     * @param button the button to set
+     */
+    public void setButton(GeoGWTButton button) {
+        this.button = button;
+    }
+
+    /**
+     * @return the button
+     */
+    public GeoGWTButton getButton() {
+        return button;
     }
 
 }

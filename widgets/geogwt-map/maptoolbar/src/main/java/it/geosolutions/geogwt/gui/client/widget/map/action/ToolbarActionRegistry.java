@@ -1,12 +1,11 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.widget.map.action.ToolbarActionRegistry,v. 0.1 7-apr-2011 17.01.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
- * $ Revision: 0.1-SNAPSHOT $
- * $ Date: 7-apr-2011 17.01.44 $
+ * $ Header: it.geosolutions.georepo.gui.client.action.ToolbarActionRegistry,v. 0.1 25-gen-2011 11.30.33 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Revision: 0.1 $
+ * $ Date: 25-gen-2011 11.30.33 $
  *
  * ====================================================================
- * GeoGWT 0.1-SNAPSHOT
- * 
- * Copyright (C) 2011 GeoSolutions S.A.S.
+ *
+ * Copyright (C) 2007 - 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
@@ -33,16 +32,16 @@
  */
 package it.geosolutions.geogwt.gui.client.widget.map.action;
 
-import it.geosolutions.geogwt.gui.client.widget.map.action.app.AppInfoAction;
+import it.geosolutions.geogwt.gui.client.configuration.ToolbarAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.DrawFeatureAction;
+import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.PanAction;
+import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomAllAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomBoxAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomInAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomOutAction;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.gwtopenmaps.openlayers.client.MapWidget;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -56,38 +55,57 @@ public final class ToolbarActionRegistry {
     static {
         REGISTRY = new HashMap<String, ToolActionCreator>();
 
-        REGISTRY.put("appInfo", new ToolActionCreator() {
+        REGISTRY.put("pan", new ToolActionCreator() {
 
-            public ToolbarAction createActionTool(MapWidget mapWidget) {
-                return new AppInfoAction();
+            public ToolbarAction createActionTool() {
+                PanAction action = new PanAction();
+                action.initialize();
+                return action;
             }
         });
+        
+        REGISTRY.put("zoomAll", new ToolActionCreator() {
 
-        REGISTRY.put("zoomBox", new ToolActionCreator() {
-
-            public ToolbarAction createActionTool(MapWidget mapWidget) {
-                return new ZoomBoxAction(mapWidget);
+            public ToolbarAction createActionTool() {
+                ZoomAllAction action = new ZoomAllAction();
+                action.initialize();
+                return action;
             }
         });
         
         REGISTRY.put("zoomIn", new ToolActionCreator() {
 
-            public ToolbarAction createActionTool(MapWidget mapWidget) {
-                return new ZoomInAction(mapWidget);
+            public ToolbarAction createActionTool() {
+                ZoomInAction action = new ZoomInAction();
+                action.initialize();
+                return action;
             }
         });
 
         REGISTRY.put("zoomOut", new ToolActionCreator() {
 
-            public ToolbarAction createActionTool(MapWidget mapWidget) {
-                return new ZoomOutAction(mapWidget);
+            public ToolbarAction createActionTool() {
+                ZoomOutAction action = new ZoomOutAction();
+                action.initialize();
+                return action;
             }
         });
         
+        REGISTRY.put("zoomBox", new ToolActionCreator() {
+
+            public ToolbarAction createActionTool() {
+                ZoomBoxAction action = new ZoomBoxAction();
+                action.initialize();
+                return action;
+            }
+        });
+
         REGISTRY.put("drawFeature", new ToolActionCreator() {
 
-            public ToolbarAction createActionTool(MapWidget mapWidget) {
-                return new DrawFeatureAction();
+            public ToolbarAction createActionTool() {
+                DrawFeatureAction action = new DrawFeatureAction();
+                action.initialize();
+                return action;
             }
         });
 
@@ -115,10 +133,10 @@ public final class ToolbarActionRegistry {
      *            the map widget
      * @return the toolbar action
      */
-    public static ToolbarAction get(String key, MapWidget mapWidget) {
+    public static ToolbarAction get(String key) {
         ToolActionCreator toolActionCreator = REGISTRY.get(key);
         if (toolActionCreator == null)
             return null;
-        return toolActionCreator.createActionTool(mapWidget);
+        return toolActionCreator.createActionTool();
     }
 }

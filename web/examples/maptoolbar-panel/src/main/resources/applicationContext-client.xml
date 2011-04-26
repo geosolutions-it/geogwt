@@ -23,20 +23,68 @@
 	<bean name="toolbarItemManager" class="it.geosolutions.geogwt.gui.client.ToolbarItemManager">
 		<property name="clientTools">
 			<list>
-				<ref bean="toolbarSeparator" />
+				<ref bean="poweredBy" />
+				<ref bean="toolbarSeparator_1" />
+				<ref bean="pan" />
+				<ref bean="zoomAll" />
+				<ref bean="zoomBox" />
 				<ref bean="zoomIn" />
 				<ref bean="zoomOut" />
 				<ref bean="drawFeature" />
+				<ref bean="toolbarSeparator_2" />
+				<ref bean="fillItem" />
 			</list>
 		</property>
 	</bean>
 
+	<bean name="poweredBy"
+		class="it.geosolutions.geogwt.gui.client.configuration.GenericClientTool">
+		<property name="id" value="PoweredBy" />
+		<property name="order" value="-400" />
+	</bean>
+
+	<bean name="toolbarSeparator_1"
+		class="it.geosolutions.geogwt.gui.client.configuration.GenericClientTool">
+		<property name="id" value="ToolbarSeparator" />
+		<property name="order" value="-300" />
+	</bean>
+
+	<bean name="fillItem"
+		class="it.geosolutions.geogwt.gui.client.configuration.GenericClientTool">
+		<property name="id" value="FillItem" />
+		<property name="order" value="300" />
+	</bean>
+
+	<bean name="pan"
+		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
+		<property name="id" value="pan" />
+		<property name="type" value="toggle" />
+		<property name="enabled" value="true" />
+		<property name="order" value="0" />
+	</bean>
+
+	<bean name="zoomAll"
+		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
+		<property name="id" value="zoomAll" />
+		<property name="type" value="button" />
+		<property name="enabled" value="true" />
+		<property name="order" value="5" />
+	</bean>
+	
+	<bean name="zoomBox"
+		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
+		<property name="id" value="zoomBox" />
+		<property name="type" value="toggle" />
+		<property name="enabled" value="true" />
+		<property name="order" value="10" />
+	</bean>
+	
 	<bean name="zoomIn"
 		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
 		<property name="id" value="zoomIn" />
 		<property name="type" value="button" />
 		<property name="enabled" value="true" />
-		<property name="order" value="10" />
+		<property name="order" value="20" />
 	</bean>
 
 	<bean name="zoomOut"
@@ -44,20 +92,20 @@
 		<property name="id" value="zoomOut" />
 		<property name="type" value="button" />
 		<property name="enabled" value="true" />
-		<property name="order" value="20" />
+		<property name="order" value="30" />
 	</bean>
 
-	<bean name="toolbarSeparator"
+	<bean name="toolbarSeparator_2"
 		class="it.geosolutions.geogwt.gui.client.configuration.GenericClientTool">
 		<property name="id" value="ToolbarSeparator" />
-		<property name="order" value="30" />
+		<property name="order" value="40" />
 	</bean>
 
 	<bean name="drawFeature"
 		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
 		<property name="id" value="drawFeature" />
 		<property name="type" value="toggle" />
-		<property name="enabled" value="false" />
+		<property name="enabled" value="true" />
 		<property name="order" value="50" />
 	</bean>
 

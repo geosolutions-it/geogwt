@@ -74,6 +74,12 @@ public interface ApplicationMessages extends Messages {
     public String foundLabel();
 
     /**
+     * 
+     * @return
+     */
+    public String pan();
+    
+    /**
      * Please wait message.
      * 
      * @return the string
@@ -136,6 +142,11 @@ public interface ApplicationMessages extends Messages {
      */
     public String wktAbbreviation();
 
+    /**
+     * 
+     */
+    public String zoomAllToolTip();
+    
     /**
      * Zoom box tool tip.
      * 

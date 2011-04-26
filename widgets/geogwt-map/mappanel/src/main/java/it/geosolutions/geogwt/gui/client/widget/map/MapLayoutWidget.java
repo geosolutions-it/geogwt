@@ -243,8 +243,19 @@ public class MapLayoutWidget extends LayoutContainer {
                 this.layers = new LinkedList<Layer>();
             }
             
-            this.layers.add(layer);
-            this.map.addLayers(new Layer[]{layer});
+            boolean present = false;
+            for (Layer l : this.layers) {
+                if (l.getId().equals(layer.getId()) || 
+                        l.getName().equals(layer.getName())) {
+                    present = true;
+                    break;
+                }
+            }
+            
+            if (!present) {
+                this.layers.add(layer);
+                this.map.addLayers(new Layer[]{layer});
+            }
         }
     }
 
@@ -378,7 +389,10 @@ public class MapLayoutWidget extends LayoutContainer {
             // geom.transform(new Projection("EPSG:4326"), new Projection("EPSG:900913"));
             VectorFeature vectorFeature = new VectorFeature(geom);
             this.vector.addFeature(vectorFeature);
-            this.getMap().zoomToExtent(geom.getBounds());
+            if (this.layers != null && this.layers.size() > 0) {
+                this.getMap().raiseLayer(this.vector, this.layers.size());
+            }
+            //this.getMap().zoomToExtent(geom.getBounds());
         }
     }
     

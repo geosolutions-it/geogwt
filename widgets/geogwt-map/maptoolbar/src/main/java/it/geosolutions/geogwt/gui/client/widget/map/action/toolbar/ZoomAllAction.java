@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.widget.map.action.ToolbarApplicationAction,v. 0.1 7-apr-2011 17.01.44 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomInAction,v. 0.1 8-apr-2011 15.48.16 created by afabiani <alessio.fabiani at geo-solutions.it> $
  * $ Revision: 0.1-SNAPSHOT $
- * $ Date: 7-apr-2011 17.01.44 $
+ * $ Date: 8-apr-2011 15.48.16 $
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
@@ -31,49 +31,47 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.client.widget.map.action;
+package it.geosolutions.geogwt.gui.client.widget.map.action.toolbar;
 
-import it.geosolutions.geogwt.gui.client.model.Category;
+import it.geosolutions.geogwt.gui.client.Resources;
+import it.geosolutions.geogwt.gui.client.i18n.I18nProvider;
+import it.geosolutions.geogwt.gui.client.widget.map.action.ToolbarMapAction;
+
+import com.extjs.gxt.ui.client.widget.button.Button;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ToolbarApplicationAction.
+ * The Class ZoomInAction.
  */
-public abstract class ToolbarApplicationAction extends ToolbarAction {
-
-    /** The button name. */
-    private String buttonName;
+public class ZoomAllAction extends ToolbarMapAction {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 2863609657536670127L;
 
     /**
-     * Instantiates a new toolbar application action.
+     * Instantiates a new zoom in action.
      * 
-     * @param buttonName
-     *            the button name
-     * @param category
-     *            the category
+     * @param mapWidget
+     *            the map widget
      */
-    public ToolbarApplicationAction(String buttonName, Category category) {
-        super(category);
-        this.buttonName = buttonName;
+    public ZoomAllAction() {
+        super();
     }
 
-    /**
-     * Gets the button name.
-     * 
-     * @return the button name
-     */
-    public String getButtonName() {
-        return buttonName;
+    @Override
+    public boolean initialize() {
+        if (!isInitialized()) {
+            setTooltip(I18nProvider.getMessages().zoomAllToolTip());
+            setIcon(Resources.ICONS.world());
+            this.initialiazed = true;
+        }
+
+        return isInitialized();
     }
 
-    /**
-     * Sets the button name.
-     * 
-     * @param buttonName
-     *            the new button name
-     */
-    public void setButtonName(String buttonName) {
-        this.buttonName = buttonName;
+    @Override
+    public void performAction(Button button) {
+        this.getMapWidget().getMap().zoomToMaxExtent();
     }
-
 }

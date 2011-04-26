@@ -33,6 +33,7 @@
  */
 package it.geosolutions.geogwt.gui.client.configuration;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionClientTool.
@@ -47,7 +48,11 @@ public class ActionClientTool extends GenericClientTool {
 
     /** The enabled. */
     private boolean enabled;
-
+    
+    public ActionClientTool() {
+        super();
+    }
+    
     /**
      * Gets the type.
      * 

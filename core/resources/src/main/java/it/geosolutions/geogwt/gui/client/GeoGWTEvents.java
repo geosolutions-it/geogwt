@@ -128,4 +128,6 @@ public class GeoGWTEvents {
     /** The Constant DEACTIVATE_ZOOM_BOX. */
     public static final EventType DEACTIVATE_ZOOM_BOX = new EventType();
 
+    public static final EventType TOGGLE_BUTTON_PRESSED = new EventType();
+
 }

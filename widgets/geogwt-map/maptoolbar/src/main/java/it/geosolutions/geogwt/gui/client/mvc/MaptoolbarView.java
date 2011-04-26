@@ -78,6 +78,10 @@ public class MaptoolbarView extends View {
             onAttachToolbar(event);
         }
 
+        if (event.getType() == GeoGWTEvents.TOGGLE_BUTTON_PRESSED) {
+            this.mapToolBar.handleEvent(event);
+        }
+        
         /** Mapping Feature Handling Events **/
         if (event.getType() == GeoGWTEvents.ENABLE_DRAW_BUTTON) {
             onEnableDrawButton();
@@ -99,14 +103,14 @@ public class MaptoolbarView extends View {
      * On disable draw button.
      */
     private void onDisableDrawButton() {
-        this.getButtonBar().changeButtonState("drawFeature", false);
+        //this.getButtonBar().changeButtonState("drawFeature", false);
     }
 
     /**
      * On enable draw button.
      */
     private void onEnableDrawButton() {
-        this.getButtonBar().changeButtonState("drawFeature", true);
+        //this.getButtonBar().changeButtonState("drawFeature", true);
     }
 
     /**

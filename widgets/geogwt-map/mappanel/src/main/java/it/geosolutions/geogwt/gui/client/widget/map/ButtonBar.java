@@ -33,30 +33,22 @@
  */
 package it.geosolutions.geogwt.gui.client.widget.map;
 
-import it.geosolutions.geogwt.gui.client.Resources;
-import it.geosolutions.geogwt.gui.client.configuration.DropdownClientTool;
-import it.geosolutions.geogwt.gui.client.model.Category;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
-import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ButtonBar.
  */
-public abstract class ButtonBar extends LayoutContainer implements Listener<AppEvent> {
+public abstract class ButtonBar extends LayoutContainer {
 
     /** The Constant TOOLBAR_SEPARATOR. */
     public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
+
+    public static final String FILL_ITEM = "FillItem";
+    
+    public static final String POWERED_BY = "PoweredBy";
 
     /** The vp. */
     protected VerticalPanel vp;
@@ -67,12 +59,8 @@ public abstract class ButtonBar extends LayoutContainer implements Listener<AppE
     /** The map layout widget. */
     private MapLayoutWidget mapLayoutWidget;
 
-    /** The REGISTR y_ buttons. */
-    protected Map<String, Button> REGISTRY_BUTTONS = new HashMap<String, Button>();
-
-    /** The dropdowns. */
-    protected Map<DropdownClientTool, ComboBox> dropdowns = new HashMap<DropdownClientTool, ComboBox>();
-
+    private ButtonBarObserver buttonBarObserver;
+    
     /**
      * Instantiates a new button bar.
      */
@@ -81,6 +69,7 @@ public abstract class ButtonBar extends LayoutContainer implements Listener<AppE
         this.vp = new VerticalPanel();
         this.setToolBar(new ToolBar());
         this.getToolBar().setHeight(60);
+        this.setButtonBarObserver(new ButtonBarObserver());
     }
     
     /**
@@ -88,82 +77,18 @@ public abstract class ButtonBar extends LayoutContainer implements Listener<AppE
      * 
      * @param mapLayoutWidget
      *            the map layout widget
+     * @throws ClassNotFoundException 
      */
     public ButtonBar(MapLayoutWidget mapLayoutWidget) {
         this();
         this.setMapLayoutWidget(mapLayoutWidget);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.extjs.gxt.ui.client.event.Listener#handleEvent(com.extjs.gxt.ui.client.event.BaseEvent)
-     */
-    public void handleEvent(AppEvent e) {
-    }
-
     /**
      * Initialize.
+     * @throws ClassNotFoundException 
      */
     protected abstract void initialize();
-
-    /**
-     * Sets the icon.
-     * 
-     * @param button
-     *            the button
-     * @param cat
-     *            the cat
-     */
-    protected void setIcon(Button button, Category cat) {
-        switch (cat) {
-        case GEOGWT_INFO:
-            button.setIcon(Resources.ICONS.info());
-            break;
-        case GEOGWT_ZOOM_BOX:
-            button.setIcon(Resources.ICONS.zoomBox());
-            break;        
-        case GEOGWT_ZOOM_IN:
-            button.setIcon(Resources.ICONS.zoomIn());
-            break;
-        case GEOGWT_ZOOM_OUT:
-            button.setIcon(Resources.ICONS.zoomOut());
-            break;
-        case GEOGWT_DRAW:
-            button.setIcon(Resources.ICONS.drawFeature());
-            break;
-        case GEOGWT_UPLOAD_SHP:
-            button.setIcon(Resources.ICONS.uploadSHP());
-            break;
-        case LOGOUT:
-            button.setIcon(Resources.ICONS.logout());
-            break;
-        case GEOGWT_CLEAN:
-            button.setIcon(Resources.ICONS.cleanMenu());
-            break;
-        case SAVE:
-            button.setIcon(Resources.ICONS.save());
-            break;
-        case DELETE_CONTENT:
-            button.setIcon(Resources.ICONS.delete());
-            break;
-        case SYNCH:
-            button.setIcon(Resources.ICONS.user());
-            break;
-        }
-    }
-
-    /**
-     * Sets the menu icon.
-     * 
-     * @param item
-     *            the item
-     * @param cat
-     *            the cat
-     */
-    protected void setMenuIcon(MenuItem item, Category cat) {
-    }
 
     /**
      * Gets the tool bar.
@@ -175,24 +100,11 @@ public abstract class ButtonBar extends LayoutContainer implements Listener<AppE
     }
 
     /**
-     * Change button state.
-     * 
-     * @param key
-     *            the key
-     * @param value
-     *            the value
-     */
-    public void changeButtonState(String key, boolean value) {
-        if (REGISTRY_BUTTONS.containsKey(key)) {
-            REGISTRY_BUTTONS.get(key).setEnabled(value);
-        }
-    }
-
-    /**
      * Sets the map layout widget.
      * 
      * @param mapLayoutWidget
      *            the new map layout widget
+     * @throws ClassNotFoundException 
      */
     public void setMapLayoutWidget(MapLayoutWidget mapLayoutWidget) {
         if (this.mapLayoutWidget == null) {
@@ -218,5 +130,19 @@ public abstract class ButtonBar extends LayoutContainer implements Listener<AppE
      */
     public void setToolBar(ToolBar toolBar) {
         this.toolBar = toolBar;
+    }
+
+    /**
+     * @param buttonBarObserver the buttonBarObserver to set
+     */
+    public void setButtonBarObserver(ButtonBarObserver buttonBarObserver) {
+        this.buttonBarObserver = buttonBarObserver;
+    }
+
+    /**
+     * @return the buttonBarObserver
+     */
+    public ButtonBarObserver getButtonBarObserver() {
+        return buttonBarObserver;
     }
 }
