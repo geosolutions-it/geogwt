@@ -55,7 +55,7 @@ public final class ToolbarActionRegistry {
     static {
         REGISTRY = new HashMap<String, ToolActionCreator>();
 
-        REGISTRY.put("pan", new ToolActionCreator() {
+        getRegistry().put("pan", new ToolActionCreator() {
 
             public ToolbarAction createActionTool() {
                 PanAction action = new PanAction();
@@ -64,7 +64,7 @@ public final class ToolbarActionRegistry {
             }
         });
         
-        REGISTRY.put("zoomAll", new ToolActionCreator() {
+        getRegistry().put("zoomAll", new ToolActionCreator() {
 
             public ToolbarAction createActionTool() {
                 ZoomAllAction action = new ZoomAllAction();
@@ -73,7 +73,7 @@ public final class ToolbarActionRegistry {
             }
         });
         
-        REGISTRY.put("zoomIn", new ToolActionCreator() {
+        getRegistry().put("zoomIn", new ToolActionCreator() {
 
             public ToolbarAction createActionTool() {
                 ZoomInAction action = new ZoomInAction();
@@ -82,7 +82,7 @@ public final class ToolbarActionRegistry {
             }
         });
 
-        REGISTRY.put("zoomOut", new ToolActionCreator() {
+        getRegistry().put("zoomOut", new ToolActionCreator() {
 
             public ToolbarAction createActionTool() {
                 ZoomOutAction action = new ZoomOutAction();
@@ -91,7 +91,7 @@ public final class ToolbarActionRegistry {
             }
         });
         
-        REGISTRY.put("zoomBox", new ToolActionCreator() {
+        getRegistry().put("zoomBox", new ToolActionCreator() {
 
             public ToolbarAction createActionTool() {
                 ZoomBoxAction action = new ZoomBoxAction();
@@ -100,7 +100,7 @@ public final class ToolbarActionRegistry {
             }
         });
 
-        REGISTRY.put("drawFeature", new ToolActionCreator() {
+        getRegistry().put("drawFeature", new ToolActionCreator() {
 
             public ToolbarAction createActionTool() {
                 DrawFeatureAction action = new DrawFeatureAction();
@@ -121,7 +121,7 @@ public final class ToolbarActionRegistry {
      */
     public static void put(String key, ToolActionCreator toolActionCreator) {
         if (key != null && toolActionCreator != null)
-            REGISTRY.put(key, toolActionCreator);
+            getRegistry().put(key, toolActionCreator);
     }
 
     /**
@@ -134,9 +134,16 @@ public final class ToolbarActionRegistry {
      * @return the toolbar action
      */
     public static ToolbarAction get(String key) {
-        ToolActionCreator toolActionCreator = REGISTRY.get(key);
+        ToolActionCreator toolActionCreator = getRegistry().get(key);
         if (toolActionCreator == null)
             return null;
         return toolActionCreator.createActionTool();
+    }
+
+    /**
+     * @return the registry
+     */
+    public static Map<String, ToolActionCreator> getRegistry() {
+        return REGISTRY;
     }
 }
