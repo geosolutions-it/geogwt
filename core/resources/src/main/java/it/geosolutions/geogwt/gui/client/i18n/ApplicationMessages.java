@@ -53,6 +53,12 @@ public interface ApplicationMessages extends Messages {
     public String applicationName();
 
     /**
+     * 
+     * @return
+     */
+    public String boxSelectTip();
+
+    /**
      * Delete button label.
      * 
      * @return the string

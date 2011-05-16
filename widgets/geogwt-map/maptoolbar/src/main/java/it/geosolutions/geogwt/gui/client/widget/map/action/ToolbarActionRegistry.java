@@ -33,6 +33,7 @@
 package it.geosolutions.geogwt.gui.client.widget.map.action;
 
 import it.geosolutions.geogwt.gui.client.configuration.ToolbarAction;
+import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.BoxSelectAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.DrawFeatureAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.PanAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomAllAction;
@@ -109,6 +110,15 @@ public final class ToolbarActionRegistry {
             }
         });
 
+        getRegistry().put("boxSelect", new ToolActionCreator() {
+
+            public ToolbarAction createActionTool() {
+                BoxSelectAction action = new BoxSelectAction();
+                action.initialize();
+                return action;
+            }
+        });
+        
     }
 
     /**

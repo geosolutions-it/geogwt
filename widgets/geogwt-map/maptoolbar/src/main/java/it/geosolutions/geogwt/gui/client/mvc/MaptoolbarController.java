@@ -58,7 +58,12 @@ public class MaptoolbarController extends Controller {
                 GeoGWTEvents.TOGGLE_BUTTON_PRESSED,
                 
                 GeoGWTEvents.ENABLE_DRAW_BUTTON, 
-                GeoGWTEvents.DISABLE_DRAW_BUTTON
+                GeoGWTEvents.DISABLE_DRAW_BUTTON,
+                
+                GeoGWTEvents.ACTIVATE_BOX_SELECT, 
+                GeoGWTEvents.DEACTIVATE_BOX_SELECT,
+                GeoGWTEvents.BOUNDS_SELECTED
+                
         );
     }
 

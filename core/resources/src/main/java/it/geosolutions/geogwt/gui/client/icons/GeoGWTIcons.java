@@ -235,8 +235,92 @@ public interface GeoGWTIcons extends ImageBundle {
     @Resource("erase.png")
     AbstractImagePrototype erase();
 
+    @Resource("folder.png")
+    AbstractImagePrototype folder();
+
+    @Resource("folder_add.png")
+    AbstractImagePrototype folderAdd();
+
+    @Resource("folder_bell.png")
+    AbstractImagePrototype folderBell();
+
+    @Resource("folder_brick.png")
+    AbstractImagePrototype folderBrick();
+
+    @Resource("folder_bug.png")
+    AbstractImagePrototype folderBug();
+
+    @Resource("folder_camera.png")
+    AbstractImagePrototype folderCamera();
+
+    @Resource("folder_database.png")
+    AbstractImagePrototype folderDatabase();
+
+    @Resource("folder_delete.png")
+    AbstractImagePrototype folderDelete();
+
+    @Resource("folder_edit.png")
+    AbstractImagePrototype folderEdit();
+
+    @Resource("folder_error.png")
+    AbstractImagePrototype folderError();
+
+    @Resource("folder_explore.png")
+    AbstractImagePrototype folderExplore();
+
+    @Resource("folder_feed.png")
+    AbstractImagePrototype folderFeed();
+
+    @Resource("folder_find.png")
+    AbstractImagePrototype folderFind();
+
+    @Resource("folder_go.png")
+    AbstractImagePrototype folderGo();
+
+    @Resource("folder_heart.png")
+    AbstractImagePrototype folderHeart();
+
+    @Resource("folder_image.png")
+    AbstractImagePrototype folderImage();
+
+    @Resource("folder_key.png")
+    AbstractImagePrototype folderKey();
+
     @Resource("folder_layer.png")
     AbstractImagePrototype folderLayer();
+
+    @Resource("folder_lightbulb.png")
+    AbstractImagePrototype folderLightbulb();
+
+    @Resource("folder_link.png")
+    AbstractImagePrototype folderLink();
+
+    @Resource("folder_magnify.png")
+    AbstractImagePrototype folderMagnify();
+
+    @Resource("folder_page.png")
+    AbstractImagePrototype folderPage();
+
+    @Resource("folder_page_white.png")
+    AbstractImagePrototype folderPageWhite();
+
+    @Resource("folder_palette.png")
+    AbstractImagePrototype folderPalette();
+
+    @Resource("folder_picture.png")
+    AbstractImagePrototype folderPicture();
+
+    @Resource("folder_star.png")
+    AbstractImagePrototype folderStar();
+
+    @Resource("folder_table.png")
+    AbstractImagePrototype folderTable();
+
+    @Resource("folder_user.png")
+    AbstractImagePrototype folderUser();
+
+    @Resource("folder_wrench.png")
+    AbstractImagePrototype folderWrench();
 
     /**
      * Gets the features.
@@ -263,7 +347,7 @@ public interface GeoGWTIcons extends ImageBundle {
     AbstractImagePrototype layers();
 
     @Resource("layers_delete.png")
-    AbstractImagePrototype layers_delete();
+    AbstractImagePrototype layersDelete();
 
     /**
      * Logout.
@@ -345,6 +429,9 @@ public interface GeoGWTIcons extends ImageBundle {
      */
     @Resource("find.png")
     AbstractImagePrototype search();
+
+    @Resource("shape_square_orange.png")
+    AbstractImagePrototype shapeSquareOrange();
 
     /**
      * Share.

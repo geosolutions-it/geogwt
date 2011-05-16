@@ -33,7 +33,11 @@
  */
 package it.geosolutions.geogwt.gui.client.widget.map;
 
+import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
 import it.geosolutions.geogwt.gui.client.configuration.GenericClientTool;
+import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelect;
+import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelectOptions;
+import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelect.BoxSelectListener;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -60,6 +64,7 @@ import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
 
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 
@@ -92,6 +97,9 @@ public class MapLayoutWidget extends LayoutContainer {
 
     /** The draw polygon. */
     private DrawFeature drawPolygon;
+
+    /** **/
+    private BoxSelect boxSelect;
 
     /** The vector. */
     private Vector vector;
@@ -319,6 +327,30 @@ public class MapLayoutWidget extends LayoutContainer {
     }
 
     /**
+     * 
+     * @param isGoogle
+     *            the is google
+     */
+    private void initBoxSelectControl(final boolean isGoogle) {
+        BoxSelectListener listener = new BoxSelectListener() {
+            public void onBoxSelected(Bounds bounds) {
+                //MessageBox.alert("", bounds.toBBox(4).toString(), null);
+
+              if (isGoogle)
+                  bounds.transform(new Projection("EPSG:900913"), new Projection("EPSG:4326"));
+
+              Dispatcher.forwardEvent(GeoGWTEvents.BOUNDS_SELECTED, bounds);
+            }
+        };
+        BoxSelectOptions boxSelectOptions = new BoxSelectOptions();
+        boxSelectOptions.onBoxSelected(listener);
+        
+        this.boxSelect = new BoxSelect(boxSelectOptions);
+
+        this.getMap().addControl(this.boxSelect);
+    }
+    
+    /**
      * Inits the draw features control.
      * 
      * @param isGoogle
@@ -394,6 +426,28 @@ public class MapLayoutWidget extends LayoutContainer {
             }
             //this.getMap().zoomToExtent(geom.getBounds());
         }
+    }
+    
+    /**
+     * 
+     */
+    public void activateBoxSelect() {
+        if (this.boxSelect == null) {
+            initBoxSelectControl(false);
+        }
+        
+        this.boxSelect.activate();
+    }
+
+    /**
+     * 
+     */
+    public void deactivateBoxSelect() {
+        if (this.boxSelect == null) {
+            initBoxSelectControl(false);
+        }
+        
+        this.boxSelect.deactivate();
     }
     
     // ////////////////////////////////////////////////////////////////////////

@@ -132,6 +132,15 @@ public class MapView extends View {
             onDisableDrawButton();
         }
 
+        /** Custom Controls **/
+        if (event.getType() == GeoGWTEvents.ACTIVATE_BOX_SELECT) {
+            onActivateBoxSelect();
+        }
+
+        if (event.getType() == GeoGWTEvents.DEACTIVATE_BOX_SELECT) {
+            onDeactivateBoxSelect();
+        }
+
         /** Mapping Utilities Events **/
 
         if (event.getType() == GeoGWTEvents.ADD_LAYER) {
@@ -343,4 +352,17 @@ public class MapView extends View {
         this.mapLayout.deactivateDrawFeature();
     }
 
+    /**
+     * 
+     */
+    private void onActivateBoxSelect() {
+        this.mapLayout.activateBoxSelect();
+    }
+
+    /**
+     * 
+     */
+    private void onDeactivateBoxSelect() {
+        this.mapLayout.deactivateBoxSelect();
+    }
 }

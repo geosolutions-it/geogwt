@@ -67,6 +67,9 @@ public class MapController extends Controller {
                 GeoGWTEvents.ENABLE_DRAW_BUTTON, 
                 GeoGWTEvents.DISABLE_DRAW_BUTTON,
 
+                GeoGWTEvents.ACTIVATE_BOX_SELECT,
+                GeoGWTEvents.DEACTIVATE_BOX_SELECT,
+                
                 GeoGWTEvents.ACTIVATE_ZOOM_BOX, 
                 GeoGWTEvents.DEACTIVATE_ZOOM_BOX,
                 

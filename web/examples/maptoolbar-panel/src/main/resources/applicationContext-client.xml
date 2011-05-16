@@ -30,6 +30,7 @@
 				<ref bean="zoomBox" />
 				<ref bean="zoomIn" />
 				<ref bean="zoomOut" />
+				<ref bean="boxSelect" />
 				<ref bean="drawFeature" />
 				<ref bean="toolbarSeparator_2" />
 				<ref bean="fillItem" />
@@ -101,12 +102,20 @@
 		<property name="order" value="40" />
 	</bean>
 
+	<bean name="boxSelect"
+		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
+		<property name="id" value="boxSelect" />
+		<property name="type" value="toggle" />
+		<property name="enabled" value="true" />
+		<property name="order" value="50" />
+	</bean>
+
 	<bean name="drawFeature"
 		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
 		<property name="id" value="drawFeature" />
 		<property name="type" value="toggle" />
 		<property name="enabled" value="true" />
-		<property name="order" value="50" />
+		<property name="order" value="60" />
 	</bean>
 
 </beans>

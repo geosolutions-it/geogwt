@@ -26,12 +26,27 @@
         <cxf-version>2.3.2</cxf-version>
     </properties>
 
-    <modules>
-        <module>core</module>
-		<module>widgets</module>
-		<module>web</module>
-    </modules>
-
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>core</module>
+				<module>widgets</module>
+				<module>web</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>widgets-only</id>
+			<modules>
+				<module>core</module>
+				<module>widgets</module>
+			</modules>
+		</profile>
+	</profiles>
+  
 	<distributionManagement>
 		  <!--..................................-->
 		  <!--      GeoSolutions Repository     -->

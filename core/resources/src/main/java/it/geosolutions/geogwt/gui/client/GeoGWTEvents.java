@@ -130,4 +130,10 @@ public class GeoGWTEvents {
 
     public static final EventType TOGGLE_BUTTON_PRESSED = new EventType();
 
+    public static final EventType ACTIVATE_BOX_SELECT = new EventType();
+
+    public static final EventType DEACTIVATE_BOX_SELECT = new EventType();
+
+    public static final EventType BOUNDS_SELECTED = new EventType();
+
 }
