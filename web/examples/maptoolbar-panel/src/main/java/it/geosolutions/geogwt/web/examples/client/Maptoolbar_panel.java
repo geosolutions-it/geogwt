@@ -48,8 +48,9 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.event.dom.client.MouseMoveEvent;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
+
+// import com.google.gwt.event.dom.client.MouseMoveEvent;
+// import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -58,7 +59,8 @@ import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
 import it.geosolutions.geogwt.gui.client.GeoGWTUtils;
 import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
 import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
-import it.geosolutions.geogwt.web.examples.client.panel.MouseMoveHandlerPanel;
+
+// import it.geosolutions.geogwt.web.examples.client.panel.MouseMoveHandlerPanel;
 import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteService;
 import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteServiceAsync;
 
@@ -161,7 +163,7 @@ public class Maptoolbar_panel implements EntryPoint
 
                     RootPanel.get("maptoolbar").add(main);
 
-                    initializeIdleTimeoutSession(result);
+                    // initializeIdleTimeoutSession(result);
                 }
 
                 public void onFailure(Throwable caught)
@@ -259,7 +261,7 @@ public class Maptoolbar_panel implements EntryPoint
         center.setHeaderVisible(false);
         center.setLayout(new BorderLayout());
 
-        MouseMoveHandlerPanel maptoolbar_panel = new MouseMoveHandlerPanel();
+        ContentPanel maptoolbar_panel = new ContentPanel();
         maptoolbar_panel.setLayout(new FitLayout());
         maptoolbar_panel.setHeaderVisible(false);
         maptoolbar_panel.setHeading("GeoGWT MapView");
@@ -280,7 +282,7 @@ public class Maptoolbar_panel implements EntryPoint
 
         /* ********************************************* */
 
-        MouseMoveHandler mouseMoveHandler = new MouseMoveHandler()
+        /*MouseMoveHandler mouseMoveHandler = new MouseMoveHandler()
             {
                 public void onMouseMove(MouseMoveEvent event)
                 {
@@ -295,7 +297,7 @@ public class Maptoolbar_panel implements EntryPoint
                 }
 
             };
-        maptoolbar_panel.addMouseMoveHandler(mouseMoveHandler);
+        maptoolbar_panel.addMouseMoveHandler(mouseMoveHandler);*/
 
         /* ********************************************* */
 
@@ -436,6 +438,7 @@ public class Maptoolbar_panel implements EntryPoint
      * @param configuration
      *
      */
+    @SuppressWarnings("unused")
     private void initializeIdleTimeoutSession(GeoGWTConfiguration configuration)
     {
         /* *********************
