@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -33,28 +33,28 @@
  */
 package it.geosolutions.geogwt.gui.server.gwt;
 
-import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
-import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
-import it.geosolutions.geogwt.gui.service.IGeoGWTStartupService;
-import it.geosolutions.geogwt.gui.spring.ApplicationContextUtil;
-
 import java.util.logging.Logger;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
+import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
+import it.geosolutions.geogwt.gui.service.IGeoGWTStartupService;
+import it.geosolutions.geogwt.gui.spring.ApplicationContextUtil;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ConfigurationRemoteImpl.
  */
-public class ConfigurationRemoteImpl extends RemoteServiceServlet implements
-        GeoGWTConfigurationRemote {
-
+public class ConfigurationRemoteImpl extends RemoteServiceServlet implements GeoGWTConfigurationRemote
+{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -6320939080552026131L;
 
@@ -66,15 +66,15 @@ public class ConfigurationRemoteImpl extends RemoteServiceServlet implements
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see javax.servlet.GenericServlet#init(javax.servlet.ServletConfig)
      */
     @Override
-    public void init(ServletConfig config) throws ServletException {
+    public void init(ServletConfig config) throws ServletException
+    {
         super.init(config);
 
-        ApplicationContext context = WebApplicationContextUtils
-                .getWebApplicationContext(getServletContext());
+        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 
         ApplicationContextUtil.getInstance().setSpringContext(context);
 
@@ -86,11 +86,12 @@ public class ConfigurationRemoteImpl extends RemoteServiceServlet implements
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see it.geosolutions.georepo.gui.client.service.ConfigurationRemote#
      * initServerConfiguration()
      */
-    public GeoGWTConfiguration initServerConfiguration() {
+    public GeoGWTConfiguration initServerConfiguration()
+    {
         return (GeoGWTConfiguration) startupService.initServerConfiguration();
     }
 

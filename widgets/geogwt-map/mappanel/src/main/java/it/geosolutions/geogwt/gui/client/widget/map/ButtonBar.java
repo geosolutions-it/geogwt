@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -37,17 +37,18 @@ import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.VerticalPanel;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ButtonBar.
  */
-public abstract class ButtonBar extends LayoutContainer {
-
+public abstract class ButtonBar extends LayoutContainer
+{
     /** The Constant TOOLBAR_SEPARATOR. */
     public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
 
     public static final String FILL_ITEM = "FillItem";
-    
+
     public static final String POWERED_BY = "PoweredBy";
 
     /** The vp. */
@@ -60,54 +61,59 @@ public abstract class ButtonBar extends LayoutContainer {
     private MapLayoutWidget mapLayoutWidget;
 
     private ButtonBarObserver buttonBarObserver;
-    
+
     /**
      * Instantiates a new button bar.
      */
-    public ButtonBar() {
+    public ButtonBar()
+    {
         super();
         this.vp = new VerticalPanel();
         this.setToolBar(new ToolBar());
         this.getToolBar().setHeight(60);
         this.setButtonBarObserver(new ButtonBarObserver());
     }
-    
+
     /**
      * Instantiates a new button bar.
-     * 
+     *
      * @param mapLayoutWidget
      *            the map layout widget
-     * @throws ClassNotFoundException 
+     * @throws ClassNotFoundException
      */
-    public ButtonBar(MapLayoutWidget mapLayoutWidget) {
+    public ButtonBar(MapLayoutWidget mapLayoutWidget)
+    {
         this();
         this.setMapLayoutWidget(mapLayoutWidget);
     }
 
     /**
      * Initialize.
-     * @throws ClassNotFoundException 
+     * @throws ClassNotFoundException
      */
     protected abstract void initialize();
 
     /**
      * Gets the tool bar.
-     * 
+     *
      * @return the tool bar
      */
-    public ToolBar getToolBar() {
+    public ToolBar getToolBar()
+    {
         return toolBar;
     }
 
     /**
      * Sets the map layout widget.
-     * 
+     *
      * @param mapLayoutWidget
      *            the new map layout widget
-     * @throws ClassNotFoundException 
+     * @throws ClassNotFoundException
      */
-    public void setMapLayoutWidget(MapLayoutWidget mapLayoutWidget) {
-        if (this.mapLayoutWidget == null) {
+    public void setMapLayoutWidget(MapLayoutWidget mapLayoutWidget)
+    {
+        if (this.mapLayoutWidget == null)
+        {
             this.mapLayoutWidget = mapLayoutWidget;
             initialize();
         }
@@ -115,34 +121,38 @@ public abstract class ButtonBar extends LayoutContainer {
 
     /**
      * Gets the map layout widget.
-     * 
+     *
      * @return the map layout widget
      */
-    public MapLayoutWidget getMapLayoutWidget() {
+    public MapLayoutWidget getMapLayoutWidget()
+    {
         return mapLayoutWidget;
     }
 
     /**
      * Sets the tool bar.
-     * 
+     *
      * @param toolBar
      *            the new tool bar
      */
-    public void setToolBar(ToolBar toolBar) {
+    public void setToolBar(ToolBar toolBar)
+    {
         this.toolBar = toolBar;
     }
 
     /**
      * @param buttonBarObserver the buttonBarObserver to set
      */
-    public void setButtonBarObserver(ButtonBarObserver buttonBarObserver) {
+    public void setButtonBarObserver(ButtonBarObserver buttonBarObserver)
+    {
         this.buttonBarObserver = buttonBarObserver;
     }
 
     /**
      * @return the buttonBarObserver
      */
-    public ButtonBarObserver getButtonBarObserver() {
+    public ButtonBarObserver getButtonBarObserver()
+    {
         return buttonBarObserver;
     }
 }

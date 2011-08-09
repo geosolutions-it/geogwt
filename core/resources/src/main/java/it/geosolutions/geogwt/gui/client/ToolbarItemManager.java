@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -33,17 +33,18 @@
  */
 package it.geosolutions.geogwt.gui.client;
 
+import java.util.List;
+
 import it.geosolutions.geogwt.gui.client.configuration.GenericClientTool;
 import it.geosolutions.geogwt.gui.client.configuration.IToolbarItemManager;
 
-import java.util.List;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolbarItemManager.
  */
-public class ToolbarItemManager implements IToolbarItemManager {
-
+public class ToolbarItemManager implements IToolbarItemManager
+{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1501328199018303376L;
 
@@ -52,21 +53,23 @@ public class ToolbarItemManager implements IToolbarItemManager {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see it.geosolutions.georepo.gui.client.configuration.IToolbarItemManager#getClientTools()
      */
-    public List<GenericClientTool> getClientTools() {
+    public List<GenericClientTool> getClientTools()
+    {
         return clientTools;
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * it.geosolutions.georepo.gui.client.configuration.IToolbarItemManager#setClientTools(java.
      * util.List)
      */
-    public void setClientTools(List<GenericClientTool> clientTools) {
+    public void setClientTools(List<GenericClientTool> clientTools)
+    {
         this.clientTools = clientTools;
     }
 

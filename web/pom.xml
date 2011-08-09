@@ -14,7 +14,7 @@
 
 	<modules>
 		<module>examples</module>
-		<!-- module>geogwt-testbed</module -->
+		<module>showcase</module>
 	</modules>
 
   <build>

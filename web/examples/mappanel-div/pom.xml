@@ -127,7 +127,7 @@
 
 	<build>
 
-		<!-- finalName>${module.name}</finalName -->
+		<finalName>mappanel-div</finalName>
 		
 		<outputDirectory>war/WEB-INF/classes</outputDirectory>
 

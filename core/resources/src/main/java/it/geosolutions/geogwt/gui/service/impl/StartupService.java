@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -38,13 +38,16 @@ import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
 import it.geosolutions.geogwt.gui.service.IGeoGWTStartupService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class StartupService.
  */
-public class StartupService extends IGeoGWTStartupService {
-    
+@Component("geogwtStartupService")
+public class StartupService extends IGeoGWTStartupService
+{
     /** The geo gwt global configuration. */
     @Autowired
     protected GeoGWTConfiguration geoGWTGlobalConfiguration;
@@ -52,12 +55,15 @@ public class StartupService extends IGeoGWTStartupService {
     /* (non-Javadoc)
      * @see it.geosolutions.geogwt.gui.service.IGeoGWTStartupService#initServerConfiguration()
      */
-    public GeoGWTConfiguration initServerConfiguration() {
+    public GeoGWTConfiguration initServerConfiguration()
+    {
         return this.geoGWTGlobalConfiguration;
     }
 
-    public void afterPropertiesSet() throws Exception {
-        if (this.geoGWTGlobalConfiguration != null) {
+    public void afterPropertiesSet() throws Exception
+    {
+        if (this.geoGWTGlobalConfiguration != null)
+        {
             GeoGWTUtils.getInstance().setGlobalConfiguration(this.geoGWTGlobalConfiguration);
         }
     }

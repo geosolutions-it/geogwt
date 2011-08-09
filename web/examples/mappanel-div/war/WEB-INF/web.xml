@@ -8,12 +8,27 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-	           classpath*:/applicationContext-common.xml
-	           classpath:applicationContext-client.xml
-	           classpath*:applicationContext.xml
-	       </param-value>
+            classpath*:applicationContext.xml
+            classpath*:/applicationContext-common.xml
+            classpath:applicationContext-client.xml
+	   	</param-value>
 	</context-param>
-	  
+
+	<!-- Log4j configuration -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/logging.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jExposeWebAppRoot</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<listener>
+		<listener-class>
+		org.springframework.web.util.Log4jConfigListener
+		</listener-class>
+	</listener>
+	
   	<!-- Servlets -->
 	<servlet>
 	  <servlet-name>remoteLoggingServiceImpl</servlet-name>

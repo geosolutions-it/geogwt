@@ -21,11 +21,11 @@
   <source path='shared'/>
   <inherits name="com.extjs.gxt.ui.GXT"/>
 
-	<!-- Servlet path -->
-	<servlet path="/ConfigurationRemote"
-		class="it.geosolutions.geogwt.gui.server.gwt.ConfigurationRemoteImpl" />
-
-	<servlet path="/LayersManagerServiceRemote"
-		class="it.geosolutions.geogwt.web.examples.server.gwt.LayersManagerServiceImpl" />
+  <!-- Servlet path -->
+  <servlet path="/ConfigurationRemote"
+	class="it.geosolutions.geogwt.gui.server.gwt.ConfigurationRemoteImpl" />
+	
+  <servlet path="/LayersManagerServiceRemote"
+	class="it.geosolutions.geogwt.web.examples.server.gwt.LayersManagerServiceImpl" />
 				
 </module>

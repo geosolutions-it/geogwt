@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -33,21 +33,34 @@
  */
 package it.geosolutions.geogwt.web.examples.client;
 
+import com.extjs.gxt.ui.client.GXT;
+import com.extjs.gxt.ui.client.Style.LayoutRegion;
+import com.extjs.gxt.ui.client.event.BaseEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.util.Margins;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Info;
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
+import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
+import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.MouseMoveEvent;
+import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.RootPanel;
+
 import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
 import it.geosolutions.geogwt.gui.client.GeoGWTUtils;
-import it.geosolutions.geogwt.gui.client.ToolbarItemManager;
-import it.geosolutions.geogwt.gui.client.configuration.ActionClientTool;
-import it.geosolutions.geogwt.gui.client.configuration.GenericClientTool;
 import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
 import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
-import it.geosolutions.geogwt.gui.client.widget.map.ButtonBar;
-import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.DrawFeatureAction;
-import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomBoxAction;
-import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomInAction;
-import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomOutAction;
-
-import java.util.ArrayList;
-import java.util.List;
+import it.geosolutions.geogwt.web.examples.client.panel.MouseMoveHandlerPanel;
+import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteService;
+import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteServiceAsync;
 
 import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapUnits;
@@ -56,27 +69,25 @@ import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
-import com.extjs.gxt.ui.client.GXT;
-import com.extjs.gxt.ui.client.Style.LayoutRegion;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.util.Margins;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.Info;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
-import com.extjs.gxt.ui.client.widget.layout.FitLayout;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class Maptoolbar_panel.
  */
-public class Maptoolbar_panel implements EntryPoint {
+public class Maptoolbar_panel implements EntryPoint
+{
+    /*
+     * Session Management section
+     */
+    private static final String THE_APP_WILL_CLOSE = " The application will close.";
+
+    private static final int SESSION_WARNING_TIMEOUT_MILLIS = 10000; // 1 minute
+
+    private Timer sessionTimeoutTimer = null;
+
+    private Timer sessionTimeoutResponseTimer = null;
+
+    private int sessionTimeMillis;
 
     /** The main. */
     private ContentPanel main;
@@ -87,12 +98,37 @@ public class Maptoolbar_panel implements EntryPoint {
     /** The north. */
     protected ContentPanel north;
 
-    /* (non-Javadoc)
+    public static native void closeBrowser() /*-{
+        $wnd.close();
+    }-*/;
+
+    public static native String getQueryString() /*-{
+        return $wnd.location.search.substring(1);
+    }-*/;
+
+    public static native String getContextPath() /*-{
+        return "/"
+        + $wnd.location.pathname.substring(1).substring(0,
+        $wnd.location.pathname.substring(1).indexOf("/"));
+    }-*/;
+
+    /*
+     * (non-Javadoc)
+     *
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
      */
-    public void onModuleLoad() {
+    public void onModuleLoad()
+    {
         GXT.hideLoadingPanel("loading");
 
+        buildUI();
+    }
+
+    /**
+     *
+     */
+    protected void buildUI()
+    {
         /**
          * Adding widgets to Viewport panels
          */
@@ -107,97 +143,103 @@ public class Maptoolbar_panel implements EntryPoint {
     /**
      * Load configuration.
      */
-    private void loadConfiguration() {
+    private void loadConfiguration()
+    {
         /** Example: trying to load toolbar components from applicationContext automatically **/
         GeoGWTConfigurationRemote.Util.getInstance().initServerConfiguration(
-                new AsyncCallback<GeoGWTConfiguration>() {
+            new AsyncCallback<GeoGWTConfiguration>()
+            {
+                public void onSuccess(GeoGWTConfiguration result)
+                {
+                    GeoGWTUtils.getInstance().setGlobalConfiguration(result);
 
-                    public void onSuccess(GeoGWTConfiguration result) {
-                        GeoGWTUtils.getInstance().setGlobalConfiguration(result);
-                        
-                        createCenter();
-                        createNorth();
+                    createCenter();
+                    createNorth();
 
-                        main.setWidth(558);
-                        main.setHeight(333);
-                        
-                        RootPanel.get("maptoolbar").add(main);
+                    main.setWidth(558);
+                    main.setHeight(333);
 
-                    }
+                    RootPanel.get("maptoolbar").add(main);
 
-                    public void onFailure(Throwable caught) {
-                        Info.display("Configuration Service Error", caught.getMessage());
-                    }
-                });
-        
-//        /** Example: loading toolbar manually **/
-//        ToolbarItemManager toolbarItemManager = new ToolbarItemManager();
-//        
-//        // defining toolbar tools
-//        GenericClientTool toolbarSeparator = new GenericClientTool();
-//        toolbarSeparator.setId(ButtonBar.TOOLBAR_SEPARATOR);
-//        toolbarSeparator.setOrder(30);
-//
-//        ActionClientTool zoomBox = new ActionClientTool();
-//        zoomBox.setId("zoomBox");
-//        zoomBox.setEnabled(true);
-//        zoomBox.setType("toggle");
-//        zoomBox.setOrder(0);
-//        
-//        ActionClientTool zoomIn = new ActionClientTool();
-//        zoomIn.setId("zoomIn");
-//        zoomIn.setEnabled(true);
-//        zoomIn.setType("button");
-//        zoomIn.setOrder(10);
-//        
-//        ActionClientTool zoomOut = new ActionClientTool();
-//        zoomOut.setId("zoomOut");
-//        zoomOut.setEnabled(true);
-//        zoomOut.setType("button");
-//        zoomOut.setOrder(20);
-//        
-//        ActionClientTool drawFeature = new ActionClientTool();
-//        drawFeature.setId("drawFeature");
-//        drawFeature.setEnabled(true);
-//        drawFeature.setType("toggle");
-//        drawFeature.setOrder(50);
-//        
-//        List<GenericClientTool> clientTools = new ArrayList<GenericClientTool>();
-//        clientTools.add(zoomBox);
-//        clientTools.add(zoomIn);
-//        clientTools.add(zoomOut);
-//        clientTools.add(toolbarSeparator);
-//        clientTools.add(drawFeature);
-//        
-//        toolbarItemManager.setClientTools(clientTools);
-//        
-//        if (GeoGWTUtils.getInstance().getGlobalConfiguration() == null) {
-//            GeoGWTUtils.getInstance().setGlobalConfiguration(new GeoGWTConfiguration());
-//        }
-//        
-//        GeoGWTUtils.getInstance().getGlobalConfiguration().setToolbarItemManager(toolbarItemManager); 
-//        
-//        createCenter();
-//        createNorth();
-//
-//        main.setWidth(558);
-//        main.setHeight(333);
-//        
-//        RootPanel.get("maptoolbar").add(main);
+                    initializeIdleTimeoutSession(result);
+                }
+
+                public void onFailure(Throwable caught)
+                {
+                    Info.display("Configuration Service Error", caught.getMessage());
+                }
+            });
+
+        // /** Example: loading toolbar manually **/
+        // ToolbarItemManager toolbarItemManager = new ToolbarItemManager();
+        //
+        // // defining toolbar tools
+        // GenericClientTool toolbarSeparator = new GenericClientTool();
+        // toolbarSeparator.setId(ButtonBar.TOOLBAR_SEPARATOR);
+        // toolbarSeparator.setOrder(30);
+        //
+        // ActionClientTool zoomBox = new ActionClientTool();
+        // zoomBox.setId("zoomBox");
+        // zoomBox.setEnabled(true);
+        // zoomBox.setType("toggle");
+        // zoomBox.setOrder(0);
+        //
+        // ActionClientTool zoomIn = new ActionClientTool();
+        // zoomIn.setId("zoomIn");
+        // zoomIn.setEnabled(true);
+        // zoomIn.setType("button");
+        // zoomIn.setOrder(10);
+        //
+        // ActionClientTool zoomOut = new ActionClientTool();
+        // zoomOut.setId("zoomOut");
+        // zoomOut.setEnabled(true);
+        // zoomOut.setType("button");
+        // zoomOut.setOrder(20);
+        //
+        // ActionClientTool drawFeature = new ActionClientTool();
+        // drawFeature.setId("drawFeature");
+        // drawFeature.setEnabled(true);
+        // drawFeature.setType("toggle");
+        // drawFeature.setOrder(50);
+        //
+        // List<GenericClientTool> clientTools = new ArrayList<GenericClientTool>();
+        // clientTools.add(zoomBox);
+        // clientTools.add(zoomIn);
+        // clientTools.add(zoomOut);
+        // clientTools.add(toolbarSeparator);
+        // clientTools.add(drawFeature);
+        //
+        // toolbarItemManager.setClientTools(clientTools);
+        //
+        // if (GeoGWTUtils.getInstance().getGlobalConfiguration() == null) {
+        // GeoGWTUtils.getInstance().setGlobalConfiguration(new GeoGWTConfiguration());
+        // }
+        //
+        // GeoGWTUtils.getInstance().getGlobalConfiguration().setToolbarItemManager(toolbarItemManager);
+        //
+        // createCenter();
+        // createNorth();
+        //
+        // main.setWidth(558);
+        // main.setHeight(333);
+        //
+        // RootPanel.get("maptoolbar").add(main);
     }
 
     /**
      * Creates the north.
      */
-    private void createNorth() {
+    private void createNorth()
+    {
         north = new ContentPanel();
         north.setHeaderVisible(false);
-        north.addListener(Events.Resize, new Listener<BaseEvent>() {
-
-            public void handleEvent(BaseEvent be) {
-                Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
-            }
-        });
+        north.addListener(Events.Resize, new Listener<BaseEvent>()
+            {
+                public void handleEvent(BaseEvent be)
+                {
+                    Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
+                }
+            });
 
         BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, 30);
         data.setMargins(new Margins(0, 5, 0, 5));
@@ -211,27 +253,52 @@ public class Maptoolbar_panel implements EntryPoint {
     /**
      * Creates the center.
      */
-    private void createCenter() {
+    private void createCenter()
+    {
         center = new ContentPanel();
         center.setHeaderVisible(false);
         center.setLayout(new BorderLayout());
 
-        ContentPanel maptoolbar_panel = new ContentPanel();
+        MouseMoveHandlerPanel maptoolbar_panel = new MouseMoveHandlerPanel();
         maptoolbar_panel.setLayout(new FitLayout());
         maptoolbar_panel.setHeaderVisible(false);
         maptoolbar_panel.setHeading("GeoGWT MapView");
-        maptoolbar_panel.addListener(Events.Resize, new Listener<BaseEvent>() {
+        maptoolbar_panel.addListener(Events.Resize, new Listener<BaseEvent>()
+            {
+                public void handleEvent(BaseEvent be)
+                {
+                    Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
+                }
+            });
+        maptoolbar_panel.addListener(Events.Move, new Listener<BaseEvent>()
+            {
+                public void handleEvent(BaseEvent be)
+                {
+                    Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
+                }
+            });
 
-            public void handleEvent(BaseEvent be) {
-                Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
-            }
-        });
-        maptoolbar_panel.addListener(Events.Move, new Listener<BaseEvent>() {
+        /* ********************************************* */
 
-            public void handleEvent(BaseEvent be) {
-                Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
-            }
-        });
+        MouseMoveHandler mouseMoveHandler = new MouseMoveHandler()
+            {
+                public void onMouseMove(MouseMoveEvent event)
+                {
+                    // Allow 30 seconds to get the RPC call constructed and called.
+                    int x = (sessionTimeMillis - 30000) - SESSION_WARNING_TIMEOUT_MILLIS;
+
+                    // User responded before the response timer elapsed, so keep session
+                    // by calling the service.
+                    sessionTimeoutResponseTimer.cancel();
+                    sessionTimeoutTimer.cancel();
+                    sessionTimeoutTimer.schedule(x);
+                }
+
+            };
+        maptoolbar_panel.addMouseMoveHandler(mouseMoveHandler);
+
+        /* ********************************************* */
+
         maptoolbar_panel.setMonitorWindowResize(true);
         maptoolbar_panel.setLayoutOnChange(true);
 
@@ -261,15 +328,15 @@ public class Maptoolbar_panel implements EntryPoint {
 
         /* base layer */
         WMSParams wmsParams = new WMSParams();
-        wmsParams.setFormat("image/png");
-        wmsParams.setLayers("GeoSolutions:ne_shaded");
+        wmsParams.setFormat("image/jpeg");
+        wmsParams.setLayers("GeoSolutions:world.200407");
         wmsParams.setStyles("");
 
         WMSOptions wmsLayerParams = new WMSOptions();
         wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
 
-        WMS layer = new WMS("GeoSolutions Natural Earth",
-                "http://demo1.geo-solutions.it/playground/wms", wmsParams, wmsLayerParams);
+        WMS layer = new WMS("GeoSolutions Blue Marble", "http://demo1.geo-solutions.it/playground/wms", wmsParams,
+                wmsLayerParams);
         Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
 
         Dispatcher.forwardEvent(GeoGWTEvents.ATTACH_MAP_WIDGET, maptoolbar_panel);
@@ -278,5 +345,131 @@ public class Maptoolbar_panel implements EntryPoint {
         // Dispatcher.forwardEvent(GeoGWTEvents.ZOOM_TO_MAX_EXTENT);
         Dispatcher.forwardEvent(GeoGWTEvents.SET_MAP_CENTER, new Double[] { 13.0, 42.0 });
         Dispatcher.forwardEvent(GeoGWTEvents.ZOOM, 5);
+    }
+
+    /** ***********************************************************************
+     * Session Timeout utility methods
+     **************************************************************************/
+    /**
+     * Called only once from <b>onModuleLoad</b>.
+     *
+     * @sessionTimeInMillis Integer
+     */
+    private void initSessionTimers(int sessionTimeMillis)
+    {
+        // Allow 30 seconds to get the RPC call constructed and called.
+        final int x = (sessionTimeMillis - 30000) - SESSION_WARNING_TIMEOUT_MILLIS;
+        sessionTimeoutResponseTimer = new Timer()
+            {
+                public void run()
+                {
+                    displaySessionTimedOut();
+                }
+            };
+        sessionTimeoutTimer = new Timer()
+            {
+                public void run()
+                {
+                    sessionTimeoutResponseTimer.schedule(SESSION_WARNING_TIMEOUT_MILLIS);
+                    MessageBox.alert("Session Timeout",
+                        "Your session is about to timeout. Please press \"OK\" to keep working.",
+                        new Listener<MessageBoxEvent>()
+                        {
+                            public void handleEvent(MessageBoxEvent be)
+                            {
+                                // User responded before the response timer elapsed, so keep session
+                                // by calling the service.
+                                sessionTimeoutResponseTimer.cancel();
+                                sessionTimeoutTimer.cancel();
+                                sessionTimeoutTimer.schedule(x);
+                                keepUserSessionAlive();
+                            }
+                        });
+                }
+            };
+        sessionTimeoutTimer.schedule(x);
+    }
+
+    /**
+     *
+     */
+    private void keepUserSessionAlive()
+    {
+        SessionControllerRemoteServiceAsync service = SessionControllerRemoteService.Util.getInstance();
+        AsyncCallback<Void> callback = new AsyncCallback<Void>()
+            {
+                public void onSuccess(Void result)
+                {
+                }
+
+                public void onFailure(final Throwable caught)
+                {
+                    MessageBox.alert("Session Timeout", caught.toString() + THE_APP_WILL_CLOSE,
+                        new Listener<MessageBoxEvent>()
+                        {
+                            public void handleEvent(MessageBoxEvent be)
+                            {
+                                closeBrowser();
+                            }
+                        });
+                }
+            };
+        service.keepUserSessionAlive(callback);
+    }
+
+    /**
+     *
+     */
+    private void displaySessionTimedOut()
+    {
+        MessageBox.alert("Session Timeout", "Your session has timed out." + THE_APP_WILL_CLOSE,
+            new Listener<MessageBoxEvent>()
+            {
+                public void handleEvent(MessageBoxEvent be)
+                {
+                    closeBrowser();
+                }
+            });
+    }
+
+    /**
+     * @param configuration
+     *
+     */
+    private void initializeIdleTimeoutSession(GeoGWTConfiguration configuration)
+    {
+        /* *********************
+         * Session Timeout initializer
+         */
+        SessionControllerRemoteServiceAsync service = SessionControllerRemoteService.Util.getInstance();
+        AsyncCallback<Integer> callback = new AsyncCallback<Integer>()
+            {
+                public void onSuccess(Integer result)
+                {
+                    sessionTimeMillis = result.intValue();
+
+                    if (sessionTimeMillis == -1)
+                    {
+                        displaySessionTimedOut();
+                    }
+                    else
+                    {
+                        initSessionTimers(sessionTimeMillis);
+                    }
+                }
+
+                public void onFailure(final Throwable caught)
+                {
+                    MessageBox.alert("Error", caught.toString() + THE_APP_WILL_CLOSE,
+                        new Listener<MessageBoxEvent>()
+                        {
+                            public void handleEvent(MessageBoxEvent be)
+                            {
+                                closeBrowser();
+                            }
+                        });
+                }
+            };
+        service.getUserSessionTimeoutMillis(callback);
     }
 }

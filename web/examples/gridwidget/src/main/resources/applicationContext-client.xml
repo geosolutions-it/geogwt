@@ -12,12 +12,10 @@
 	<context:component-scan base-package="it.geosolutions.geogwt.web.examples" />
 
 	<!-- GWT Configuration -->
-	<bean id="geoGWTGlobalConfiguration" class="it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration" lazy-init="false">
-	</bean>
+	<bean id="geoGWTGlobalConfiguration" class="it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration" />
 
 	<!-- Startup service -->
-	<bean id="geogwtStartupService" class="it.geosolutions.geogwt.gui.service.impl.StartupService" lazy-init="false">
-	</bean>
+	<bean id="geogwtStartupService" class="it.geosolutions.geogwt.gui.service.impl.StartupService" />
 
 	<!-- Toolbar configuration -->
 	<bean name="toolbarItemManager" class="it.geosolutions.geogwt.gui.client.ToolbarItemManager">
@@ -26,12 +24,12 @@
 			</list>
 		</property>
 	</bean>
-	
+		
 	<!-- Layers Manager Service configuration -->
 	<bean name="layersManagerServiceGWT" class="it.geosolutions.geogwt.web.examples.server.service.impl.LayersManagerServiceImpl">
 		<property name="geoServerUrl" value="http://demo1.geo-solutions.it/playground"/>
-		<!-- property name="geoServerUser" value="admin"/>
-		<property name="geoServerPassword" value="*******"/ -->
+		<property name="geoServerUser" value="admin"/>
+		<property name="geoServerPassword" value="1geosolutions2"/>
 	</bean>
 	
 </beans>

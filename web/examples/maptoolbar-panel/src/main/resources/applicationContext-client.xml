@@ -10,15 +10,13 @@
 	<context:annotation-config />
 
 	<context:component-scan base-package="it.geosolutions.geogwt.gui" />
-	
+
 	<!-- GWT Configuration -->
-	<bean id="geoGWTGlobalConfiguration" class="it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration" lazy-init="false">
-	</bean>
+	<bean id="geoGWTGlobalConfiguration" class="it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration" />
 
 	<!-- Startup service -->
-	<bean id="geogwtStartupService" class="it.geosolutions.geogwt.gui.service.impl.StartupService" lazy-init="false">
-	</bean>
-	
+	<bean id="geogwtStartupService" class="it.geosolutions.geogwt.gui.service.impl.StartupService" />
+
 	<!-- Toolbar configuration -->
 	<bean name="toolbarItemManager" class="it.geosolutions.geogwt.gui.client.ToolbarItemManager">
 		<property name="clientTools">

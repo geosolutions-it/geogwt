@@ -165,7 +165,7 @@
 
 	<build>
 
-		<!-- finalName>${module.name}</finalName -->
+		<finalName>gridwidget</finalName>
 		
 		<outputDirectory>war/WEB-INF/classes</outputDirectory>
 
