@@ -12,8 +12,8 @@
 
     <properties>
         <geogwt-version>0.1-SNAPSHOT</geogwt-version>
-		<!-- gwtopenmaps-version>0.6-SNAPSHOT</gwtopenmaps-version -->
-		<gwtopenmaps-version>0.6</gwtopenmaps-version>
+		<gwtopenmaps-version>0.6-SNAPSHOT</gwtopenmaps-version>
+		<!-- gwtopenmaps-version>0.6</gwtopenmaps-version -->
 
         <spring.version>3.0.4.RELEASE</spring.version>
         <gt-version>2.7-RC2</gt-version>
@@ -90,6 +90,12 @@
             <id>osgeo-geotools</id>
             <url>http://download.osgeo.org/webdav/geotools/</url>
         </repository>
+
+        <repository>
+			<id>sonatype-nexus-snapshots</id>
+			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+		
     </repositories>
     
 
@@ -132,11 +138,11 @@
 			</dependency>
 
 			<!-- GWT-OL Resources -->
-			<dependency>
+			<!-- dependency>
 				<groupId>org.gwtopenmaps.openlayers</groupId>
 				<artifactId>openlayers_gwt</artifactId>
 				<version>${gwtopenmaps-version}</version>
-			</dependency>
+			</dependency -->
 			<dependency>
 				<groupId>org.gwtopenmaps.openlayers</groupId>
 				<artifactId>gwt-openlayers-client</artifactId>
@@ -147,7 +153,6 @@
 				<artifactId>gwt-openlayers-server</artifactId>
 				<version>${gwtopenmaps-version}</version>
 			</dependency>
-			
 				
 			<!-- =========================================================== -->
 			<!--     GeoGWT Widgets                                          -->

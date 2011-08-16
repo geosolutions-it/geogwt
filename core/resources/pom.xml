@@ -70,18 +70,18 @@
 		</dependency>
 
 		<!-- GWT-OL Resources -->
-		<dependency>
+		<!-- dependency>
 			<groupId>org.gwtopenmaps.openlayers</groupId>
 			<artifactId>openlayers_gwt</artifactId>
-		</dependency>
-		<!-- dependency>
+		</dependency -->
+		<dependency>
 			<groupId>org.gwtopenmaps.openlayers</groupId>
 			<artifactId>gwt-openlayers-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.gwtopenmaps.openlayers</groupId>
 			<artifactId>gwt-openlayers-server</artifactId>
-		</dependency -->
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
