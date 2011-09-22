@@ -59,6 +59,7 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  */
 public class Mappanel_div implements EntryPoint
 {
+
     /* (non-Javadoc)
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
      */
@@ -98,6 +99,8 @@ public class Mappanel_div implements EntryPoint
         // Example initialization with map options and a default layer
         /* map options */
         MapOptions mapOptions = new MapOptions();
+        mapOptions.removeDefaultControls();
+        mapOptions.setNumZoomLevels(16);
         mapOptions.setUnits(MapUnits.DEGREES);
         mapOptions.setProjection("EPSG:4326");
 

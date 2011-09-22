@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -33,26 +33,29 @@
  */
 package it.geosolutions.geogwt.gui.client;
 
-import it.geosolutions.geogwt.gui.client.mvc.MapController;
-
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.google.gwt.core.client.EntryPoint;
+
+import it.geosolutions.geogwt.gui.client.mvc.MapController;
+
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class Mappanel.
  */
-public class Mappanel implements EntryPoint {
+public class Mappanel implements EntryPoint
+{
 
     /** The dispatcher. */
     private Dispatcher dispatcher;
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
      */
-    public void onModuleLoad() {
+    public void onModuleLoad()
+    {
         dispatcher = Dispatcher.get();
 
         dispatcher.addController(new MapController());

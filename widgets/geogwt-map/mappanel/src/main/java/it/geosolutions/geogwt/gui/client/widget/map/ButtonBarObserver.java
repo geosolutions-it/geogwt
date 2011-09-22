@@ -18,6 +18,7 @@ import it.geosolutions.geogwt.gui.client.widget.GeoGWTButton.ButtonType;
  */
 public class ButtonBarObserver implements Observer
 {
+
     /* (non-Javadoc)
      * @see it.geosolutions.geogwt.gui.client.Observer#update(it.geosolutions.geogwt.gui.client.Observable, java.lang.Object)
      */

@@ -44,6 +44,7 @@ import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
  */
 public abstract class ButtonBar extends LayoutContainer
 {
+
     /** The Constant TOOLBAR_SEPARATOR. */
     public static final String TOOLBAR_SEPARATOR = "ToolbarSeparator";
 
