@@ -12,8 +12,7 @@
 
     <properties>
         <geogwt-version>0.1-SNAPSHOT</geogwt-version>
-		<gwtopenmaps-version>0.6-SNAPSHOT</gwtopenmaps-version>
-		<!-- gwtopenmaps-version>0.6</gwtopenmaps-version -->
+		<gwtopenmaps-version>0.6</gwtopenmaps-version>
 
         <spring.version>3.0.4.RELEASE</spring.version>
         <gt-version>2.7-RC2</gt-version>
