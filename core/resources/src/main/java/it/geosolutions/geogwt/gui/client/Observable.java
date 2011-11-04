@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -35,11 +35,13 @@ package it.geosolutions.geogwt.gui.client;
 
 import java.util.Vector;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Observable.
  */
-public class Observable {
+public class Observable
+{
 
     /** The changed. */
     private boolean changed = false;
@@ -51,54 +53,65 @@ public class Observable {
      * Instantiates a new observable.
      */
 
-    public Observable() {
+    public Observable()
+    {
         obs = new Vector();
     }
 
     /**
      * Adds the observer.
-     * 
+     *
      * @param o
      *            the o
      */
-    public synchronized void addObserver(Observer o) {
+    public synchronized void addObserver(Observer o)
+    {
         if (o == null)
+        {
             throw new NullPointerException();
-        if (!obs.contains(o)) {
+        }
+        if (!obs.contains(o))
+        {
             obs.addElement(o);
         }
     }
 
     /**
      * Delete observer.
-     * 
+     *
      * @param o
      *            the o
      */
-    public synchronized void deleteObserver(Observer o) {
+    public synchronized void deleteObserver(Observer o)
+    {
         obs.removeElement(o);
     }
 
     /**
      * Notify observers.
      */
-    public void notifyObservers() {
+    public void notifyObservers()
+    {
         notifyObservers(null);
     }
 
     /**
      * Notify observers.
-     * 
+     *
      * @param arg
      *            the arg
      */
-    public void notifyObservers(Object arg) {
+    public void notifyObservers(Object arg)
+    {
+
         /*
          * a temporary array buffer, used as a snapshot of the state of current Observers.
          */
         Object[] arrLocal;
 
-        synchronized (this) {
+        synchronized (this)
+        {
+
             /*
              * We don't want the Observer doing callbacks into arbitrary code while holding its own
              * Monitor. The code where we extract each Observable from the Vector and store the
@@ -108,51 +121,60 @@ public class Observable {
              * will be wrongly notified when it doesn't care
              */
             if (!changed)
+            {
                 return;
+            }
             arrLocal = obs.toArray();
             clearChanged();
         }
 
         for (int i = arrLocal.length - 1; i >= 0; i--)
+        {
             ((Observer) arrLocal[i]).update(this, arg);
+        }
     }
 
     /**
      * Delete observers.
      */
-    public synchronized void deleteObservers() {
+    public synchronized void deleteObservers()
+    {
         obs.removeAllElements();
     }
 
     /**
      * Sets the changed.
      */
-    protected synchronized void setChanged() {
+    protected synchronized void setChanged()
+    {
         changed = true;
     }
 
     /**
      * Clear changed.
      */
-    protected synchronized void clearChanged() {
+    protected synchronized void clearChanged()
+    {
         changed = false;
     }
 
     /**
      * Checks for changed.
-     * 
+     *
      * @return true, if successful
      */
-    public synchronized boolean hasChanged() {
+    public synchronized boolean hasChanged()
+    {
         return changed;
     }
 
     /**
      * Count observers.
-     * 
+     *
      * @return the int
      */
-    public synchronized int countObservers() {
+    public synchronized int countObservers()
+    {
         return obs.size();
     }
 

@@ -44,6 +44,7 @@ import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
  */
 public interface GeoGWTConfigurationRemoteAsync
 {
+
     /**
      * Inits the server configuration.
      *

@@ -49,6 +49,7 @@ import it.geosolutions.geogwt.gui.client.widget.GeoGWTButton;
  */
 public abstract class ToolbarAction implements Listener<BaseEvent>, Serializable
 {
+
     /**
      *
      */

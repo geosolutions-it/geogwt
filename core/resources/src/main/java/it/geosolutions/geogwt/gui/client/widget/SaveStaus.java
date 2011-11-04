@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -37,12 +37,14 @@ package it.geosolutions.geogwt.gui.client.widget;
 /**
  * The Class SaveStaus.
  */
-public class SaveStaus extends StatusWidget {
+public class SaveStaus extends StatusWidget
+{
 
     /**
      * The Enum EnumSaveStatus.
      */
-    public enum EnumSaveStatus {
+    public enum EnumSaveStatus
+    {
 
         /** The STATU s_ save. */
         STATUS_SAVE("x-status-ok"),
@@ -67,20 +69,22 @@ public class SaveStaus extends StatusWidget {
 
         /**
          * Instantiates a new enum save status.
-         * 
+         *
          * @param value
          *            the value
          */
-        EnumSaveStatus(String value) {
+        EnumSaveStatus(String value)
+        {
             this.value = value;
         }
 
         /**
          * Gets the value.
-         * 
+         *
          * @return the value
          */
-        public String getValue() {
+        public String getValue()
+        {
             return value;
         }
     }

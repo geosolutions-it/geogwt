@@ -78,12 +78,27 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
  */
 public class Maptoolbar_panel implements EntryPoint
 {
+
     /*
      * Session Management section
      */
     private static final String THE_APP_WILL_CLOSE = " The application will close.";
 
     private static final int SESSION_WARNING_TIMEOUT_MILLIS = 10000; // 1 minute
+
+    public static native void closeBrowser() /*-{
+        $wnd.close();
+    }-*/;
+
+    public static native String getQueryString() /*-{
+        return $wnd.location.search.substring(1);
+    }-*/;
+
+    public static native String getContextPath() /*-{
+        return "/"
+        + $wnd.location.pathname.substring(1).substring(0,
+        $wnd.location.pathname.substring(1).indexOf("/"));
+    }-*/;
 
     private Timer sessionTimeoutTimer = null;
 
@@ -99,20 +114,6 @@ public class Maptoolbar_panel implements EntryPoint
 
     /** The north. */
     protected ContentPanel north;
-
-    public static native void closeBrowser() /*-{
-        $wnd.close();
-    }-*/;
-
-    public static native String getQueryString() /*-{
-        return $wnd.location.search.substring(1);
-    }-*/;
-
-    public static native String getContextPath() /*-{
-        return "/"
-        + $wnd.location.pathname.substring(1).substring(0,
-        $wnd.location.pathname.substring(1).indexOf("/"));
-    }-*/;
 
     /*
      * (non-Javadoc)
@@ -131,6 +132,7 @@ public class Maptoolbar_panel implements EntryPoint
      */
     protected void buildUI()
     {
+
         /**
          * Adding widgets to Viewport panels
          */
@@ -147,6 +149,7 @@ public class Maptoolbar_panel implements EntryPoint
      */
     private void loadConfiguration()
     {
+
         /** Example: trying to load toolbar components from applicationContext automatically **/
         GeoGWTConfigurationRemote.Util.getInstance().initServerConfiguration(
             new AsyncCallback<GeoGWTConfiguration>()
@@ -441,6 +444,7 @@ public class Maptoolbar_panel implements EntryPoint
     @SuppressWarnings("unused")
     private void initializeIdleTimeoutSession(GeoGWTConfiguration configuration)
     {
+
         /* *********************
          * Session Timeout initializer
          */

@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -35,21 +35,24 @@ package it.geosolutions.geogwt.gui.client.i18n;
 
 import com.google.gwt.core.client.GWT;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nProvider.
  */
-public final class I18nProvider {
+public final class I18nProvider
+{
 
     /** The Constant MESSAGES. */
     private static final ApplicationMessages MESSAGES = GWT.create(ApplicationMessages.class);
 
     /**
      * Gets the messages.
-     * 
+     *
      * @return the messages
      */
-    public static ApplicationMessages getMessages() {
+    public static ApplicationMessages getMessages()
+    {
         return MESSAGES;
     }
 

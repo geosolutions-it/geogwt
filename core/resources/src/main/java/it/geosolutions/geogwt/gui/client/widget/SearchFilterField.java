@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -42,15 +42,16 @@ import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class SearchFilterField.
- * 
+ *
  * @param <T>
  *            the generic type
  */
-public abstract class SearchFilterField<T extends ModelData> extends StoreFilterField<T> implements
-        IconSupport {
+public abstract class SearchFilterField<T extends ModelData> extends StoreFilterField<T> implements IconSupport
+{
 
     /** The style. */
     private String style;
@@ -61,13 +62,14 @@ public abstract class SearchFilterField<T extends ModelData> extends StoreFilter
     /**
      * Instantiates a new search filter field.
      */
-    public SearchFilterField() {
+    public SearchFilterField()
+    {
         this.style = "x-menu-item";
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * com.extjs.gxt.ui.client.widget.form.StoreFilterField#doSelect(com.extjs.gxt.ui.client.store
      * .Store, com.extjs.gxt.ui.client.data.ModelData, com.extjs.gxt.ui.client.data.ModelData,
@@ -75,30 +77,35 @@ public abstract class SearchFilterField<T extends ModelData> extends StoreFilter
      */
     @Override
     protected abstract boolean doSelect(Store<T> store, T parent, T record, String property,
-            String filter);
+        String filter);
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.extjs.gxt.ui.client.widget.IconSupport#getIcon()
      */
-    public AbstractImagePrototype getIcon() {
+    public AbstractImagePrototype getIcon()
+    {
         return icon;
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @seecom.extjs.gxt.ui.client.widget.IconSupport#setIcon(com.google.gwt.user.client.ui.
      * AbstractImagePrototype)
      */
-    public void setIcon(AbstractImagePrototype icon) {
-        if (rendered) {
+    public void setIcon(AbstractImagePrototype icon)
+    {
+        if (rendered)
+        {
             El oldIcon = el().selectNode(style);
-            if (oldIcon != null) {
+            if (oldIcon != null)
+            {
                 oldIcon.remove();
             }
-            if (icon != null) {
+            if (icon != null)
+            {
                 Element e = icon.createElement().cast();
                 El.fly(e).addStyleName(style);
                 el().insertChild(e, 0);
@@ -109,20 +116,22 @@ public abstract class SearchFilterField<T extends ModelData> extends StoreFilter
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.extjs.gxt.ui.client.widget.IconSupport#setIconStyle(java.lang.String)
      */
-    public void setIconStyle(String icon) {
+    public void setIconStyle(String icon)
+    {
         setIcon(IconHelper.create(icon));
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.extjs.gxt.ui.client.widget.form.TriggerField#afterRender()
      */
     @Override
-    protected void afterRender() {
+    protected void afterRender()
+    {
         super.afterRender();
         setIcon(icon);
     }

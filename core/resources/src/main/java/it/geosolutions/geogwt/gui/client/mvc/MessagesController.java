@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -33,16 +33,18 @@
  */
 package it.geosolutions.geogwt.gui.client.mvc;
 
-import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
-
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
+
+import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
+
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class MessagesController.
  */
-public class MessagesController extends Controller {
+public class MessagesController extends Controller
+{
 
     /** The messages view. */
     private MessagesView messagesView;
@@ -50,33 +52,35 @@ public class MessagesController extends Controller {
     /**
      * Instantiates a new messages controller.
      */
-    public MessagesController() {
+    public MessagesController()
+    {
         registerEventTypes(
-                GeoGWTEvents.INIT_RESOURCES_MODULE, 
-                GeoGWTEvents.SEND_ALERT_MESSAGE,
-                GeoGWTEvents.SEND_ERROR_MESSAGE, 
-                GeoGWTEvents.SEND_INFO_MESSAGE
-        );
+            GeoGWTEvents.INIT_RESOURCES_MODULE,
+            GeoGWTEvents.SEND_ALERT_MESSAGE,
+            GeoGWTEvents.SEND_ERROR_MESSAGE,
+            GeoGWTEvents.SEND_INFO_MESSAGE);
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.extjs.gxt.ui.client.mvc.Controller#initialize()
      */
     @Override
-    protected void initialize() {
+    protected void initialize()
+    {
         this.messagesView = new MessagesView(this);
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.extjs.gxt.ui.client.mvc.Controller#handleEvent(com.extjs.gxt.ui.client
      * .mvc.AppEvent)
      */
     @Override
-    public void handleEvent(AppEvent event) {
+    public void handleEvent(AppEvent event)
+    {
         forwardToView(messagesView, event);
     }
 }

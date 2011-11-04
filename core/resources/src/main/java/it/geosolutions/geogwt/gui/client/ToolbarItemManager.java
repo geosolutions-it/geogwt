@@ -45,6 +45,7 @@ import it.geosolutions.geogwt.gui.client.configuration.IToolbarItemManager;
  */
 public class ToolbarItemManager implements IToolbarItemManager
 {
+
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1501328199018303376L;
 

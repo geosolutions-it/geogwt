@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -35,11 +35,13 @@ package it.geosolutions.geogwt.gui.client;
 
 import java.io.Serializable;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ApplicationException.
  */
-public class ApplicationException extends RuntimeException implements Serializable {
+public class ApplicationException extends RuntimeException implements Serializable
+{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 5240255747375099784L;
@@ -50,68 +52,75 @@ public class ApplicationException extends RuntimeException implements Serializab
     /**
      * Instantiates a new application exception.
      */
-    public ApplicationException() {
+    public ApplicationException()
+    {
     }
 
     /**
      * Instantiates a new application exception.
-     * 
+     *
      * @param message
      *            the message
      */
-    public ApplicationException(String message) {
+    public ApplicationException(String message)
+    {
         this.message = message;
     }
 
     /**
      * Instantiates a new application exception.
-     * 
+     *
      * @param e
      *            the e
      */
-    public ApplicationException(Throwable e) {
+    public ApplicationException(Throwable e)
+    {
         super(e);
     }
 
     /**
      * Instantiates a new application exception.
-     * 
+     *
      * @param message
      *            the message
      * @param e
      *            the e
      */
-    public ApplicationException(String message, Throwable e) {
+    public ApplicationException(String message, Throwable e)
+    {
         super(e);
         this.message = message;
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Throwable#getMessage()
      */
     @Override
-    public String getMessage() {
+    public String getMessage()
+    {
         return message;
     }
 
     /**
      * Sets the message.
-     * 
+     *
      * @param message
      *            the new message
      */
-    public void setMessage(String message) {
+    public void setMessage(String message)
+    {
         this.message = message;
     }
 
     /**
      * Gets the detailed message.
-     * 
+     *
      * @return the detailed message
      */
-    public String getDetailedMessage() {
+    public String getDetailedMessage()
+    {
         return super.getMessage();
     }
 }

@@ -19,7 +19,7 @@
         <commonsFileuploadVersion>1.2.1</commonsFileuploadVersion>
         <commonsIoVersion>1.4</commonsIoVersion>
     
-		<geosolutions-gsmanager-version>1.1-SNAPSHOT</geosolutions-gsmanager-version>
+		<geosolutions-gsmanager-version>1.2-SNAPSHOT</geosolutions-gsmanager-version>
 	
         <jaxws-version>2.1</jaxws-version>
         <cxf-version>2.3.2</cxf-version>
@@ -266,20 +266,20 @@
 			<dependency>
 				<groupId>com.google.gwt</groupId>
 				<artifactId>gwt-user</artifactId>
-				<version>2.1.1</version>
+				<version>2.3.0</version>
 				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>com.google.gwt</groupId>
 				<artifactId>gwt-servlet</artifactId>
-				<version>2.1.1</version>
+				<version>2.3.0</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.google.gwt</groupId>
 				<artifactId>gwt-servlet</artifactId>
-				<version>2.1.1</version>
+				<version>2.3.0</version>
 			</dependency>
 
 			<dependency>
@@ -292,7 +292,7 @@
 			<dependency>
 				<groupId>com.extjs</groupId>
 				<artifactId>gxt</artifactId>
-				<version>2.1.1</version>
+				<version>2.2.3</version>
 			</dependency>
 
 			<!-- GeoAPI and its dependencies -->

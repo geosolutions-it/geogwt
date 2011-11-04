@@ -55,6 +55,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  */
 public class ConfigurationRemoteImpl extends RemoteServiceServlet implements GeoGWTConfigurationRemote
 {
+
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -6320939080552026131L;
 

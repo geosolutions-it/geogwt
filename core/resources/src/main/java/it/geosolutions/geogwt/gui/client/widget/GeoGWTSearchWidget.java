@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -32,8 +32,6 @@
  *
  */
 package it.geosolutions.geogwt.gui.client.widget;
-
-import it.geosolutions.geogwt.gui.client.widget.SearchStatus.EnumSearchStatus;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
@@ -68,14 +66,18 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.LabelToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 
+import it.geosolutions.geogwt.gui.client.widget.SearchStatus.EnumSearchStatus;
+
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class GeoGWTSearchWidget.
- * 
+ *
  * @param <T>
  *            the generic type
  */
-public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
+public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window
+{
 
     /** The vp. */
     private VerticalPanel vp;
@@ -116,7 +118,8 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
     /**
      * Instantiates a new geo gwt search widget.
      */
-    public GeoGWTSearchWidget() {
+    public GeoGWTSearchWidget()
+    {
         initWindow();
         initVerticalPanel();
         initFormPanel();
@@ -126,21 +129,24 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
     /**
      * Inits the window.
      */
-    private void initWindow() {
+    private void initWindow()
+    {
         setModal(true);
         setResizable(false);
         setLayout(new FlowLayout());
         setPlain(true);
         setMaximizable(false);
 
-        addWindowListener(new WindowListener() {
+        addWindowListener(new WindowListener()
+            {
 
-            @Override
-            public void windowHide(WindowEvent we) {
-                cancel();
-            }
+                @Override
+                public void windowHide(WindowEvent we)
+                {
+                    cancel();
+                }
 
-        });
+            });
 
         setWindowProperties();
     }
@@ -148,7 +154,8 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
     /**
      * Inits the vertical panel.
      */
-    private void initVerticalPanel() {
+    private void initVerticalPanel()
+    {
         vp = new VerticalPanel();
         vp.setSpacing(10);
         createStore();
@@ -158,7 +165,8 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
     /**
      * Inits the form panel.
      */
-    private void initFormPanel() {
+    private void initFormPanel()
+    {
         formPanel = new FormPanel();
         formPanel.setHeaderVisible(false);
         formPanel.setFrame(true);
@@ -174,29 +182,35 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
         search = new TextField<String>();
         search.setFieldLabel("Find");
 
-        search.addKeyListener(new KeyListener() {
+        search.addKeyListener(new KeyListener()
+            {
 
-            @Override
-            public void componentKeyUp(ComponentEvent event) {
-                if ((event.getKeyCode() == 8) && (search.getValue() == null)) {
-                    reset();
-                    loader.load(0, 25);
-                }
-            }
-
-            @Override
-            public void componentKeyPress(ComponentEvent event) {
-                if ((event.getKeyCode() == 13)) {
-                    // && (!search.getValue().equals(""))) {
-                    // searchStatus.setBusy("Connection to the Server");
-                    if (search.getValue() != null) {
-                        searchText = search.getValue() == null ? "" : search.getValue();
+                @Override
+                public void componentKeyUp(ComponentEvent event)
+                {
+                    if ((event.getKeyCode() == 8) && (search.getValue() == null))
+                    {
+                        reset();
                         loader.load(0, 25);
                     }
                 }
-            }
 
-        });
+                @Override
+                public void componentKeyPress(ComponentEvent event)
+                {
+                    if ((event.getKeyCode() == 13))
+                    {
+                        // && (!search.getValue().equals(""))) {
+                        // searchStatus.setBusy("Connection to the Server");
+                        if (search.getValue() != null)
+                        {
+                            searchText = (search.getValue() == null) ? "" : search.getValue();
+                            loader.load(0, 25);
+                        }
+                    }
+                }
+
+            });
 
         BorderLayoutData data = new BorderLayoutData(LayoutRegion.CENTER);
         data.setMargins(new Margins(5, 5, 5, 5));
@@ -216,26 +230,30 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
 
         formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
 
-        select = new Button("Select", new SelectionListener<ButtonEvent>() {
+        select = new Button("Select", new SelectionListener<ButtonEvent>()
+                {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                select();
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce)
+                    {
+                        select();
+                    }
+                });
 
         select.setIconStyle("x-georepo-select");
         select.disable();
 
         formPanel.addButton(this.select);
 
-        cancel = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+        cancel = new Button("Cancel", new SelectionListener<ButtonEvent>()
+                {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                cancel();
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce)
+                    {
+                        cancel();
+                    }
+                });
 
         cancel.setIconStyle("x-georepo-cancel");
 
@@ -249,7 +267,8 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
     /**
      * Inits the grid.
      */
-    private void initGrid() {
+    private void initGrid()
+    {
         ColumnModel cm = prepareColumnModel();
 
         grid = new Grid<T>(store, cm);
@@ -257,22 +276,30 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
 
         grid.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        grid.addListener(Events.CellClick, new Listener<BaseEvent>() {
+        grid.addListener(Events.CellClick, new Listener<BaseEvent>()
+            {
 
-            public void handleEvent(BaseEvent be) {
-                if (!grid.getSelectionModel().getSelection().isEmpty())
-                    select.enable();
-                else
-                    select.disable();
-            }
-        });
+                public void handleEvent(BaseEvent be)
+                {
+                    if (!grid.getSelectionModel().getSelection().isEmpty())
+                    {
+                        select.enable();
+                    }
+                    else
+                    {
+                        select.disable();
+                    }
+                }
+            });
 
-        grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>() {
+        grid.addListener(Events.CellDoubleClick, new Listener<BaseEvent>()
+            {
 
-            public void handleEvent(BaseEvent be) {
-                select();
-            }
-        });
+                public void handleEvent(BaseEvent be)
+                {
+                    select();
+                }
+            });
 
         setGridProperties();
     }
@@ -281,7 +308,8 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
      * Cancel.
      */
     @SuppressWarnings("deprecation")
-    public void cancel() {
+    public void cancel()
+    {
         super.close();
         reset();
     }
@@ -289,7 +317,8 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
     /**
      * Reset.
      */
-    public void reset() {
+    public void reset()
+    {
         this.search.reset();
         this.store.removeAll();
         this.toolBar.clear();
@@ -300,20 +329,22 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
     /**
      * Clear grid elements.
      */
-    public void clearGridElements() {
+    public void clearGridElements()
+    {
         this.store.removeAll();
         this.toolBar.clear();
     }
 
     /**
      * Sets the search status.
-     * 
+     *
      * @param status
      *            the status
      * @param message
      *            the message
      */
-    public void setSearchStatus(EnumSearchStatus status, EnumSearchStatus message) {
+    public void setSearchStatus(EnumSearchStatus status, EnumSearchStatus message)
+    {
         this.searchStatus.setIconStyle(status.getValue());
         this.searchStatus.setText(message.getValue());
     }
@@ -335,7 +366,7 @@ public abstract class GeoGWTSearchWidget<T extends BaseModel> extends Window {
 
     /**
      * Prepare column model.
-     * 
+     *
      * @return the column model
      */
     public abstract ColumnModel prepareColumnModel();

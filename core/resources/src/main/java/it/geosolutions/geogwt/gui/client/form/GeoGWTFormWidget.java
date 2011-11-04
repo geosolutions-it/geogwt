@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -32,9 +32,6 @@
  *
  */
 package it.geosolutions.geogwt.gui.client.form;
-
-import it.geosolutions.geogwt.gui.client.widget.SaveStaus;
-import it.geosolutions.geogwt.gui.client.widget.SaveStaus.EnumSaveStatus;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
@@ -49,11 +46,16 @@ import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 
+import it.geosolutions.geogwt.gui.client.widget.SaveStaus;
+import it.geosolutions.geogwt.gui.client.widget.SaveStaus.EnumSaveStatus;
+
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class GeoGWTFormWidget.
  */
-public abstract class GeoGWTFormWidget extends Window implements IForm {
+public abstract class GeoGWTFormWidget extends Window implements IForm
+{
 
     /** The form panel. */
     public FormPanel formPanel = new FormPanel();
@@ -73,7 +75,8 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
     /**
      * Instantiates a new geo gwt form widget.
      */
-    public GeoGWTFormWidget() {
+    public GeoGWTFormWidget()
+    {
         this.initializeWindow();
         this.initializeFormPanel();
         this.add(this.formPanel);
@@ -82,7 +85,8 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
     /**
      * Initialize form panel.
      */
-    public void initializeFormPanel() {
+    public void initializeFormPanel()
+    {
         this.formPanel.setFrame(true);
         this.formPanel.setLayout(new FlowLayout());
 
@@ -94,18 +98,21 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
     /**
      * Initialize window.
      */
-    private void initializeWindow() {
+    private void initializeWindow()
+    {
         initSize();
         setResizable(false);
 
-        addWindowListener(new WindowListener() {
+        addWindowListener(new WindowListener()
+            {
 
-            @Override
-            public void windowHide(WindowEvent we) {
-                reset();
-            }
+                @Override
+                public void windowHide(WindowEvent we)
+                {
+                    reset();
+                }
 
-        });
+            });
 
         setLayout(new FitLayout());
         setModal(true);
@@ -115,7 +122,8 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
     /**
      * Adds the buttons.
      */
-    public void addButtons() {
+    public void addButtons()
+    {
         formPanel.setButtonAlign(HorizontalAlignment.LEFT);
 
         this.saveStatus = new SaveStaus();
@@ -127,15 +135,19 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
 
         this.submit = new Button("SUBMIT");
 
-        this.submit.addSelectionListener(new SelectionListener<ButtonEvent>() {
+        this.submit.addSelectionListener(new SelectionListener<ButtonEvent>()
+            {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                if (formPanel.isValid())
-                    execute();
-            }
+                @Override
+                public void componentSelected(ButtonEvent ce)
+                {
+                    if (formPanel.isValid())
+                    {
+                        execute();
+                    }
+                }
 
-        });
+            });
 
         submit.setIconStyle("x-georepo-submit");
 
@@ -143,13 +155,15 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
 
         this.cancel = new Button("CANCEL");
 
-        this.cancel.addSelectionListener(new SelectionListener<ButtonEvent>() {
+        this.cancel.addSelectionListener(new SelectionListener<ButtonEvent>()
+            {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                cancel();
-            }
-        });
+                @Override
+                public void componentSelected(ButtonEvent ce)
+                {
+                    cancel();
+                }
+            });
 
         this.cancel.setIconStyle("x-georepo-cancel");
 
@@ -158,13 +172,14 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
 
     /**
      * Sets the save status.
-     * 
+     *
      * @param status
      *            the status
      * @param message
      *            the message
      */
-    public void setSaveStatus(EnumSaveStatus status, EnumSaveStatus message) {
+    public void setSaveStatus(EnumSaveStatus status, EnumSaveStatus message)
+    {
         this.saveStatus.setIconStyle(status.getValue());
         this.saveStatus.setText(message.getValue());
     }
@@ -172,7 +187,8 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
     /**
      * Reset.
      */
-    public void reset() {
+    public void reset()
+    {
 
     }
 
@@ -199,7 +215,8 @@ public abstract class GeoGWTFormWidget extends Window implements IForm {
     /**
      * Inject event.
      */
-    public void injectEvent() {
+    public void injectEvent()
+    {
         // TODO Auto-generated method stub
 
     }

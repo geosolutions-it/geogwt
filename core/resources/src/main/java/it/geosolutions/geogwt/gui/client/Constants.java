@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -37,10 +37,11 @@ package it.geosolutions.geogwt.gui.client;
 /**
  * The Class Constants.
  */
-public class Constants {
+public class Constants
+{
 
     /** The Constant DEFAULT_PAGESIZE. */
-    public final static int DEFAULT_PAGESIZE = 25;
+    public static final int DEFAULT_PAGESIZE = 25;
 
     /** The Constant NORTH_PANEL_DIMENSION. */
     public static final int NORTH_PANEL_DIMENSION = 30;
@@ -59,10 +60,11 @@ public class Constants {
 
     /**
      * Gets the single instance of Constants.
-     * 
+     *
      * @return single instance of Constants
      */
-    public static Constants getInstance() {
+    public static Constants getInstance()
+    {
         return instance;
     }
 }

@@ -17,7 +17,8 @@ public class GeoGWTButton extends Observable
 {
     public enum ButtonType
     {
-        BUTTON, TOGGLE;
+        BUTTON,
+        TOGGLE;
 
         public static ButtonType getValue(String value)
         {

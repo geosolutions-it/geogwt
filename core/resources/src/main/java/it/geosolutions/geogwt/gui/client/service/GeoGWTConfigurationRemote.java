@@ -46,6 +46,7 @@ import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
  */
 public interface GeoGWTConfigurationRemote extends RemoteService
 {
+
     /**
      * Inits the server configuration.
      *
@@ -58,6 +59,7 @@ public interface GeoGWTConfigurationRemote extends RemoteService
      */
     public static class Util
     {
+
         /** The instance. */
         private static GeoGWTConfigurationRemoteAsync instance;
 

@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -35,26 +35,30 @@ package it.geosolutions.geogwt.gui.client.widget;
 
 import com.extjs.gxt.ui.client.widget.Status;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class StatusWidget.
  */
-public class StatusWidget extends Status {
+public class StatusWidget extends Status
+{
 
     /**
      * Instantiates a new status widget.
      */
-    public StatusWidget() {
+    public StatusWidget()
+    {
         super();
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.extjs.gxt.ui.client.widget.Status#setBusy(java.lang.String)
      */
     @Override
-    public void setBusy(String text) {
+    public void setBusy(String text)
+    {
         setIconStyle("x-loading-status");
         setText(text);
     }

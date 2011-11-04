@@ -48,6 +48,7 @@ import org.springframework.stereotype.Component;
 @Component("geogwtStartupService")
 public class StartupService extends IGeoGWTStartupService
 {
+
     /** The geo gwt global configuration. */
     @Autowired
     protected GeoGWTConfiguration geoGWTGlobalConfiguration;

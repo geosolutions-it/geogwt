@@ -44,6 +44,7 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public abstract class IGeoGWTStartupService implements InitializingBean
 {
+
     /**
      * Inits the server configuration.
      *

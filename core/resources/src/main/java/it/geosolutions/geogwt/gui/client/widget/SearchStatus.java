@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -37,12 +37,14 @@ package it.geosolutions.geogwt.gui.client.widget;
 /**
  * The Class SearchStatus.
  */
-public class SearchStatus extends StatusWidget {
+public class SearchStatus extends StatusWidget
+{
 
     /**
      * The Enum EnumSearchStatus.
      */
-    public enum EnumSearchStatus {
+    public enum EnumSearchStatus
+    {
 
         /** The STATU s_ search. */
         STATUS_SEARCH("x-status-ok"),
@@ -88,20 +90,22 @@ public class SearchStatus extends StatusWidget {
 
         /**
          * Instantiates a new enum search status.
-         * 
+         *
          * @param value
          *            the value
          */
-        EnumSearchStatus(String value) {
+        EnumSearchStatus(String value)
+        {
             this.value = value;
         }
 
         /**
          * Gets the value.
-         * 
+         *
          * @return the value
          */
-        public String getValue() {
+        public String getValue()
+        {
             return value;
         }
     }

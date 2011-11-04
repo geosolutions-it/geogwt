@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -42,21 +42,23 @@ import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class GeoGWTGridWidget.
- * 
+ *
  * @param <T>
  *            the generic type
  */
-public abstract class GeoGWTGridWidget<T extends BaseModel> {
+public abstract class GeoGWTGridWidget<T extends BaseModel>
+{
 
     /** The store. */
     protected ListStore<T> store;
 
     /** The tool bar. */
     private PagingToolBar toolBar;
-    
+
     /** The grid. */
     protected Grid<T> grid;
 
@@ -65,27 +67,29 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
 
     /**
      * Instantiates a new geo gwt grid widget.
-     * 
-     * @param pageSize 
+     *
+     * @param pageSize
      */
-    public GeoGWTGridWidget(int pageSize, int gridDimension) {
+    public GeoGWTGridWidget(int pageSize, int gridDimension)
+    {
         this.toolBar = new PagingToolBar(pageSize);
         this.setGridDimension(gridDimension);
-        
+
         createStore();
         initGrid();
     }
 
     /**
      * Instantiates a new geo gwt grid widget.
-     * 
+     *
      * @param models
      *            the models
      */
-    public GeoGWTGridWidget(List<T> models, int pageSize, int gridDimension) {
+    public GeoGWTGridWidget(List<T> models, int pageSize, int gridDimension)
+    {
         this.toolBar = new PagingToolBar(pageSize);
         this.setGridDimension(gridDimension);
-        
+
         createStore();
         this.store.add(models);
         initGrid();
@@ -94,7 +98,8 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
     /**
      * Inits the grid.
      */
-    protected void initGrid() {
+    protected void initGrid()
+    {
         ColumnModel cm = prepareColumnModel();
 
         grid = new Grid<T>(store, cm);
@@ -113,12 +118,13 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
     /**
      * Clear grid elements.
      */
-    public void clearGridElements() {
+    public void clearGridElements()
+    {
         this.store.removeAll();
         this.toolBar.clear();
         this.toolBar.disable();
     }
-    
+
     /**
      * Sets the grid properties.
      */
@@ -126,7 +132,7 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
 
     /**
      * Prepare column model.
-     * 
+     *
      * @return the column model
      */
     public abstract ColumnModel prepareColumnModel();
@@ -135,7 +141,7 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
      * Sets the up load listener.
      */
     public abstract void setUpLoadListener();
-    
+
     /**
      * Creates the store.
      */
@@ -143,40 +149,45 @@ public abstract class GeoGWTGridWidget<T extends BaseModel> {
 
     /**
      * Gets the grid.
-     * 
+     *
      * @return the grid
      */
-    public Grid<T> getGrid() {
+    public Grid<T> getGrid()
+    {
         return grid;
     }
 
     /**
      * Gets the store.
-     * 
+     *
      * @return the store
      */
-    public ListStore<T> getStore() {
+    public ListStore<T> getStore()
+    {
         return store;
     }
 
     /**
      * @return the toolBar
      */
-    public PagingToolBar getToolBar() {
+    public PagingToolBar getToolBar()
+    {
         return toolBar;
     }
 
     /**
      * @param gridDimension the gridDimension to set
      */
-    public void setGridDimension(int gridDimension) {
+    public void setGridDimension(int gridDimension)
+    {
         this.gridDimension = gridDimension;
     }
 
     /**
      * @return the gridDimension
      */
-    public int getGridDimension() {
+    public int getGridDimension()
+    {
         return gridDimension;
     }
 }

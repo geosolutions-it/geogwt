@@ -27,6 +27,7 @@ import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemot
  */
 public class SessionControllerRemoteServiceImpl extends RemoteServiceServlet implements SessionControllerRemoteService
 {
+
     /** serialVersionUID */
     private static final long serialVersionUID = 523698438299277368L;
 

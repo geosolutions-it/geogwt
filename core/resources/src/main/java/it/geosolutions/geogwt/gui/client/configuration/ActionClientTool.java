@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -38,7 +38,8 @@ package it.geosolutions.geogwt.gui.client.configuration;
 /**
  * The Class ActionClientTool.
  */
-public class ActionClientTool extends GenericClientTool {
+public class ActionClientTool extends GenericClientTool
+{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7373117917871895237L;
@@ -48,58 +49,64 @@ public class ActionClientTool extends GenericClientTool {
 
     /** The enabled. */
     private boolean enabled;
-    
-    public ActionClientTool() {
+
+    public ActionClientTool()
+    {
         super();
     }
-    
+
     /**
      * Gets the type.
-     * 
+     *
      * @return the type
      */
-    public String getType() {
+    public String getType()
+    {
         return type;
     }
 
     /**
      * Sets the type.
-     * 
+     *
      * @param type
      *            the new type
      */
-    public void setType(String type) {
+    public void setType(String type)
+    {
         this.type = type;
     }
 
     /**
      * Checks if is the enabled.
-     * 
+     *
      * @return the enabled
      */
-    public boolean isEnabled() {
+    public boolean isEnabled()
+    {
         return enabled;
     }
 
     /**
      * Sets the enabled.
-     * 
+     *
      * @param enabled
      *            the new enabled
      */
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(boolean enabled)
+    {
         this.enabled = enabled;
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Object#toString()
      */
     @Override
-    public String toString() {
-        return "ActionClientTool [enabled=" + enabled + ", getId()=" + getId() + ", getOrder()="
-                + getOrder() + ", getType()=" + getType() + "]";
+    public String toString()
+    {
+        return "ActionClientTool [enabled=" + enabled + ", getId()=" + getId() + ", getOrder()=" +
+            getOrder() + ", getType()=" + getType() + "]";
     }
 
 }

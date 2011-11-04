@@ -27,6 +27,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 @RemoteServiceRelativePath("SessionControllerRemoteService")
 public interface SessionControllerRemoteService extends RemoteService
 {
+
     /**
      *
      */
@@ -43,6 +44,7 @@ public interface SessionControllerRemoteService extends RemoteService
      */
     public static class Util
     {
+
         /** The instance. */
         private static SessionControllerRemoteServiceAsync instance;
 

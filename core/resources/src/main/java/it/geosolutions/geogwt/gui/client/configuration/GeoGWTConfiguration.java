@@ -46,6 +46,7 @@ import org.springframework.stereotype.Component;
 @Component("geoGWTGlobalConfiguration")
 public class GeoGWTConfiguration implements Serializable
 {
+
     /**
      *
      */

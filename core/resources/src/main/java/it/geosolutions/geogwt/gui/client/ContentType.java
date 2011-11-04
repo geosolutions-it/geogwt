@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -35,11 +35,13 @@ package it.geosolutions.geogwt.gui.client;
 
 import com.extjs.gxt.ui.client.data.BeanModel;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentType.
  */
-public class ContentType extends BeanModel {
+public class ContentType extends BeanModel
+{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 5218642838039771231L;
@@ -47,7 +49,8 @@ public class ContentType extends BeanModel {
     /**
      * The Enum ContentTypeEnum.
      */
-    public enum ContentTypeEnum {
+    public enum ContentTypeEnum
+    {
 
         /** The TYPE. */
         TYPE("contentType");
@@ -57,50 +60,55 @@ public class ContentType extends BeanModel {
 
         /**
          * Instantiates a new content type enum.
-         * 
+         *
          * @param value
          *            the value
          */
-        ContentTypeEnum(String value) {
+        ContentTypeEnum(String value)
+        {
             this.value = value;
         }
 
         /**
          * Gets the value.
-         * 
+         *
          * @return the value
          */
-        public String getValue() {
+        public String getValue()
+        {
             return value;
         }
     }
 
     /**
      * Instantiates a new content type.
-     * 
+     *
      * @param type
      *            the type
      */
-    public ContentType(String type) {
+    public ContentType(String type)
+    {
         setType(type);
     }
 
     /**
      * Sets the type.
-     * 
+     *
      * @param type
      *            the new type
      */
-    public void setType(String type) {
+    public void setType(String type)
+    {
         set(ContentTypeEnum.TYPE.getValue(), type);
     }
 
     /**
      * Gets the type.
-     * 
+     *
      * @return the type
      */
-    public String getType() {
+    public String getType()
+    {
         return get(ContentTypeEnum.TYPE.getValue());
     }
 }

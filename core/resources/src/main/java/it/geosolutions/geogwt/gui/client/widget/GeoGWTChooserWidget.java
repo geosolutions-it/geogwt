@@ -5,12 +5,12 @@
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
- * 
+ *
  * Copyright (C) 2011 GeoSolutions S.A.S.
  * http://www.geo-solutions.it
  *
  * GPLv3 + Classpath exception
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -22,7 +22,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program. 
+ * along with this program.
  *
  * ====================================================================
  *
@@ -32,8 +32,6 @@
  *
  */
 package it.geosolutions.geogwt.gui.client.widget;
-
-import it.geosolutions.geogwt.gui.client.widget.SearchStatus.EnumSearchStatus;
 
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.Style.SelectionMode;
@@ -58,9 +56,9 @@ import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.ListView;
 import com.extjs.gxt.ui.client.widget.button.Button;
+import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.TextField;
-import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
@@ -69,14 +67,18 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 
+import it.geosolutions.geogwt.gui.client.widget.SearchStatus.EnumSearchStatus;
+
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class GeoGWTChooserWidget.
- * 
+ *
  * @param <T>
  *            the generic type
  */
-public abstract class GeoGWTChooserWidget<T extends BeanModel> {
+public abstract class GeoGWTChooserWidget<T extends BeanModel>
+{
 
     /** The store. */
     protected ListStore<T> store;
@@ -129,7 +131,8 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
     /**
      * Instantiates a new geo gwt chooser widget.
      */
-    public GeoGWTChooserWidget() {
+    public GeoGWTChooserWidget()
+    {
         createTemplate();
         createStore();
         createChooser();
@@ -140,7 +143,8 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
     /**
      * Inits the list view.
      */
-    private void initListView() {
+    private void initListView()
+    {
         view = new ListView<T>();
 
         view.setId("img-chooser-view");
@@ -151,11 +155,13 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
 
         view.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         view.getSelectionModel().addListener(Events.SelectionChange,
-                new Listener<SelectionChangedEvent<T>>() {
-                    public void handleEvent(SelectionChangedEvent<T> be) {
-                        onSelectionChange(be);
-                    }
-                });
+            new Listener<SelectionChangedEvent<T>>()
+            {
+                public void handleEvent(SelectionChangedEvent<T> be)
+                {
+                    onSelectionChange(be);
+                }
+            });
         main.add(view);
 
         createDetails();
@@ -165,7 +171,8 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
     /**
      * Creates the details.
      */
-    private void createDetails() {
+    private void createDetails()
+    {
         details = new LayoutContainer();
         details.setBorders(true);
         details.setStyleAttribute("backgroundColor", "white");
@@ -184,7 +191,8 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
     /**
      * Creates the main panel.
      */
-    private void createMainPanel() {
+    private void createMainPanel()
+    {
         main = new ContentPanel();
         main.setBorders(true);
         main.setBodyBorder(false);
@@ -197,24 +205,29 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
         search = new TextField<String>();
         search.setWidth(100);
 
-        search.addKeyListener(new KeyListener() {
+        search.addKeyListener(new KeyListener()
+            {
 
-            @Override
-            public void componentKeyUp(ComponentEvent event) {
-                if ((event.getKeyCode() == 8) && (search.getValue() == null)) {
-                    reset();
+                @Override
+                public void componentKeyUp(ComponentEvent event)
+                {
+                    if ((event.getKeyCode() == 8) && (search.getValue() == null))
+                    {
+                        reset();
+                    }
                 }
-            }
 
-            @Override
-            public void componentKeyPress(ComponentEvent event) {
-                if (event.getKeyCode() == 13) {
-                    searchText = search.getValue() == null ? "" : search.getValue();
-                    loader.load(0, 25);
+                @Override
+                public void componentKeyPress(ComponentEvent event)
+                {
+                    if (event.getKeyCode() == 13)
+                    {
+                        searchText = (search.getValue() == null) ? "" : search.getValue();
+                        loader.load(0, 25);
+                    }
                 }
-            }
 
-        });
+            });
 
         bar.add(search);
         bar.add(new SeparatorToolItem());
@@ -236,7 +249,8 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
     /**
      * Creates the chooser.
      */
-    private void createChooser() {
+    private void createChooser()
+    {
         chooser = new Dialog();
         chooser.setMinWidth(500);
         chooser.setMinHeight(300);
@@ -254,28 +268,33 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
 
         chooser.getButtonBar().add(this.searchStatus);
 
-        this.ok = new Button("Ok", new SelectionListener<ButtonEvent>() {
+        this.ok = new Button("Ok", new SelectionListener<ButtonEvent>()
+                {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                if (!view.getSelectionModel().getSelection().isEmpty()) {
-                    onDispatch(view.getSelectionModel().getSelectedItem());
-                }
+                    @Override
+                    public void componentSelected(ButtonEvent ce)
+                    {
+                        if (!view.getSelectionModel().getSelection().isEmpty())
+                        {
+                            onDispatch(view.getSelectionModel().getSelectedItem());
+                        }
 
-            }
-        });
+                    }
+                });
 
         this.ok.disable();
 
         chooser.addButton(ok);
 
-        this.cancel = new Button("Cancel", new SelectionListener<ButtonEvent>() {
+        this.cancel = new Button("Cancel", new SelectionListener<ButtonEvent>()
+                {
 
-            @Override
-            public void componentSelected(ButtonEvent ce) {
-                cancel();
-            }
-        });
+                    @Override
+                    public void componentSelected(ButtonEvent ce)
+                    {
+                        cancel();
+                    }
+                });
 
         chooser.addButton(cancel);
 
@@ -283,15 +302,19 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
 
     /**
      * On selection change.
-     * 
+     *
      * @param be
      *            the be
      */
-    private void onSelectionChange(SelectionChangedEvent<T> be) {
-        if (!be.getSelection().isEmpty()) {
+    private void onSelectionChange(SelectionChangedEvent<T> be)
+    {
+        if (!be.getSelection().isEmpty())
+        {
             detailTp.overwrite(details.getElement(), Util.getJsObject(be.getSelection().get(0)));
             ok.enable();
-        } else {
+        }
+        else
+        {
             ok.disable();
             details.el().setInnerHtml("");
         }
@@ -301,7 +324,8 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
     /**
      * Cancel.
      */
-    public void cancel() {
+    public void cancel()
+    {
         chooser.hide();
         reset();
     }
@@ -309,7 +333,8 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
     /**
      * Reset.
      */
-    public void reset() {
+    public void reset()
+    {
         this.search.reset();
         this.store.removeAll();
         this.toolBar.clear();
@@ -322,7 +347,8 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
     /**
      * Clear list view elements.
      */
-    public void clearListViewElements() {
+    public void clearListViewElements()
+    {
         this.store.removeAll();
         this.toolBar.clear();
         this.toolBar.disable();
@@ -330,13 +356,14 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
 
     /**
      * Sets the search status.
-     * 
+     *
      * @param status
      *            the status
      * @param message
      *            the message
      */
-    public void setSearchStatus(EnumSearchStatus status, EnumSearchStatus message) {
+    public void setSearchStatus(EnumSearchStatus status, EnumSearchStatus message)
+    {
         this.searchStatus.setIconStyle(status.getValue());
         this.searchStatus.setText(message.getValue());
     }
@@ -363,7 +390,7 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
 
     /**
      * On dispatch.
-     * 
+     *
      * @param model
      *            the model
      */
@@ -376,37 +403,41 @@ public abstract class GeoGWTChooserWidget<T extends BeanModel> {
 
     /**
      * Gets the store.
-     * 
+     *
      * @return the store
      */
-    public ListStore<T> getStore() {
+    public ListStore<T> getStore()
+    {
         return store;
     }
 
     /**
      * Gets the detail tp.
-     * 
+     *
      * @return the detail tp
      */
-    public XTemplate getDetailTp() {
+    public XTemplate getDetailTp()
+    {
         return detailTp;
     }
 
     /**
      * Gets the details.
-     * 
+     *
      * @return the details
      */
-    public LayoutContainer getDetails() {
+    public LayoutContainer getDetails()
+    {
         return details;
     }
 
     /**
      * Gets the chooser.
-     * 
+     *
      * @return the chooser
      */
-    public Dialog getChooser() {
+    public Dialog getChooser()
+    {
         return chooser;
     }
 
