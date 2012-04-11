@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>it.geosolutions.geogwt.web.examples</groupId>
         <artifactId>geogwt-web-examples</artifactId>
-        <version>0.1-SNAPSHOT</version>
+        <version>0.2-SNAPSHOT</version>
 	</parent>
 
 	<groupId>it.geosolutions.geogwt.web.examples</groupId>
@@ -76,10 +76,10 @@
 			<artifactId>gxt</artifactId>
 		</dependency>
 
-		<dependency>
+		<!-- dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-incubator</artifactId>
-		</dependency>
+		</dependency -->
 
 		<!-- GWT-OL Resources -->
 		<!-- dependency>
@@ -137,7 +137,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.3.0</version>
+				<version>${gwt.version}</version>
 				<configuration>
 					<inplace>true</inplace>
 					<warSourceDirectory>war</warSourceDirectory>

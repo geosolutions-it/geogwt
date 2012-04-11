@@ -32,7 +32,7 @@
   	<!-- Servlets -->
 	<servlet>
 	  <servlet-name>remoteLoggingServiceImpl</servlet-name>
-	  <servlet-class>com.google.gwt.libideas.logging.server.RemoteLoggingServiceImpl</servlet-class>
+	  <servlet-class>com.google.gwt.logging.server.RemoteLoggingServiceImpl</servlet-class>
 	</servlet>
 
 	<servlet>

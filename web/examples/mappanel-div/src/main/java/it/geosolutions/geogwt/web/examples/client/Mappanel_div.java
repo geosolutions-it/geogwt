@@ -47,10 +47,13 @@ import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
 
 import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapUnits;
+import org.gwtopenmaps.openlayers.client.control.Navigation;
 import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
+import org.gwtopenmaps.openlayers.client.util.JObjectArray;
+import org.gwtopenmaps.openlayers.client.util.JSObject;
 
 
 // TODO: Auto-generated Javadoc
@@ -100,6 +103,8 @@ public class Mappanel_div implements EntryPoint
         /* map options */
         MapOptions mapOptions = new MapOptions();
         mapOptions.removeDefaultControls();
+        JObjectArray controls = new JObjectArray(new JSObject[]{ (new Navigation().getJSObject()) });
+        mapOptions.setControls(controls);
         mapOptions.setNumZoomLevels(16);
         mapOptions.setUnits(MapUnits.DEGREES);
         mapOptions.setProjection("EPSG:4326");
@@ -108,14 +113,14 @@ public class Mappanel_div implements EntryPoint
 
         /* base layer */
         WMSParams wmsParams = new WMSParams();
-        wmsParams.setFormat("image/jpeg");
-        wmsParams.setLayers("GeoSolutions:world.200407");
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers("basic");
         wmsParams.setStyles("");
 
         WMSOptions wmsLayerParams = new WMSOptions();
         wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
 
-        WMS layer = new WMS("GeoSolutions Blue Marble", "http://demo1.geo-solutions.it/playground/wms", wmsParams,
+        WMS layer = new WMS("OpenLayers Base Map", "http://vmap0.tiles.osgeo.org/wms/vmap0", wmsParams,
                 wmsLayerParams);
         Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
 

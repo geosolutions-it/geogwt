@@ -333,14 +333,14 @@ public class Maptoolbar_panel implements EntryPoint
 
         /* base layer */
         WMSParams wmsParams = new WMSParams();
-        wmsParams.setFormat("image/jpeg");
-        wmsParams.setLayers("GeoSolutions:world.200407");
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers("basic");
         wmsParams.setStyles("");
 
         WMSOptions wmsLayerParams = new WMSOptions();
         wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
 
-        WMS layer = new WMS("GeoSolutions Blue Marble", "http://demo1.geo-solutions.it/playground/wms", wmsParams,
+        WMS layer = new WMS("OpenLayers Base Map", "http://vmap0.tiles.osgeo.org/wms/vmap0", wmsParams,
                 wmsLayerParams);
         Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
 

@@ -2,7 +2,7 @@
 <module>
 	<inherits name='com.google.gwt.user.User' />
 	<inherits name='com.extjs.gxt.ui.GXT' />
-	<inherits name='com.google.gwt.widgetideas.WidgetIdeas'/>
+	<!-- inherits name='com.google.gwt.widgetideas.WidgetIdeas'/ -->
 
     <inherits name='it.geosolutions.geogwt.gui.Resources' />
     <inherits name="it.geosolutions.geogwt.gui.Mappanel"/>
