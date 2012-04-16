@@ -449,6 +449,16 @@ public class MapLayoutWidget extends LayoutContainer
     }
 
     /**
+     * Activate GetFeatureInfo tool.
+     * 
+     * @param data
+     *  LayerId or null
+     */
+    public void activateGetFeatureInfo(Object data) {
+        // TODO
+    }
+
+    /**
      * Erase features.
      */
     public void eraseFeatures()

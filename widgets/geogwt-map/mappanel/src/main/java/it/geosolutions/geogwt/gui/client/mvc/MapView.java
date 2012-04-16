@@ -146,6 +146,11 @@ public class MapView extends View
             onActivateDrawFeature();
         }
 
+        if (event.getType() == GeoGWTEvents.ACTIVATE_GET_FEATURE_INFO)
+        {
+            onActivateGetFeatureInfo(event.getData());
+        }
+
         if (event.getType() == GeoGWTEvents.DEACTIVATE_DRAW_FEATURES)
         {
             onDeactivateDrawFeature();
@@ -436,4 +441,13 @@ public class MapView extends View
     {
         this.mapLayout.deactivateBoxSelect();
     }
+
+    /**
+     * 
+     * @param data
+     */
+    private void onActivateGetFeatureInfo(Object data) {
+        this.mapLayout.activateGetFeatureInfo(data);
+    }
+
 }

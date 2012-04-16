@@ -48,6 +48,9 @@ public class GeoGWTEvents
     /** The Constant ACTIVATE_DRAW_FEATURES. */
     public static final EventType ACTIVATE_DRAW_FEATURES = new EventType();
 
+    /** The Constant ACTIVATE_GET_FEATURE_INFO. */
+    public static final EventType ACTIVATE_GET_FEATURE_INFO = new EventType();
+
     /** The Constant ACTIVATE_ZOOM_BOX. */
     public static final EventType ACTIVATE_ZOOM_BOX = new EventType();
 
