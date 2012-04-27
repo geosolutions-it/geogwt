@@ -33,26 +33,30 @@
  */
 package it.geosolutions.geogwt.gui.client.widget.map;
 
+import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
+import it.geosolutions.geogwt.gui.client.configuration.GenericClientTool;
+import it.geosolutions.geogwt.gui.client.model.GetFeatureInfoDetails;
+import it.geosolutions.geogwt.gui.client.service.GeoGWTRemoteService;
+import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelect;
+import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelect.BoxSelectListener;
+import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelectOptions;
+import it.geosolutions.geogwt.gui.client.widget.map.ol.control.PointSelect;
+import it.geosolutions.geogwt.gui.client.widget.map.ol.control.PointSelect.PointSelectListener;
+import it.geosolutions.geogwt.gui.client.widget.map.ol.control.PointSelectOptions;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.extjs.gxt.ui.client.mvc.Dispatcher;
-import com.extjs.gxt.ui.client.widget.ContentPanel;
-import com.extjs.gxt.ui.client.widget.LayoutContainer;
-
-import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
-import it.geosolutions.geogwt.gui.client.configuration.GenericClientTool;
-import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelect;
-import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelect.BoxSelectListener;
-import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelectOptions;
-
 import org.gwtopenmaps.openlayers.client.Bounds;
+import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.Map;
 import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.MapUnits;
 import org.gwtopenmaps.openlayers.client.MapWidget;
 import org.gwtopenmaps.openlayers.client.OpenLayers;
+import org.gwtopenmaps.openlayers.client.Pixel;
 import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.Style;
 import org.gwtopenmaps.openlayers.client.control.Control;
@@ -61,20 +65,29 @@ import org.gwtopenmaps.openlayers.client.control.DrawFeature.FeatureAddedListene
 import org.gwtopenmaps.openlayers.client.control.DrawFeatureOptions;
 import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
+import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.handler.PolygonHandler;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.OSM;
 import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
 import org.gwtopenmaps.openlayers.client.layer.VectorOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMS;
 
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.MessageBox;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MapLayoutWidget.
+ * 
+ * @author Alessio Fabiani at alessio.fabiani@@geo-solutions.it
+ * @author Tobia Di Pisa at tobia.dipisa@geo-solutions.it
+ * 
  */
-public class MapLayoutWidget extends LayoutContainer
-{
+public class MapLayoutWidget extends LayoutContainer {
 
     /** The map widget. */
     private MapWidget mapWidget;
@@ -87,6 +100,9 @@ public class MapLayoutWidget extends LayoutContainer
 
     /** The layers. */
     private List<Layer> layers;
+
+    /** The layers IDs */
+    private List<String> layersIDs = null;
 
     /** The controls **/
     private List<Control> controls;
@@ -103,64 +119,68 @@ public class MapLayoutWidget extends LayoutContainer
     /** **/
     private BoxSelect boxSelect;
 
+    /** **/
+    private PointSelect pointSelect;
+
     /** The vector. */
     private Vector vector;
 
     /**
      * Instantiates a new map layout widget.
      */
-    public MapLayoutWidget()
-    {
+    public MapLayoutWidget() {
         this(false);
     }
 
     /**
      * Instantiates a new map layout widget.
-     *
-     * @param isGoogle
-     *            the is google
+     * 
+     * @param isGoogle the is google
      */
-    public MapLayoutWidget(boolean isGoogle)
-    {
+    public MapLayoutWidget(boolean isGoogle) {
         super();
         this.createMapOption(isGoogle);
     }
 
     /**
      * Instantiates a new map layout widget.
-     *
-     * @param mapOptions
-     *            the map options
+     * 
+     * @param mapOptions the map options
      */
-    public MapLayoutWidget(MapOptions mapOptions)
-    {
+    public MapLayoutWidget(MapOptions mapOptions) {
         super();
         this.initMapWidget(mapOptions, false);
     }
 
     /**
-     * Creates the map option.
-     *
-     * @param isGoogle
-     *            the is google
+     * Instantiates a new map layout widget.
+     * 
+     * @param mapConfig the map configs
      */
-    private void createMapOption(boolean isGoogle)
-    {
+    public MapLayoutWidget(MapConfig mapConfig) {
+        super();
+        this.layersIDs = mapConfig.getLayersIDs();
+        this.initMapWidget(mapConfig.getMapOptions(), false);
+    }
+
+    /**
+     * Creates the map option.
+     * 
+     * @param isGoogle the is google
+     */
+    private void createMapOption(boolean isGoogle) {
 
         OpenLayers.setProxyHost("gwtOpenLayersProxy?targetURL=");
         this.defaultMapOptions = new MapOptions();
         this.defaultMapOptions.setNumZoomLevels(18);
-        if (isGoogle)
-        {
+        if (isGoogle) {
             this.defaultMapOptions.setProjection("EPSG:900913");
             this.defaultMapOptions.setDisplayProjection(new Projection("EPSG:4326"));
             this.defaultMapOptions.setUnits(MapUnits.METERS);
             this.defaultMapOptions.setMaxExtent(new Bounds(-20037508, -20037508, 20037508,
                     20037508.34));
             this.defaultMapOptions.setMaxResolution(new Double(156543.0339).floatValue());
-        }
-        else
-        {
+        } else {
             this.defaultMapOptions.setUnits(MapUnits.DEGREES);
             this.defaultMapOptions.setProjection("EPSG:4326");
         }
@@ -171,19 +191,15 @@ public class MapLayoutWidget extends LayoutContainer
 
     /**
      * Inits the map widget.
-     *
-     * @param defaultMapOptions
-     *            the default map options
-     * @param isGoogle
-     *            the is google
+     * 
+     * @param defaultMapOptions the default map options
+     * @param isGoogle the is google
      */
-    private void initMapWidget(MapOptions defaultMapOptions, boolean isGoogle)
-    {
+    private void initMapWidget(MapOptions defaultMapOptions, boolean isGoogle) {
         mapWidget = new MapWidget("100%", "100%", defaultMapOptions);
         this.setMap(mapWidget.getMap());
         // this.map.addControl(new LayerSwitcher());
-        if (isGoogle)
-        {
+        if (isGoogle) {
             this.createOSM();
             // this.createBaseGoogleLayer();
         }
@@ -194,18 +210,17 @@ public class MapLayoutWidget extends LayoutContainer
     /**
      * Creates the osm.
      */
-    private void createOSM()
-    {
+    private void createOSM() {
         OSMOptions osmOption = new OSMOptions();
         // osmOption.setDisplayOutsideMaxExtent(true);
         // osmOption.setWrapDateLine(true);
 
-        if (this.getLayers() == null)
-        {
+        if (this.getLayers() == null) {
             this.setLayers(new LinkedList<Layer>());
         }
-        this.getLayers().add(OSM.THIS("OpenStreetMap", OpenLayers.getProxyHost() +
-                "http://tile.openstreetmap.org/${z}/${x}/${y}.png", osmOption)); // OSM.Mapnik("OpenStreetMap",
+        this.getLayers().add(
+                OSM.THIS("OpenStreetMap", OpenLayers.getProxyHost()
+                        + "http://tile.openstreetmap.org/${z}/${x}/${y}.png", osmOption)); // OSM.Mapnik("OpenStreetMap",
         // osmOption);
 
         this.getMap().addLayers(this.getLayers().toArray(new Layer[1]));
@@ -213,18 +228,15 @@ public class MapLayoutWidget extends LayoutContainer
 
     /**
      * On add to panel.
-     *
-     * @param center
-     *            the center
+     * 
+     * @param center the center
      */
-    public void onAddToPanel(ContentPanel center)
-    {
+    public void onAddToPanel(ContentPanel center) {
         this.center = center;
         center.add(mapWidget);
         center.layout();
 
-        if ((this.getMap() != null) && (this.getLayers() != null) && (this.getLayers().size() > 0))
-        {
+        if ((this.getMap() != null) && (this.getLayers() != null) && (this.getLayers().size() > 0)) {
             // this.map.zoomToExtent(new Bounds(5, 35, 20 ,45));
             // this.map.setCenter(new LonLat(10, 40));
             // this.map.zoomTo(5);
@@ -240,8 +252,7 @@ public class MapLayoutWidget extends LayoutContainer
     /**
      * Update map size.
      */
-    public void updateMapSize()
-    {
+    public void updateMapSize() {
         this.getMap().updateSize();
         this.center.layout();
     }
@@ -257,33 +268,25 @@ public class MapLayoutWidget extends LayoutContainer
 
     /**
      * Adds the layer.
-     *
-     * @param layer
-     *            the layer
+     * 
+     * @param layer the layer
      */
-    public void addLayer(Layer layer)
-    {
-        if (this.map != null)
-        {
-            if (this.layers == null)
-            {
+    public void addLayer(Layer layer) {
+        if (this.map != null) {
+            if (this.layers == null) {
                 this.layers = new LinkedList<Layer>();
             }
 
             boolean present = false;
-            for (Layer l : this.layers)
-            {
-                if (l.getId().equals(layer.getId()) ||
-                        l.getName().equals(layer.getName()))
-                {
+            for (Layer l : this.layers) {
+                if (l.getId().equals(layer.getId()) || l.getName().equals(layer.getName())) {
                     present = true;
 
                     break;
                 }
             }
 
-            if (!present)
-            {
+            if (!present) {
                 this.layers.add(layer);
                 this.map.addLayers(new Layer[] { layer });
             }
@@ -292,21 +295,14 @@ public class MapLayoutWidget extends LayoutContainer
 
     /**
      * Removes the layer.
-     *
-     * @param layer
-     *            the layer
+     * 
+     * @param layer the layer
      */
-    public void removeLayer(Layer layer)
-    {
-        if (this.map != null)
-        {
-            if (this.layers != null)
-            {
-                for (Layer l : this.layers)
-                {
-                    if (l.getId().equals(layer.getId()) ||
-                            l.getName().equals(layer.getName()))
-                    {
+    public void removeLayer(Layer layer) {
+        if (this.map != null) {
+            if (this.layers != null) {
+                for (Layer l : this.layers) {
+                    if (l.getId().equals(layer.getId()) || l.getName().equals(layer.getName())) {
                         this.map.removeLayer(l);
                         this.layers.remove(l);
 
@@ -319,11 +315,10 @@ public class MapLayoutWidget extends LayoutContainer
 
     /**
      * Creates the default style.
-     *
+     * 
      * @return the style
      */
-    private Style createDefaultStyle()
-    {
+    private Style createDefaultStyle() {
         Style style = new Style();
         style.setStrokeColor("#000000");
         style.setStrokeWidth(1);
@@ -343,12 +338,10 @@ public class MapLayoutWidget extends LayoutContainer
 
     /**
      * Inits the vector layer.
-     *
-     * @param isGoogle
-     *            the is google
+     * 
+     * @param isGoogle the is google
      */
-    private void initVectorLayer(boolean isGoogle)
-    {
+    private void initVectorLayer(boolean isGoogle) {
         VectorOptions vectorOption = new VectorOptions();
         vectorOption.setStyle(this.createDefaultStyle());
         vectorOption.setDisplayInLayerSwitcher(false);
@@ -359,26 +352,47 @@ public class MapLayoutWidget extends LayoutContainer
     }
 
     /**
-     *
-     * @param isGoogle
-     *            the is google
+     * 
+     * @param isGoogle the is google
      */
-    private void initBoxSelectControl(final boolean isGoogle)
-    {
-        BoxSelectListener listener = new BoxSelectListener()
-            {
-                public void onBoxSelected(Bounds bounds)
-                {
+    private void initBoxSelectControl(final boolean isGoogle) {
+        BoxSelectListener listener = new BoxSelectListener() {
+            public void onBoxSelected(Bounds bounds) {
+
+                if (!Double.valueOf(bounds.getLowerLeftX()).isNaN()
+                        && !Double.valueOf(bounds.getLowerLeftY()).isNaN()
+                        && !Double.valueOf(bounds.getUpperRightX()).isNaN()
+                        && !Double.valueOf(bounds.getUpperRightY()).isNaN()) {
+
                     // MessageBox.alert("", bounds.toBBox(4).toString(), null);
 
-                    if (isGoogle)
-                    {
+                    if (isGoogle) {
                         bounds.transform(new Projection("EPSG:900913"), new Projection("EPSG:4326"));
                     }
 
-                    Dispatcher.forwardEvent(GeoGWTEvents.BOUNDS_SELECTED, bounds);
+                    List<String> layersToQuery = getQueryLayerList();
+
+                    String crsCode = map.getProjection();
+                    GeoGWTRemoteService.Util.getInstance().getFeatures(
+                            bounds.toGeometry().toString(), layersToQuery, crsCode,
+                            new AsyncCallback<GetFeatureInfoDetails>() {
+
+                                public void onFailure(Throwable caught) {
+                                    MessageBox.alert("Service Failure",
+                                            caught.getLocalizedMessage(), null);
+                                }
+
+                                public void onSuccess(GetFeatureInfoDetails result) {
+                                    if (result != null) {
+                                        Dispatcher.forwardEvent(GeoGWTEvents.GOT_FEATURE_INFO,
+                                                result);
+                                    }
+                                }
+
+                            });
                 }
-            };
+            }
+        };
 
         BoxSelectOptions boxSelectOptions = new BoxSelectOptions();
         boxSelectOptions.onBoxSelected(listener);
@@ -389,30 +403,122 @@ public class MapLayoutWidget extends LayoutContainer
     }
 
     /**
-     * Inits the draw features control.
-     *
-     * @param isGoogle
-     *            the is google
+     * @return List<String>
      */
-    private void initDrawFeaturesControl(final boolean isGoogle)
-    {
-        FeatureAddedListener listener = new FeatureAddedListener()
-            {
-                public void onFeatureAdded(VectorFeature vf)
-                {
-                    org.gwtopenmaps.openlayers.client.geometry.Polygon aoi =
-                        org.gwtopenmaps.openlayers.client.geometry.Polygon.narrowToPolygon(vf.getGeometry().getJSObject());
+    public List<String> getQueryLayerList() {
+        List<String> layersToQuery;
+        if (layersIDs == null) {
+            int size = layers.size();
+            layersToQuery = new ArrayList<String>();
 
-                    if (isGoogle)
-                    {
-                        aoi.transform(new Projection("EPSG:900913"), new Projection("EPSG:4326"));
+            for (int i = 0; i < size; i++) {
+                Layer l = layers.get(i);
+
+                if (l instanceof WMS) {
+                    WMS wmsLayer = (WMS) l;
+
+                    //
+                    // Only the visible layers should be taken
+                    //
+                    if (wmsLayer.isVisible() && !wmsLayer.isBaseLayer()) {
+                        String wms = wmsLayer.getParams().getLayers();
+
+                        if (wms.indexOf(",") != -1) {
+                            String[] layer = wms.split(",");
+                            for (int y = 0; y < layer.length; y++) {
+                                layersToQuery.add(layer[y]);
+                            }
+                        } else {
+                            layersToQuery.add(wms);
+                        }
                     }
-
-                    // Dispatcher.forwardEvent(GeoGWTEvents.INJECT_WKT, aoi.toString());
-
-                    // Dispatcher.forwardEvent(GeoGWTEvents.DISABLE_DRAW_BUTTON);
                 }
-            };
+            }
+        } else {
+            layersToQuery = layersIDs;
+        }
+
+        if (layersToQuery.size() < 1)
+            layersToQuery = null;
+
+        return layersToQuery;
+    }
+    
+    /**
+     * @param isGoogle the is google
+     */
+    private void initPointSelectControl(final boolean isGoogle) {
+        
+       PointSelectListener listener = new PointSelectListener() {
+           
+            public void onPointSelected(LonLat lonlat) {
+
+                // MessageBox.alert("", "Lon: " + lonlat.lon() + "  Lat: " + lonlat.lat(), null);
+
+                if (isGoogle) {
+                    lonlat.transform("EPSG:900913", "EPSG:4326");
+                }
+
+                List<String> layersToQuery = getQueryLayerList();
+
+                Point selectedPoint = new Point(lonlat.lon(), lonlat.lat());
+                
+                String crsCode = map.getProjection();
+                Pixel pixel = map.getPixelFromLonLat(lonlat);
+                
+                Bounds bounds = map.getExtent();
+                String bbox = bounds.getLowerLeftX() + "," + bounds.getLowerLeftY() + "," + bounds.getUpperRightX() + "," + bounds.getUpperRightY(); 
+                
+                int mapHeight = (int)map.getSize().getHeight();
+                int mapWidth = (int)map.getSize().getWidth();
+                
+                double resolutions = map.getResolution();
+                
+                GeoGWTRemoteService.Util.getInstance().getFeatureInfo(mapHeight, mapWidth, bbox, layersToQuery, selectedPoint.toString(), pixel.x(), pixel.y(),
+                        crsCode, resolutions, new AsyncCallback<GetFeatureInfoDetails>() {
+
+                            public void onFailure(Throwable caught) {
+                                MessageBox.alert("Service Failure", caught.getLocalizedMessage(),
+                                        null);
+                            }
+
+                            public void onSuccess(GetFeatureInfoDetails result) {
+                                if (result != null) {
+                                    Dispatcher.forwardEvent(GeoGWTEvents.GOT_FEATURE_INFO, result);
+                                }
+                            }
+                        });
+            }
+
+        };
+
+        PointSelectOptions pointSelectOptions = new PointSelectOptions();
+        pointSelectOptions.onPointSelected(listener);
+
+        this.pointSelect = new PointSelect(pointSelectOptions);
+
+        this.getMap().addControl(this.pointSelect);
+    }
+
+    /**
+     * Inits the draw features control.
+     * 
+     * @param isGoogle the is google
+     */
+    private void initDrawFeaturesControl(final boolean isGoogle) {
+        FeatureAddedListener listener = new FeatureAddedListener() {
+            public void onFeatureAdded(VectorFeature vf) {
+                org.gwtopenmaps.openlayers.client.geometry.Polygon aoi = org.gwtopenmaps.openlayers.client.geometry.Polygon
+                        .narrowToPolygon(vf.getGeometry().getJSObject());
+
+                if (isGoogle) {
+                    aoi.transform(new Projection("EPSG:900913"), new Projection("EPSG:4326"));
+                }
+
+                // Dispatcher.forwardEvent(GeoGWTEvents.INJECT_WKT, aoi.toString());
+                // Dispatcher.forwardEvent(GeoGWTEvents.DISABLE_DRAW_BUTTON);
+            }
+        };
 
         DrawFeatureOptions drawPolygonFeatureOptions = new DrawFeatureOptions();
         drawPolygonFeatureOptions.onFeatureAdded(listener);
@@ -425,10 +531,8 @@ public class MapLayoutWidget extends LayoutContainer
     /**
      * Activate draw feature.
      */
-    public void activateDrawFeature()
-    {
-        if (this.drawPolygon == null)
-        {
+    public void activateDrawFeature() {
+        if (this.drawPolygon == null) {
             initDrawFeaturesControl(false);
         }
 
@@ -438,10 +542,8 @@ public class MapLayoutWidget extends LayoutContainer
     /**
      * Deactivate draw feature.
      */
-    public void deactivateDrawFeature()
-    {
-        if (this.drawPolygon == null)
-        {
+    public void deactivateDrawFeature() {
+        if (this.drawPolygon == null) {
             initDrawFeaturesControl(false);
         }
 
@@ -451,39 +553,50 @@ public class MapLayoutWidget extends LayoutContainer
     /**
      * Activate GetFeatureInfo tool.
      * 
-     * @param data
-     *  LayerId or null
+     * @param data LayerId or null
      */
-    public void activateGetFeatureInfo(Object data) {
-        // TODO
+    public void activateGetFeatureInfo(List<String> data) {
+
+        if (data != null) {
+            // 
+            // Case with Layers IDs
+            // 
+            this.setLayersIDs(data);
+        }
+
+        Dispatcher.forwardEvent(GeoGWTEvents.ACTIVATE_BOX_SELECT);
+        Dispatcher.forwardEvent(GeoGWTEvents.ACTIVATE_POINT_SELECT);
+    }
+
+    /**
+     * Deactivate GetFeatureInfo tool.
+     */
+    public void deactivateGetFeatureInfo() {
+        Dispatcher.forwardEvent(GeoGWTEvents.DEACTIVATE_BOX_SELECT);
+        Dispatcher.forwardEvent(GeoGWTEvents.DEACTIVATE_POINT_SELECT);
     }
 
     /**
      * Erase features.
      */
-    public void eraseFeatures()
-    {
+    public void eraseFeatures() {
         this.vector.destroyFeatures();
     }
 
     /**
      * Draw wkt on map.
-     *
-     * @param wkt
-     *            the wkt
+     * 
+     * @param wkt the wkt
      */
-    public void drawWKTOnMap(String wkt)
-    {
-        if (this.vector != null)
-        {
+    public void drawWKTOnMap(String wkt) {
+        if (this.vector != null) {
             this.eraseFeatures();
 
             Geometry geom = Geometry.narrowToGeometry(Geometry.fromWKT(wkt).getJSObject());
             // geom.transform(new Projection("EPSG:4326"), new Projection("EPSG:900913"));
             VectorFeature vectorFeature = new VectorFeature(geom);
             this.vector.addFeature(vectorFeature);
-            if ((this.layers != null) && (this.layers.size() > 0))
-            {
+            if ((this.layers != null) && (this.layers.size() > 0)) {
                 this.getMap().raiseLayer(this.vector, this.layers.size());
             }
             // this.getMap().zoomToExtent(geom.getBounds());
@@ -493,10 +606,8 @@ public class MapLayoutWidget extends LayoutContainer
     /**
      *
      */
-    public void activateBoxSelect()
-    {
-        if (this.boxSelect == null)
-        {
+    public void activateBoxSelect() {
+        if (this.boxSelect == null) {
             initBoxSelectControl(false);
         }
 
@@ -506,14 +617,34 @@ public class MapLayoutWidget extends LayoutContainer
     /**
      *
      */
-    public void deactivateBoxSelect()
-    {
-        if (this.boxSelect == null)
-        {
+    public void deactivateBoxSelect() {
+        if (this.boxSelect == null) {
             initBoxSelectControl(false);
         }
 
         this.boxSelect.deactivate();
+    }
+
+    /**
+     * 
+     */
+    public void activatePointSelect() {
+        if (this.pointSelect == null) {
+            initPointSelectControl(false);
+        }
+
+        this.pointSelect.activate();
+    }
+
+    /**
+     * 
+     */
+    public void deactivatePointSelect() {
+        if (this.pointSelect == null) {
+            initPointSelectControl(false);
+        }
+
+        this.pointSelect.deactivate();
     }
 
     // ////////////////////////////////////////////////////////////////////////
@@ -524,92 +655,94 @@ public class MapLayoutWidget extends LayoutContainer
 
     /**
      * Gets the map.
-     *
+     * 
      * @return the map
      */
-    public Map getMap()
-    {
+    public Map getMap() {
         return map;
     }
 
     /**
      * Gets the map widget.
-     *
+     * 
      * @return the map widget
      */
-    public MapWidget getMapWidget()
-    {
+    public MapWidget getMapWidget() {
         return mapWidget;
     }
 
     /**
      * Gets the tools.
-     *
+     * 
      * @return the tools
      */
-    public List<GenericClientTool> getTools()
-    {
+    public List<GenericClientTool> getTools() {
         return tools;
     }
 
     /**
      * Sets the tools.
-     *
-     * @param tools
-     *            the new tools
+     * 
+     * @param tools the new tools
      */
-    public void setTools(List<GenericClientTool> tools)
-    {
+    public void setTools(List<GenericClientTool> tools) {
         Collections.sort(tools);
         this.tools = tools;
     }
 
     /**
      * Sets the map.
-     *
-     * @param map
-     *            the new map
+     * 
+     * @param map the new map
      */
-    public void setMap(Map map)
-    {
+    public void setMap(Map map) {
         this.map = map;
     }
 
     /**
      * Sets the layer.
-     *
-     * @param layers
-     *            the new layer
+     * 
+     * @param layers the new layer
      */
-    public void setLayers(List<Layer> layers)
-    {
+    public void setLayers(List<Layer> layers) {
         this.layers = layers;
     }
 
     /**
      * Gets the layer.
-     *
+     * 
      * @return the layer
      */
-    public List<Layer> getLayers()
-    {
+    public List<Layer> getLayers() {
         return layers;
     }
 
     /**
      * @param controls the controls to set
      */
-    public void setControls(List<Control> controls)
-    {
+    public void setControls(List<Control> controls) {
         this.controls = controls;
     }
 
     /**
      * @return the controls
      */
-    public List<Control> getControls()
-    {
+    public List<Control> getControls() {
         return controls;
+    }
+
+    /**
+     * @return the layersIDs
+     */
+    public List<String> getLayersIDs() {
+        return layersIDs;
+    }
+
+    /**
+     * @param layersIDs the layersIDs to set
+     */
+    public void setLayersIDs(List<String> layersIDs) {
+        this.layersIDs = layersIDs;
     }
 
 }

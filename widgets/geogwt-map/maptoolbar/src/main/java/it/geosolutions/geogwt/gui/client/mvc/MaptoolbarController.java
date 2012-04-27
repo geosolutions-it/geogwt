@@ -41,6 +41,10 @@ import com.extjs.gxt.ui.client.mvc.Controller;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MaptoolbarController.
+ * 
+ * @author Alessio Fabiani at alessio.fabiani@@geo-solutions.it
+ * @author Tobia Di Pisa at tobia.dipisa@geo-solutions.it
+ *
  */
 public class MaptoolbarController extends Controller {
 
@@ -62,7 +66,17 @@ public class MaptoolbarController extends Controller {
                 
                 GeoGWTEvents.ACTIVATE_BOX_SELECT, 
                 GeoGWTEvents.DEACTIVATE_BOX_SELECT,
-                GeoGWTEvents.BOUNDS_SELECTED
+                GeoGWTEvents.BOUNDS_SELECTED,
+                
+                GeoGWTEvents.POINT_SELECTED,
+                
+                GeoGWTEvents.ACTIVATE_POINT_SELECT,
+                GeoGWTEvents.DEACTIVATE_POINT_SELECT,
+                
+                GeoGWTEvents.ACTIVATE_GET_FEATURE_INFO,
+                GeoGWTEvents.DEACTIVATE_GET_FEATURE_INFO,
+                
+                GeoGWTEvents.GOT_FEATURE_INFO
                 
         );
     }

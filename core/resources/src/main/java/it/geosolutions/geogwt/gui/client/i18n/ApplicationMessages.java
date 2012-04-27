@@ -35,10 +35,12 @@ package it.geosolutions.geogwt.gui.client.i18n;
 
 import com.google.gwt.i18n.client.Messages;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Interface ApplicationMessages.
+ * 
+ * @author Alessio Fabiani at alessio.fabiani@geo-solutions.it
+ * @author Tobia Di Pisa at tobia.dipisa@geo-solutions.it
+ *
  */
 public interface ApplicationMessages extends Messages
 {
@@ -56,7 +58,7 @@ public interface ApplicationMessages extends Messages
 
     /**
      *
-     * @return
+     * @return String
      */
     public String boxSelectTip();
 
@@ -82,6 +84,13 @@ public interface ApplicationMessages extends Messages
     public String foundLabel();
 
     /**
+     * Get Feature Info Tip.
+     *
+     * @return the string
+     */
+    public String featureInfoTip();
+    
+    /**
      *
      * @return
      */
@@ -93,7 +102,12 @@ public interface ApplicationMessages extends Messages
      * @return the string
      */
     public String pleaseWaitMessage();
-
+    
+    /**
+     * @return String
+     */
+    public String pointSelectTip();
+    
     /**
      * Record label.
      *

@@ -28,4 +28,7 @@
   <servlet path="/SessionControllerRemoteService"
 	class="it.geosolutions.geogwt.web.examples.server.gwt.SessionControllerRemoteServiceImpl" />
 		
+  <servlet path="/GeoGWTRemoteService"
+	class="it.geosolutions.geogwt.gui.server.gwt.GeoGWTRemoteServiceImpl" />
+	
 </module>

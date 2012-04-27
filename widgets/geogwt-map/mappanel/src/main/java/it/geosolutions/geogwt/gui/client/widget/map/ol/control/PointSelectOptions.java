@@ -1,7 +1,7 @@
 /*
- * $ Header: it.geosolutions.geogwt.gui.client.Resources,v. 0.1 7-apr-2011 16.58.11 created by afabiani <alessio.fabiani at geo-solutions.it> $
+ * $ Header: it.geosolutions.geogwt.gui.client.widget.map.ol.control.PointSelectOptions,v. 0.1 18-apr-2012 16.59.50 created by tobia di pisa <tobia.dipisa at geo-solutions.it> $
  * $ Revision: 0.1-SNAPSHOT $
- * $ Date: 7-apr-2011 16.58.11 $
+ * $ Date: 18-apr-2012 16.59.50 $
  *
  * ====================================================================
  * GeoGWT 0.1-SNAPSHOT
@@ -31,25 +31,25 @@
  * <http://www.geo-solutions.it/>.
  *
  */
-package it.geosolutions.geogwt.gui.client;
+package it.geosolutions.geogwt.gui.client.widget.map.ol.control;
 
-import com.google.gwt.core.client.GWT;
+import it.geosolutions.geogwt.gui.client.widget.map.ol.control.PointSelect.PointSelectListener;
 
-import it.geosolutions.geogwt.gui.client.icons.GeoGWTIcons;
+import org.gwtopenmaps.openlayers.client.control.ControlOptions;
+import org.gwtopenmaps.openlayers.client.util.JSObject;
 
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class Resources.
- * 
- * @author Alessio Fabiani at alessio.fabiani@@geo-solutions.it
  * @author Tobia Di Pisa at tobia.dipisa@geo-solutions.it
  *
  */
-public class Resources
+public class PointSelectOptions extends ControlOptions
 {
-
-    /** The Constant ICONS. */
-    public static final GeoGWTIcons ICONS = GWT.create(GeoGWTIcons.class);
-
+    /**
+     * @param listener
+     */
+    public void onPointSelected(PointSelectListener listener)
+    {
+        JSObject callback = PointSelectImpl.createPointSelectedCallback(listener);
+        getJSObject().setProperty("pointSelected", callback);
+    }
 }

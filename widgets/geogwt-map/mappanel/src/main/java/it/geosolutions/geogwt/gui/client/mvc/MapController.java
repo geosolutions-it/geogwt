@@ -42,6 +42,10 @@ import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MapController.
+ * 
+ * @author Alessio Fabiani at alessio.fabiani@@geo-solutions.it
+ * @author Tobia Di Pisa at tobia.dipisa@geo-solutions.it
+ *
  */
 public class MapController extends Controller
 {
@@ -101,7 +105,17 @@ public class MapController extends Controller
             GeoGWTEvents.ZOOM_TO_MAX_EXTENT,
             GeoGWTEvents.ZOOM_TO_CENTER,
             GeoGWTEvents.ZOOM,
-            GeoGWTEvents.SET_MAP_CENTER);
+            GeoGWTEvents.SET_MAP_CENTER,
+            
+            GeoGWTEvents.POINT_SELECTED,
+            
+            GeoGWTEvents.ACTIVATE_POINT_SELECT,
+            GeoGWTEvents.DEACTIVATE_POINT_SELECT, 
+            
+            GeoGWTEvents.ACTIVATE_GET_FEATURE_INFO,
+            GeoGWTEvents.DEACTIVATE_GET_FEATURE_INFO,
+            
+            GeoGWTEvents.GOT_FEATURE_INFO);
     }
 
     /*

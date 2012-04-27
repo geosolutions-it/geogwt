@@ -61,6 +61,12 @@
 		<servlet-class>
 			org.gwtopenmaps.openlayers.server.GwtOpenLayersProxyServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>GeoGWTRemoteService</servlet-name>
+		<servlet-class>it.geosolutions.geogwt.gui.server.gwt.GeoGWTRemoteServiceImpl</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 
   	<!-- Servlet Mappings -->
 	<servlet-mapping>
@@ -81,6 +87,11 @@
 	<servlet-mapping>
 		<servlet-name>GwtOpenlayersProxy</servlet-name>
 		<url-pattern>/gwtOpenLayersProxy/*</url-pattern>
+	</servlet-mapping>
+	
+    <servlet-mapping>
+		<servlet-name>GeoGWTRemoteService</servlet-name>
+		<url-pattern>/maptoolbar_panel/GeoGWTRemoteService</url-pattern>
 	</servlet-mapping>
 		
   	<!-- Default page to serve -->

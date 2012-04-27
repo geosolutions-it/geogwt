@@ -33,6 +33,21 @@
  */
 package it.geosolutions.geogwt.web.examples.client;
 
+import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
+import it.geosolutions.geogwt.gui.client.GeoGWTUtils;
+import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
+import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
+import it.geosolutions.geogwt.gui.client.widget.map.MapConfig;
+import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteService;
+import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteServiceAsync;
+
+import org.gwtopenmaps.openlayers.client.MapOptions;
+import org.gwtopenmaps.openlayers.client.MapUnits;
+import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
+import org.gwtopenmaps.openlayers.client.layer.WMS;
+import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMSParams;
+
 import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.BaseEvent;
@@ -48,28 +63,9 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.core.client.EntryPoint;
-
-// import com.google.gwt.event.dom.client.MouseMoveEvent;
-// import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
-
-import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
-import it.geosolutions.geogwt.gui.client.GeoGWTUtils;
-import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
-import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
-
-// import it.geosolutions.geogwt.web.examples.client.panel.MouseMoveHandlerPanel;
-import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteService;
-import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteServiceAsync;
-
-import org.gwtopenmaps.openlayers.client.MapOptions;
-import org.gwtopenmaps.openlayers.client.MapUnits;
-import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
-import org.gwtopenmaps.openlayers.client.layer.WMS;
-import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
-import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 
 // TODO: Auto-generated Javadoc
@@ -158,7 +154,7 @@ public class Maptoolbar_panel implements EntryPoint
                 {
                     GeoGWTUtils.getInstance().setGlobalConfiguration(result);
 
-                    createCenter();
+                        createCenter();
                     createNorth();
 
                     main.setWidth(558);
@@ -328,8 +324,10 @@ public class Maptoolbar_panel implements EntryPoint
         MapOptions mapOptions = new MapOptions();
         mapOptions.setUnits(MapUnits.DEGREES);
         mapOptions.setProjection("EPSG:4326");
+        
+        MapConfig mapConfig = new MapConfig(mapOptions, null);
 
-        Dispatcher.forwardEvent(GeoGWTEvents.INIT_MAPS_UI_MODULE, mapOptions);
+        Dispatcher.forwardEvent(GeoGWTEvents.INIT_MAPS_UI_MODULE, mapConfig);
 
         /* base layer */
         WMSParams wmsParams = new WMSParams();
@@ -341,6 +339,48 @@ public class Maptoolbar_panel implements EntryPoint
         wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
 
         WMS layer = new WMS("OpenLayers Base Map", "http://vmap0.tiles.osgeo.org/wms/vmap0", wmsParams,
+                wmsLayerParams);
+        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
+        
+        /* overlay layer */
+        wmsParams = new WMSParams();
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers("topp:states");
+        wmsParams.setTransparent(true);
+
+        wmsLayerParams = new WMSOptions();
+        wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
+        wmsLayerParams.setIsBaseLayer(false);
+
+        layer = new WMS("States", "http://localhost:8080/geoserver/wms", wmsParams,
+                wmsLayerParams);
+        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
+        
+        /* overlay layer */
+        wmsParams = new WMSParams();
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers("cite:tasmania_state_boundaries");
+        wmsParams.setTransparent(true);
+
+        wmsLayerParams = new WMSOptions();
+        wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
+        wmsLayerParams.setIsBaseLayer(false);
+
+        layer = new WMS("boundaries", "http://localhost:8080/geoserver/wms", wmsParams,
+                wmsLayerParams);
+        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
+
+        /* overlay layer */
+        wmsParams = new WMSParams();
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers("nurc:ports");
+        wmsParams.setTransparent(true);
+
+        wmsLayerParams = new WMSOptions();
+        wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
+        wmsLayerParams.setIsBaseLayer(false);
+
+        layer = new WMS("ports", "http://localhost:8080/geoserver/wms", wmsParams,
                 wmsLayerParams);
         Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
 

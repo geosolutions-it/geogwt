@@ -5,3 +5,6 @@
 *bin
 *war/WEB-INF/classes
 *war/WEB-INF/lib
+*deploy/
+*.gwt/
+*gwt-unitCache/

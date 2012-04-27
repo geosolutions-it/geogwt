@@ -36,18 +36,20 @@ package it.geosolutions.geogwt.gui.client.icons;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.ImageBundle;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Interface GeoGWTIcons.
+ * 
+ * @author Alessio Fabiani at alessio.fabiani@@geo-solutions.it
+ * @author Tobia Di Pisa at tobia.dipisa@geo-solutions.it
+ * 
  */
 @SuppressWarnings("deprecation")
-public interface GeoGWTIcons extends ImageBundle
-{
+public interface GeoGWTIcons extends ImageBundle {
 
     /**
      * Adds the.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("add.gif")
@@ -55,7 +57,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Arrow down.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("arrow_down.png")
@@ -63,135 +65,134 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Arrow up.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("arrow_up.png")
     AbstractImagePrototype arrowUp();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("basket_add.png")
     AbstractImagePrototype basketAdd();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("basket_delete.png")
     AbstractImagePrototype basketDelete();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("basket_edit.png")
     AbstractImagePrototype basketEdit();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("basket_error.png")
     AbstractImagePrototype basketError();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("basket_go.png")
     AbstractImagePrototype basketGo();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("basket_put.png")
     AbstractImagePrototype basketPut();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("basket_remove.png")
     AbstractImagePrototype basketRemove();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("basket.png")
     AbstractImagePrototype basket();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("bullet_wrench.png")
     AbstractImagePrototype bulletWrench();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("cart_add.png")
     AbstractImagePrototype cartAdd();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("cart_delete.png")
     AbstractImagePrototype cartDelete();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("cart_edit.png")
     AbstractImagePrototype cartEdit();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("cart_error.png")
     AbstractImagePrototype cartError();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("cart_go.png")
     AbstractImagePrototype cartGo();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("cart_put.png")
     AbstractImagePrototype cartPut();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("cart_remove.png")
     AbstractImagePrototype cartRemove();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("cart.png")
     AbstractImagePrototype cart();
 
-
     /**
      * Clean menu.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("eraser_minus.png")
@@ -199,14 +200,14 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Connect.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("connect.png")
     AbstractImagePrototype connect();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("decline.png")
@@ -214,7 +215,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Delete.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("delete.gif")
@@ -222,7 +223,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Draw feature.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("draw-feature.png")
@@ -326,7 +327,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Gets the features.
-     *
+     * 
      * @return the features
      */
     @Resource("features_get.png")
@@ -334,15 +335,23 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Info.
-     *
+     * 
      * @return the abstract image prototype
      */
-    @Resource("about.png")
+    @Resource("information.png")
     AbstractImagePrototype info();
 
     /**
+     * Info.
+     * 
+     * @return the abstract image prototype
+     */
+    @Resource("bullet_green.png")
+    AbstractImagePrototype select();
+
+    /**
      * Layers.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("layers.png")
@@ -353,7 +362,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Logout.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("logout.png")
@@ -361,7 +370,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Page edit.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("page_edit.gif")
@@ -369,7 +378,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Pan.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("pan.png")
@@ -389,28 +398,28 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Rss.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("rss.png")
     AbstractImagePrototype rss();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("ruler_square.png")
     AbstractImagePrototype rulerSquare();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("ruler_triangle.png")
     AbstractImagePrototype rulerTriangle();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("ruler.png")
@@ -418,7 +427,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Save.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("save.png")
@@ -426,7 +435,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Search.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("find.png")
@@ -437,7 +446,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Share.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("share.png")
@@ -448,7 +457,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Table.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("table.png")
@@ -456,7 +465,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Trigger.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("trigger.png")
@@ -464,7 +473,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Upload.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("file_upload_icon.png")
@@ -472,7 +481,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Upload shp.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("file_upload_icon.png")
@@ -480,49 +489,49 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * User.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("user.gif")
     AbstractImagePrototype user();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("world_add.png")
     AbstractImagePrototype worldAdd();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("world_delete.png")
     AbstractImagePrototype worldDelete();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("world_edit.png")
     AbstractImagePrototype worldEdit();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("world_go.png")
     AbstractImagePrototype worldGo();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("world_link.png")
     AbstractImagePrototype worldLink();
 
     /**
-     *
+     * 
      * @return
      */
     @Resource("world.png")
@@ -530,7 +539,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Zoom in.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("zoom-in.png")
@@ -538,7 +547,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Zoom out.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("zoom-out.png")
@@ -546,7 +555,7 @@ public interface GeoGWTIcons extends ImageBundle
 
     /**
      * Zoom box.
-     *
+     * 
      * @return the abstract image prototype
      */
     @Resource("zoom.png")
