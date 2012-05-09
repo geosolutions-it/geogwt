@@ -33,6 +33,20 @@
  */
 package it.geosolutions.geogwt.web.examples.client;
 
+import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
+import it.geosolutions.geogwt.gui.client.GeoGWTUtils;
+import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
+import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
+import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteService;
+import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteServiceAsync;
+
+import org.gwtopenmaps.openlayers.client.MapOptions;
+import org.gwtopenmaps.openlayers.client.MapUnits;
+import org.gwtopenmaps.openlayers.client.layer.Layer;
+import org.gwtopenmaps.openlayers.client.layer.OSM;
+import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
+import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
+
 import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
 import com.extjs.gxt.ui.client.event.BaseEvent;
@@ -48,36 +62,15 @@ import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.google.gwt.core.client.EntryPoint;
-
-// import com.google.gwt.event.dom.client.MouseMoveEvent;
-// import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
-
-import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
-import it.geosolutions.geogwt.gui.client.GeoGWTUtils;
-import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
-import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
-
-// import it.geosolutions.geogwt.web.examples.client.panel.MouseMoveHandlerPanel;
-import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteService;
-import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteServiceAsync;
-
-import org.gwtopenmaps.openlayers.client.MapOptions;
-import org.gwtopenmaps.openlayers.client.MapUnits;
-import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
-import org.gwtopenmaps.openlayers.client.layer.WMS;
-import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
-import org.gwtopenmaps.openlayers.client.layer.WMSParams;
-
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class Maptoolbar_panel.
  */
-public class Maptoolbar_panel implements EntryPoint
-{
+public class Maptoolbar_panel implements EntryPoint {
 
     /*
      * Session Management section
@@ -87,17 +80,17 @@ public class Maptoolbar_panel implements EntryPoint
     private static final int SESSION_WARNING_TIMEOUT_MILLIS = 10000; // 1 minute
 
     public static native void closeBrowser() /*-{
-        $wnd.close();
+		$wnd.close();
     }-*/;
 
     public static native String getQueryString() /*-{
-        return $wnd.location.search.substring(1);
+		return $wnd.location.search.substring(1);
     }-*/;
 
     public static native String getContextPath() /*-{
-        return "/"
-        + $wnd.location.pathname.substring(1).substring(0,
-        $wnd.location.pathname.substring(1).indexOf("/"));
+		return "/"
+				+ $wnd.location.pathname.substring(1).substring(0,
+						$wnd.location.pathname.substring(1).indexOf("/"));
     }-*/;
 
     private Timer sessionTimeoutTimer = null;
@@ -117,11 +110,10 @@ public class Maptoolbar_panel implements EntryPoint
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
      */
-    public void onModuleLoad()
-    {
+    public void onModuleLoad() {
         GXT.hideLoadingPanel("loading");
 
         buildUI();
@@ -130,8 +122,7 @@ public class Maptoolbar_panel implements EntryPoint
     /**
      *
      */
-    protected void buildUI()
-    {
+    protected void buildUI() {
 
         /**
          * Adding widgets to Viewport panels
@@ -147,33 +138,29 @@ public class Maptoolbar_panel implements EntryPoint
     /**
      * Load configuration.
      */
-    private void loadConfiguration()
-    {
+    private void loadConfiguration() {
 
         /** Example: trying to load toolbar components from applicationContext automatically **/
         GeoGWTConfigurationRemote.Util.getInstance().initServerConfiguration(
-            new AsyncCallback<GeoGWTConfiguration>()
-            {
-                public void onSuccess(GeoGWTConfiguration result)
-                {
-                    GeoGWTUtils.getInstance().setGlobalConfiguration(result);
+                new AsyncCallback<GeoGWTConfiguration>() {
+                    public void onSuccess(GeoGWTConfiguration result) {
+                        GeoGWTUtils.getInstance().setGlobalConfiguration(result);
 
-                    createCenter();
-                    createNorth();
+                        createCenter();
+                        createNorth();
 
-                    main.setWidth(558);
-                    main.setHeight(333);
+                        main.setWidth(558);
+                        main.setHeight(333);
 
-                    RootPanel.get("maptoolbar").add(main);
+                        RootPanel.get("maptoolbar").add(main);
 
-                    // initializeIdleTimeoutSession(result);
-                }
+                        // initializeIdleTimeoutSession(result);
+                    }
 
-                public void onFailure(Throwable caught)
-                {
-                    Info.display("Configuration Service Error", caught.getMessage());
-                }
-            });
+                    public void onFailure(Throwable caught) {
+                        Info.display("Configuration Service Error", caught.getMessage());
+                    }
+                });
 
         // /** Example: loading toolbar manually **/
         // ToolbarItemManager toolbarItemManager = new ToolbarItemManager();
@@ -234,17 +221,14 @@ public class Maptoolbar_panel implements EntryPoint
     /**
      * Creates the north.
      */
-    private void createNorth()
-    {
+    private void createNorth() {
         north = new ContentPanel();
         north.setHeaderVisible(false);
-        north.addListener(Events.Resize, new Listener<BaseEvent>()
-            {
-                public void handleEvent(BaseEvent be)
-                {
-                    Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
-                }
-            });
+        north.addListener(Events.Resize, new Listener<BaseEvent>() {
+            public void handleEvent(BaseEvent be) {
+                Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
+            }
+        });
 
         BorderLayoutData data = new BorderLayoutData(LayoutRegion.NORTH, 30);
         data.setMargins(new Margins(0, 5, 0, 5));
@@ -332,16 +316,37 @@ public class Maptoolbar_panel implements EntryPoint
         Dispatcher.forwardEvent(GeoGWTEvents.INIT_MAPS_UI_MODULE, mapOptions);
 
         /* base layer */
-        WMSParams wmsParams = new WMSParams();
-        wmsParams.setFormat("image/png");
-        wmsParams.setLayers("basic");
-        wmsParams.setStyles("");
-
-        WMSOptions wmsLayerParams = new WMSOptions();
-        wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
-
-        WMS layer = new WMS("OpenLayers Base Map", "http://vmap0.tiles.osgeo.org/wms/vmap0", wmsParams,
-                wmsLayerParams);
+//        WMSParams wmsParams = new WMSParams();
+//        wmsParams.setFormat("image/png");
+//        wmsParams.setLayers("basic");
+//        wmsParams.setStyles("");
+//
+//        WMSOptions wmsLayerParams = new WMSOptions();
+//        wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
+//
+//        String[] urlArray = new String[] {
+//                "http://vmap0.tiles.osgeo.org/wms/vmap0?test=${x}",
+//                "http://vmap0.tiles.osgeo.org/wms/vmap0?test=${y}",
+//                "http://vmap0.tiles.osgeo.org/wms/vmap0?test=${z}"
+//        };
+//        
+//        WMS layer = new WMS("OpenLayers Base Map", urlArray, wmsParams,
+//                wmsLayerParams);
+        
+        String[] urlArray = new String[] {
+                        "http://a.tile.openstreetmap.org/${z}/${x}/${y}.png",
+                        "http://b.tile.openstreetmap.org/${z}/${x}/${y}.png",
+                        "http://c.tile.openstreetmap.org/${z}/${x}/${y}.png"};
+        
+        OSMOptions osmOptions = new OSMOptions();
+        osmOptions.setTransitionEffect(TransitionEffect.RESIZE);
+        
+        Layer layer = new OSM(
+                "OSM", 
+                urlArray, 
+                osmOptions
+        );
+        
         Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
 
         Dispatcher.forwardEvent(GeoGWTEvents.ATTACH_MAP_WIDGET, maptoolbar_panel);
@@ -352,36 +357,30 @@ public class Maptoolbar_panel implements EntryPoint
         Dispatcher.forwardEvent(GeoGWTEvents.ZOOM, 5);
     }
 
-    /** ***********************************************************************
-     * Session Timeout utility methods
+    /**
+     * *********************************************************************** Session Timeout
+     * utility methods
      **************************************************************************/
     /**
      * Called only once from <b>onModuleLoad</b>.
-     *
+     * 
      * @sessionTimeInMillis Integer
      */
-    private void initSessionTimers(int sessionTimeMillis)
-    {
+    private void initSessionTimers(int sessionTimeMillis) {
         // Allow 30 seconds to get the RPC call constructed and called.
         final int x = (sessionTimeMillis - 30000) - SESSION_WARNING_TIMEOUT_MILLIS;
-        sessionTimeoutResponseTimer = new Timer()
-            {
-                public void run()
-                {
-                    displaySessionTimedOut();
-                }
-            };
-        sessionTimeoutTimer = new Timer()
-            {
-                public void run()
-                {
-                    sessionTimeoutResponseTimer.schedule(SESSION_WARNING_TIMEOUT_MILLIS);
-                    MessageBox.alert("Session Timeout",
+        sessionTimeoutResponseTimer = new Timer() {
+            public void run() {
+                displaySessionTimedOut();
+            }
+        };
+        sessionTimeoutTimer = new Timer() {
+            public void run() {
+                sessionTimeoutResponseTimer.schedule(SESSION_WARNING_TIMEOUT_MILLIS);
+                MessageBox.alert("Session Timeout",
                         "Your session is about to timeout. Please press \"OK\" to keep working.",
-                        new Listener<MessageBoxEvent>()
-                        {
-                            public void handleEvent(MessageBoxEvent be)
-                            {
+                        new Listener<MessageBoxEvent>() {
+                            public void handleEvent(MessageBoxEvent be) {
                                 // User responded before the response timer elapsed, so keep session
                                 // by calling the service.
                                 sessionTimeoutResponseTimer.cancel();
@@ -390,93 +389,77 @@ public class Maptoolbar_panel implements EntryPoint
                                 keepUserSessionAlive();
                             }
                         });
-                }
-            };
+            }
+        };
         sessionTimeoutTimer.schedule(x);
     }
 
     /**
      *
      */
-    private void keepUserSessionAlive()
-    {
-        SessionControllerRemoteServiceAsync service = SessionControllerRemoteService.Util.getInstance();
-        AsyncCallback<Void> callback = new AsyncCallback<Void>()
-            {
-                public void onSuccess(Void result)
-                {
-                }
+    private void keepUserSessionAlive() {
+        SessionControllerRemoteServiceAsync service = SessionControllerRemoteService.Util
+                .getInstance();
+        AsyncCallback<Void> callback = new AsyncCallback<Void>() {
+            public void onSuccess(Void result) {
+            }
 
-                public void onFailure(final Throwable caught)
-                {
-                    MessageBox.alert("Session Timeout", caught.toString() + THE_APP_WILL_CLOSE,
-                        new Listener<MessageBoxEvent>()
-                        {
-                            public void handleEvent(MessageBoxEvent be)
-                            {
+            public void onFailure(final Throwable caught) {
+                MessageBox.alert("Session Timeout", caught.toString() + THE_APP_WILL_CLOSE,
+                        new Listener<MessageBoxEvent>() {
+                            public void handleEvent(MessageBoxEvent be) {
                                 closeBrowser();
                             }
                         });
-                }
-            };
+            }
+        };
         service.keepUserSessionAlive(callback);
     }
 
     /**
      *
      */
-    private void displaySessionTimedOut()
-    {
+    private void displaySessionTimedOut() {
         MessageBox.alert("Session Timeout", "Your session has timed out." + THE_APP_WILL_CLOSE,
-            new Listener<MessageBoxEvent>()
-            {
-                public void handleEvent(MessageBoxEvent be)
-                {
-                    closeBrowser();
-                }
-            });
+                new Listener<MessageBoxEvent>() {
+                    public void handleEvent(MessageBoxEvent be) {
+                        closeBrowser();
+                    }
+                });
     }
 
     /**
      * @param configuration
-     *
+     * 
      */
     @SuppressWarnings("unused")
-    private void initializeIdleTimeoutSession(GeoGWTConfiguration configuration)
-    {
+    private void initializeIdleTimeoutSession(GeoGWTConfiguration configuration) {
 
         /* *********************
          * Session Timeout initializer
          */
-        SessionControllerRemoteServiceAsync service = SessionControllerRemoteService.Util.getInstance();
-        AsyncCallback<Integer> callback = new AsyncCallback<Integer>()
-            {
-                public void onSuccess(Integer result)
-                {
-                    sessionTimeMillis = result.intValue();
+        SessionControllerRemoteServiceAsync service = SessionControllerRemoteService.Util
+                .getInstance();
+        AsyncCallback<Integer> callback = new AsyncCallback<Integer>() {
+            public void onSuccess(Integer result) {
+                sessionTimeMillis = result.intValue();
 
-                    if (sessionTimeMillis == -1)
-                    {
-                        displaySessionTimedOut();
-                    }
-                    else
-                    {
-                        initSessionTimers(sessionTimeMillis);
-                    }
+                if (sessionTimeMillis == -1) {
+                    displaySessionTimedOut();
+                } else {
+                    initSessionTimers(sessionTimeMillis);
                 }
+            }
 
-                public void onFailure(final Throwable caught)
-                {
-                    MessageBox.alert("Error", caught.toString() + THE_APP_WILL_CLOSE,
-                        new Listener<MessageBoxEvent>()
-                        {
-                            public void handleEvent(MessageBoxEvent be)
-                            {
+            public void onFailure(final Throwable caught) {
+                MessageBox.alert("Error", caught.toString() + THE_APP_WILL_CLOSE,
+                        new Listener<MessageBoxEvent>() {
+                            public void handleEvent(MessageBoxEvent be) {
                                 closeBrowser();
                             }
                         });
-                }
-            };
+            }
+        };
         service.getUserSessionTimeoutMillis(callback);
     }
 }
