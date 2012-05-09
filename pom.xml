@@ -13,7 +13,7 @@
     <properties>
         <geogwt-version>0.2-SNAPSHOT</geogwt-version>
 
-		<gwtopenmaps-version>0.8-SNAPSHOT</gwtopenmaps-version>
+		<gwtopenmaps-version>0.8</gwtopenmaps-version>
 		<gwt.version>2.4.0</gwt.version>
         <extjs.version>2.2.5-gwt22</extjs.version>
 
