@@ -35,13 +35,14 @@ package it.geosolutions.geogwt.gui.client;
 
 import com.extjs.gxt.ui.client.event.EventType;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class GeoGWTEvents.
+ * 
+ * @author Alessio Fabiani at alessio.fabiani@@geo-solutions.it
+ * @author Tobia Di Pisa at tobia.dipisa@geo-solutions.it
+ * 
  */
-public class GeoGWTEvents
-{
+public class GeoGWTEvents {
 
     public static final EventType ACTIVATE_BOX_SELECT = new EventType();
 
@@ -68,11 +69,13 @@ public class GeoGWTEvents
 
     public static final EventType BOUNDS_SELECTED = new EventType();
 
-
     public static final EventType DEACTIVATE_BOX_SELECT = new EventType();
 
     /** The Constant DEACTIVATE_DRAW_FEATURES. */
     public static final EventType DEACTIVATE_DRAW_FEATURES = new EventType();
+
+    /** The Constant DEACTIVATE_GET_FEATURE_INFO. */
+    public static final EventType DEACTIVATE_GET_FEATURE_INFO = new EventType();
 
     /** The Constant DEACTIVATE_ZOOM_BOX. */
     public static final EventType DEACTIVATE_ZOOM_BOX = new EventType();
@@ -89,6 +92,9 @@ public class GeoGWTEvents
     /** The Constant ERASE_FEATURES. */
     public static final EventType ERASE_FEATURES = new EventType();
 
+    /** The Constant GOT_FEATURE_INFO. */
+    public static final EventType GOT_FEATURE_INFO = new EventType();
+    
     /** The Constant INIT. */
     public static final EventType INIT = new EventType();
 
@@ -142,4 +148,10 @@ public class GeoGWTEvents
     /** The Constant ZOOM_TO_MAX_EXTENT. */
     public static final EventType ZOOM_TO_MAX_EXTENT = new EventType();
 
+    /** The Constant POINT SELECTIONS. */
+    public static final EventType ACTIVATE_POINT_SELECT = new EventType();
+
+    public static final EventType DEACTIVATE_POINT_SELECT = new EventType();
+
+    public static final EventType POINT_SELECTED = new EventType();
 }

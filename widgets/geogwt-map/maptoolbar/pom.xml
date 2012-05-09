@@ -91,7 +91,7 @@
 			</exclusions>
 		</dependency>
 
-		<!-- GeoAPI and its dependencies -->
+		<!-- GeoAPI and its dependencies 
 		<dependency>
 			<groupId>org.opengis</groupId>
 			<artifactId>geoapi</artifactId>
@@ -107,7 +107,7 @@
 		<dependency>
 			<groupId>net.java.dev.jsr-275</groupId>
 			<artifactId>jsr-275</artifactId>
-		</dependency>
+		</dependency> -->
 
 		<!-- GEOTOOLS -->
 		<dependency>
@@ -132,14 +132,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.geotools</groupId>
-			<artifactId>gt-epsg-extension</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.geotools</groupId>
 			<artifactId>gt-epsg-wkt</artifactId>
 		</dependency>
-
-		<dependency>
+        
+        <dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 		</dependency>

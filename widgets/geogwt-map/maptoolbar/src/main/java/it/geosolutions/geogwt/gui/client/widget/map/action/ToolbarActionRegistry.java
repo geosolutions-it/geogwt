@@ -35,7 +35,9 @@ package it.geosolutions.geogwt.gui.client.widget.map.action;
 import it.geosolutions.geogwt.gui.client.configuration.ToolbarAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.BoxSelectAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.DrawFeatureAction;
+import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.GetFeatureInfoAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.PanAction;
+import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.PointSelectAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomAllAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomBoxAction;
 import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomInAction;
@@ -44,9 +46,12 @@ import it.geosolutions.geogwt.gui.client.widget.map.action.toolbar.ZoomOutAction
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ToolbarActionRegistry.
+ * 
+ * @author Alessio Fabiani at alessio.fabiani@@geo-solutions.it
+ * @author Tobia Di Pisa at tobia.dipisa@geo-solutions.it
+ *
  */
 public final class ToolbarActionRegistry {
 
@@ -119,6 +124,23 @@ public final class ToolbarActionRegistry {
             }
         });
         
+        getRegistry().put("pointSelect", new ToolActionCreator() {
+
+            public ToolbarAction createActionTool() {
+                PointSelectAction action = new PointSelectAction();
+                action.initialize();
+                return action;
+            }
+        });
+        
+        getRegistry().put("getFeatureInfo", new ToolActionCreator() {
+
+            public ToolbarAction createActionTool() {
+                GetFeatureInfoAction action = new GetFeatureInfoAction();
+                action.initialize();
+                return action;
+            }
+        });
     }
 
     /**

@@ -12,10 +12,23 @@
 	<context:component-scan base-package="it.geosolutions.geogwt.gui" />
 
 	<!-- GWT Configuration -->
-	<bean id="geoGWTGlobalConfiguration" class="it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration" />
+	<bean id="geoGWTGlobalConfiguration"
+		class="it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration" />
 
 	<!-- Startup service -->
 	<bean id="geogwtStartupService" class="it.geosolutions.geogwt.gui.service.impl.StartupService" />
+
+	<!-- Remote service -->
+	<bean id="geoGWTRemoteService"
+		class="it.geosolutions.geogwt.gui.service.impl.GeoGWTRemoteServiceImpl">
+		<property name="geoServerUrl" value="http://localhost:8080/geoserver" />
+		<property name="geoServerUser" value="" />
+		<property name="geoServerPassword" value="" />
+		<property name="wmsVersion" value="1.1.1" />
+		<property name="wfsVersion" value="1.0.0" />
+		<property name="featureInfoCount" value="20" />
+		<property name="bufferRange" value="2" />
+	</bean>
 
 	<!-- Toolbar configuration -->
 	<bean name="toolbarItemManager" class="it.geosolutions.geogwt.gui.client.ToolbarItemManager">
@@ -28,8 +41,10 @@
 				<ref bean="zoomBox" />
 				<ref bean="zoomIn" />
 				<ref bean="zoomOut" />
-				<ref bean="boxSelect" />
+				<!-- <ref bean="boxSelect" /> -->
 				<ref bean="drawFeature" />
+				<!-- <ref bean="pointSelect" /> -->
+				<ref bean="getFeatureInfo" />
 				<ref bean="toolbarSeparator_2" />
 				<ref bean="fillItem" />
 			</list>
@@ -69,7 +84,7 @@
 		<property name="enabled" value="true" />
 		<property name="order" value="5" />
 	</bean>
-	
+
 	<bean name="zoomBox"
 		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
 		<property name="id" value="zoomBox" />
@@ -77,7 +92,7 @@
 		<property name="enabled" value="true" />
 		<property name="order" value="10" />
 	</bean>
-	
+
 	<bean name="zoomIn"
 		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
 		<property name="id" value="zoomIn" />
@@ -100,13 +115,13 @@
 		<property name="order" value="40" />
 	</bean>
 
-	<bean name="boxSelect"
-		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
-		<property name="id" value="boxSelect" />
-		<property name="type" value="toggle" />
-		<property name="enabled" value="true" />
-		<property name="order" value="50" />
-	</bean>
+	<!-- <bean name="boxSelect" -->
+	<!-- class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool"> -->
+	<!-- <property name="id" value="boxSelect" /> -->
+	<!-- <property name="type" value="toggle" /> -->
+	<!-- <property name="enabled" value="true" /> -->
+	<!-- <property name="order" value="50" /> -->
+	<!-- </bean> -->
 
 	<bean name="drawFeature"
 		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
@@ -114,6 +129,22 @@
 		<property name="type" value="toggle" />
 		<property name="enabled" value="true" />
 		<property name="order" value="60" />
+	</bean>
+
+	<!-- <bean name="pointSelect" -->
+	<!-- class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool"> -->
+	<!-- <property name="id" value="pointSelect" /> -->
+	<!-- <property name="type" value="toggle" /> -->
+	<!-- <property name="enabled" value="true" /> -->
+	<!-- <property name="order" value="70" /> -->
+	<!-- </bean> -->
+
+	<bean name="getFeatureInfo"
+		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">
+		<property name="id" value="getFeatureInfo" />
+		<property name="type" value="toggle" />
+		<property name="enabled" value="true" />
+		<property name="order" value="80" />
 	</bean>
 
 </beans>
