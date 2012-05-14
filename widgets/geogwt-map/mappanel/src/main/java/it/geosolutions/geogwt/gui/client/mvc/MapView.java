@@ -50,9 +50,7 @@ import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapOptions;
 import org.gwtopenmaps.openlayers.client.control.Control;
 import org.gwtopenmaps.openlayers.client.control.ZoomBox;
-import org.gwtopenmaps.openlayers.client.feature.VectorFeature;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
-import org.gwtopenmaps.openlayers.client.geometry.Point;
 import org.gwtopenmaps.openlayers.client.layer.Layer;
 import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
 import org.gwtopenmaps.openlayers.client.layer.Vector;
@@ -368,9 +366,9 @@ public class MapView extends View {
      * @param event
      */
     private void onPointSelected(AppEvent event) {
-        LonLat lonlat = event.getData();
-
-        // MessageBox.alert("Point Select", "Lon: " + lonlat.lon() + "  Lat: " + lonlat.lat(), null);
+        /*PointSelectDetails psd = (PointSelectDetails)event.getData();
+        
+        LonLat lonlat = new LonLat(psd.getLon(), psd.getLat());
 
         if (this.mapLayout.getLayers().contains(vector)) {
             this.mapLayout.removeLayer(vector);
@@ -383,16 +381,16 @@ public class MapView extends View {
 
         vector.addFeature(feature);
 
-        this.mapLayout.addLayer(vector);
+        this.mapLayout.addLayer(vector);*/
     }
 
     /**
 	 * 
 	 */
     private void onDeactivatePointSelect() {
-        if (this.mapLayout.getLayers().contains(vector)) {
+        /*if (this.mapLayout.getLayers().contains(vector)) {
             this.mapLayout.removeLayer(vector);
-        }
+        }*/
         this.mapLayout.deactivatePointSelect();
     }
 

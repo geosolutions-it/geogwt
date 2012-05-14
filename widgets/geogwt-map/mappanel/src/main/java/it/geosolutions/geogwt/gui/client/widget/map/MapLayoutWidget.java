@@ -36,6 +36,7 @@ package it.geosolutions.geogwt.gui.client.widget.map;
 import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
 import it.geosolutions.geogwt.gui.client.configuration.GenericClientTool;
 import it.geosolutions.geogwt.gui.client.model.GetFeatureInfoDetails;
+import it.geosolutions.geogwt.gui.client.model.PointSelectDetails;
 import it.geosolutions.geogwt.gui.client.service.GeoGWTRemoteService;
 import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelect;
 import it.geosolutions.geogwt.gui.client.widget.map.ol.control.BoxSelect.BoxSelectListener;
@@ -121,6 +122,8 @@ public class MapLayoutWidget extends LayoutContainer {
 
     /** **/
     private PointSelect pointSelect;
+
+    private boolean featureInfoActivated = false;
 
     /** The vector. */
     private Vector vector;
@@ -443,14 +446,14 @@ public class MapLayoutWidget extends LayoutContainer {
 
         return layersToQuery;
     }
-    
+
     /**
      * @param isGoogle the is google
      */
     private void initPointSelectControl(final boolean isGoogle) {
-        
-       PointSelectListener listener = new PointSelectListener() {
-           
+
+        PointSelectListener listener = new PointSelectListener() {
+
             public void onPointSelected(LonLat lonlat) {
 
                 // MessageBox.alert("", "Lon: " + lonlat.lon() + "  Lat: " + lonlat.lat(), null);
@@ -459,37 +462,47 @@ public class MapLayoutWidget extends LayoutContainer {
                     lonlat.transform("EPSG:900913", "EPSG:4326");
                 }
 
-                List<String> layersToQuery = getQueryLayerList();
-
-                Point selectedPoint = new Point(lonlat.lon(), lonlat.lat());
-                
-                String crsCode = map.getProjection();
                 Pixel pixel = map.getPixelFromLonLat(lonlat);
-                
-                Bounds bounds = map.getExtent();
-                String bbox = bounds.getLowerLeftX() + "," + bounds.getLowerLeftY() + "," + bounds.getUpperRightX() + "," + bounds.getUpperRightY(); 
-                
-                int mapHeight = (int)map.getSize().getHeight();
-                int mapWidth = (int)map.getSize().getWidth();
-                
-                double resolutions = map.getResolution();
-                
-                GeoGWTRemoteService.Util.getInstance().getFeatureInfo(mapHeight, mapWidth, bbox, layersToQuery, selectedPoint.toString(), pixel.x(), pixel.y(),
-                        crsCode, resolutions, new AsyncCallback<GetFeatureInfoDetails>() {
 
-                            public void onFailure(Throwable caught) {
-                                MessageBox.alert("Service Failure", caught.getLocalizedMessage(),
-                                        null);
-                            }
+                PointSelectDetails psd = new PointSelectDetails(lonlat.lon(), lonlat.lat(),
+                        pixel.x(), pixel.y(), map.getScale());
 
-                            public void onSuccess(GetFeatureInfoDetails result) {
-                                if (result != null) {
-                                    Dispatcher.forwardEvent(GeoGWTEvents.GOT_FEATURE_INFO, result);
+                Dispatcher.forwardEvent(GeoGWTEvents.POINT_SELECTED, psd);
+
+                if (featureInfoActivated) {
+                    Point selectedPoint = new Point(lonlat.lon(), lonlat.lat());
+                    
+                    List<String> layersToQuery = getQueryLayerList();
+
+                    String crsCode = map.getProjection();
+
+                    Bounds bounds = map.getExtent();
+                    String bbox = bounds.getLowerLeftX() + "," + bounds.getLowerLeftY() + ","
+                            + bounds.getUpperRightX() + "," + bounds.getUpperRightY();
+
+                    int mapHeight = (int) map.getSize().getHeight();
+                    int mapWidth = (int) map.getSize().getWidth();
+
+                    double resolutions = map.getResolution();
+
+                    GeoGWTRemoteService.Util.getInstance().getFeatureInfo(mapHeight, mapWidth,
+                            bbox, layersToQuery, selectedPoint.toString(), pixel.x(), pixel.y(),
+                            crsCode, resolutions, new AsyncCallback<GetFeatureInfoDetails>() {
+
+                                public void onFailure(Throwable caught) {
+                                    MessageBox.alert("Service Failure",
+                                            caught.getLocalizedMessage(), null);
                                 }
-                            }
-                        });
-            }
 
+                                public void onSuccess(GetFeatureInfoDetails result) {
+                                    if (result != null) {
+                                        Dispatcher.forwardEvent(GeoGWTEvents.GOT_FEATURE_INFO,
+                                                result);
+                                    }
+                                }
+                            });
+                }
+            }
         };
 
         PointSelectOptions pointSelectOptions = new PointSelectOptions();
@@ -558,14 +571,18 @@ public class MapLayoutWidget extends LayoutContainer {
     public void activateGetFeatureInfo(List<String> data) {
 
         if (data != null) {
-            // 
+            //
             // Case with Layers IDs
-            // 
+            //
             this.setLayersIDs(data);
         }
 
         Dispatcher.forwardEvent(GeoGWTEvents.ACTIVATE_BOX_SELECT);
         Dispatcher.forwardEvent(GeoGWTEvents.ACTIVATE_POINT_SELECT);
+
+        if (this.boxSelect.isActive() && this.pointSelect.isActive()) {
+            this.featureInfoActivated = true;
+        }
     }
 
     /**
@@ -574,6 +591,8 @@ public class MapLayoutWidget extends LayoutContainer {
     public void deactivateGetFeatureInfo() {
         Dispatcher.forwardEvent(GeoGWTEvents.DEACTIVATE_BOX_SELECT);
         Dispatcher.forwardEvent(GeoGWTEvents.DEACTIVATE_POINT_SELECT);
+
+        this.featureInfoActivated = false;
     }
 
     /**
