@@ -258,8 +258,9 @@ public class MapView extends View {
             // Filter WMS here using SLD
             //
             Set<String> keyNames = details.getInfoDetails().keySet();
+            Iterator<String> iterator = keyNames.iterator();
+            
             int size = keyNames.size();
-
             if (size > 0) {
                 String selectionWKT = details.getGeometryWKT();
                 Geometry geometry = Geometry.fromWKT(selectionWKT);
@@ -268,22 +269,43 @@ public class MapView extends View {
                 String upper = bounds.getUpperRightX() + "," + bounds.getUpperRightY();
                 String lower = bounds.getLowerLeftX() + "," + bounds.getLowerLeftY();
 
-                Iterator<String> iterator = keyNames.iterator();
-
                 while (iterator.hasNext()) {
                     String layerName = iterator.next();
                     
-                    //
-                    // Build SLD_BODY
-                    //
-                    String sldBody = getSLDBody(layerName, upper, lower, details);
-
+                    WMS layer = getLayerByName(layerName);
+                    
+                    String style = null;
+                    if(layer != null)
+                        style = layer.getParams().getStyles();
+                    
                     WMSParams wmsParams = new WMSParams();
-                    wmsParams.setParameter("SLD_BODY", sldBody);
-                    wmsParams.setFormat("image/gif");
-                    wmsParams.setLayers(layerName);
-                    wmsParams.setTransparent(true);
-
+                    if(style != null && !style.isEmpty()){
+                        //
+                        // Build CQL_FILTER
+                        //
+                        String cql = getCQLFilter(upper, lower);
+                        
+                        wmsParams.setParameter("CQL_FILTER", cql);
+                        wmsParams.setFormat("image/gif");
+                        
+                        //
+                        // For this case we have to provide a selection SLD in GeoServer
+                        //
+                        wmsParams.setStyles(style + "_selected");
+                        wmsParams.setLayers(layerName);
+                        wmsParams.setTransparent(true);
+                    }else{
+                        //
+                        // Build SLD_BODY
+                        //
+                        String sldBody = getSLDBody(layerName, upper, lower, details);
+                        
+                        wmsParams.setParameter("SLD_BODY", sldBody);
+                        wmsParams.setFormat("image/gif");
+                        wmsParams.setLayers(layerName);
+                        wmsParams.setTransparent(true);
+                    }
+                    
                     WMSOptions wmsOptions = new WMSOptions();
                     wmsOptions.setTransitionEffect(TransitionEffect.RESIZE);
                     wmsOptions.setIsBaseLayer(false);
@@ -297,6 +319,40 @@ public class MapView extends View {
         } else {
             MessageBox.alert("Info Details", "The get feature information object details is null", null);
         }
+    }
+
+    /**
+     * @param string
+     * @return WMS
+     */
+    private WMS getLayerByName(String layerName) {
+        List<Layer> layers = this.mapLayout.getLayers();
+        Iterator<Layer> iterator = layers.iterator();
+        
+        WMS match = null;
+        while(iterator.hasNext()){
+            Layer l = iterator.next();
+            
+            if (l instanceof WMS) {
+                WMS wmsLayer = (WMS) l;                
+                String wms = wmsLayer.getParams().getLayers();
+                
+                if(!wms.contains(",") && wms.equals(layerName))
+                    match = wmsLayer;
+            }
+        }
+        
+        return match;
+    }
+
+    /**
+     * @param upper
+     * @param lower
+     * @return String
+     */
+    private String getCQLFilter(String upper, String lower) {
+        String cql = "BBOX(the_geom, " + lower + ", " + upper  + ")";
+        return cql;
     }
 
     /**

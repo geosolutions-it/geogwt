@@ -346,6 +346,7 @@ public class Maptoolbar_panel implements EntryPoint
         wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
         wmsParams.setLayers("topp:states");
+        wmsParams.setStyles("polygon");
         wmsParams.setTransparent(true);
 
         wmsLayerParams = new WMSOptions();
