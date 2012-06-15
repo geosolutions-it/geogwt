@@ -43,7 +43,7 @@
 				<ref bean="zoomOut" />
 				<!-- <ref bean="boxSelect" /> -->
 				<ref bean="drawFeature" />
-				<!-- <ref bean="pointSelect" /> -->
+<!-- 				<ref bean="pointSelect" />  -->
 				<ref bean="getFeatureInfo" />
 				<ref bean="toolbarSeparator_2" />
 				<ref bean="fillItem" />
@@ -131,13 +131,13 @@
 		<property name="order" value="60" />
 	</bean>
 
-	<!-- <bean name="pointSelect" -->
-	<!-- class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool"> -->
-	<!-- <property name="id" value="pointSelect" /> -->
-	<!-- <property name="type" value="toggle" /> -->
-	<!-- <property name="enabled" value="true" /> -->
-	<!-- <property name="order" value="70" /> -->
-	<!-- </bean> -->
+<!-- 	<bean name="pointSelect" -->
+<!-- 	class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool"> -->
+<!-- 	<property name="id" value="pointSelect" /> -->
+<!-- 	<property name="type" value="toggle" /> -->
+<!-- 	<property name="enabled" value="true" /> -->
+<!-- 	<property name="order" value="70" /> -->
+<!-- 	</bean> -->
 
 	<bean name="getFeatureInfo"
 		class="it.geosolutions.geogwt.gui.client.configuration.ActionClientTool">

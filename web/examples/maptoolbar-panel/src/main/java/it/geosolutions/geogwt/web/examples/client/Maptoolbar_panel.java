@@ -347,6 +347,21 @@ public class Maptoolbar_panel implements EntryPoint {
                 osmOptions
         );
         
+        /* overlay layer */
+/*        wmsParams = new WMSParams();
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers("topp:states");
+        wmsParams.setStyles("polygon");
+        wmsParams.setTransparent(true);
+
+        wmsLayerParams = new WMSOptions();
+        wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
+        wmsLayerParams.setIsBaseLayer(false);
+
+        layer = new WMS("States", "http://localhost:8080/geoserver/wms", wmsParams,
+                wmsLayerParams);
+        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer); */
+        
         Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
 
         Dispatcher.forwardEvent(GeoGWTEvents.ATTACH_MAP_WIDGET, maptoolbar_panel);
