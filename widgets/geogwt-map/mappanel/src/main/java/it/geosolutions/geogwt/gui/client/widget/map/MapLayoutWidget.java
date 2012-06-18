@@ -528,8 +528,8 @@ public class MapLayoutWidget extends LayoutContainer {
                     aoi.transform(new Projection("EPSG:900913"), new Projection("EPSG:4326"));
                 }
 
-                // Dispatcher.forwardEvent(GeoGWTEvents.INJECT_WKT, aoi.toString());
-                // Dispatcher.forwardEvent(GeoGWTEvents.DISABLE_DRAW_BUTTON);
+                Dispatcher.forwardEvent(GeoGWTEvents.INJECT_WKT, aoi.toString());
+                Dispatcher.forwardEvent(GeoGWTEvents.DISABLE_DRAW_BUTTON);
             }
         };
 

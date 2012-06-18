@@ -106,6 +106,9 @@ public class GeoGWTEvents {
 
     /** The Constant INIT_TOOLBAR. */
     public static final EventType INIT_TOOLBAR = new EventType();
+    
+    /** The Constant INIT_TOOLBAR. */
+    public static final EventType INJECT_WKT = new EventType();
 
     /** The Constant LOGOUT. */
     public static final EventType LOGOUT = new EventType();
