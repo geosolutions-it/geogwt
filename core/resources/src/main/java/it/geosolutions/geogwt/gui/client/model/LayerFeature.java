@@ -33,6 +33,8 @@
  */
 package it.geosolutions.geogwt.gui.client.model;
 
+import java.util.Map;
+
 import com.extjs.gxt.ui.client.data.BeanModel;
 
 
@@ -52,6 +54,8 @@ public class LayerFeature  extends BeanModel{
     private String geomWKT;
     
     private String geomType;
+    
+    private Map<String, Object> featureProperties;
 
     
     /**
@@ -113,6 +117,20 @@ public class LayerFeature  extends BeanModel{
      */
     public void setGeomType(String geomType) {
         this.geomType = geomType;
+    }
+
+    /**
+     * @return the featureProperties
+     */
+    public Map<String, Object> getFeatureProperties() {
+        return featureProperties;
+    }
+
+    /**
+     * @param featureProperties the featureProperties to set
+     */
+    public void setFeatureProperties(Map<String, Object> featureProperties) {
+        this.featureProperties = featureProperties;
     }
 
     @Override

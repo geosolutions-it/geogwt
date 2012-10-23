@@ -75,6 +75,7 @@ import org.geotools.referencing.CRS;
 import org.geotools.xml.Configuration;
 import org.geotools.xml.Parser;
 import org.opengis.feature.Feature;
+import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.GeometryType;
@@ -129,6 +130,8 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
      * Use "EPSG:3857" for Google CRS 900913
      */
     private String getFeatureCRS = "EPSG:4326";
+    
+    private String propertyNames;
 
     /**
      * 
@@ -249,7 +252,22 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
                     if (geometry instanceof Polygon) {
                         BBOX filter = ff.bbox(ff.property(geomName), bbox);
 
-                        Query query = new Query(layerName, filter, new String[] { geomName });
+                        //
+                        // set properties to get
+                        //
+                        String[] properties = this.propertyNames.split(",");
+                        int size = properties.length;
+                        
+                        String[] p = new String[size + 1];
+                        p[0] = geomName;
+                        
+                        for(int i=1; i<size; i++){
+                            if(properties[i] != null){
+                                p[i] = properties[i];
+                            }
+                        }
+                        
+                        Query query = new Query(layerName, filter, p);
                         query.setCoordinateSystem(crs);
                         
                         // ///////////////////////////////////////////////////////////////////////////
@@ -504,7 +522,23 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
             type = "OpenLayers.Geometry.LineString";
 
         LayerFeature layerFeature = new LayerFeature(featureId, geomWKT, type);
+        
+        if(this.propertyNames != null){
+            Map<String, Object> featureProperties = new HashMap<String, Object>();
+            
+            String[] pnames = this.propertyNames.split(",");
+            int size = pnames.length;
+            for(int i=0; i< size; i++){
+                Property p = feature.getProperty(pnames[i]);
+                if(p != null)
+                    featureProperties.put(p.getName().toString(), p.getValue());
+            } 
+            
+            if(featureProperties.size() > 0)
+                layerFeature.setFeatureProperties(featureProperties); 
+        }
 
+        
         return layerFeature;
     }
     
@@ -620,5 +654,19 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
     public void setGetFeatureCRS(String getFeatureCRS) {
         this.getFeatureCRS = getFeatureCRS;
     }
-    
+
+    /**
+     * @return the propertyNames
+     */
+    public String getPropertyNames() {
+        return propertyNames;
+    }
+
+    /**
+     * @param propertyNames the propertyNames to set
+     */
+    public void setPropertyNames(String propertyNames) {
+        this.propertyNames = propertyNames;
+    }
+
 }

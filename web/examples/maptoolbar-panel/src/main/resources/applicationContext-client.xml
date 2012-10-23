@@ -29,6 +29,7 @@
 		<property name="featureInfoCount" value="20" />
 		<property name="bufferRange" value="2" />
 		<property name="getFeatureCRS" value="EPSG:4326" />
+		<property name="propertyNames" value="STATE_NAME,STATE_ABBR" />
 	</bean>
 
 	<!-- Toolbar configuration -->
