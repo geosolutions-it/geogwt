@@ -39,6 +39,7 @@ import it.geosolutions.geogwt.gui.client.model.LayerFeature;
 import it.geosolutions.geogwt.gui.client.widget.map.ButtonBar;
 import it.geosolutions.geogwt.gui.client.widget.map.MapConfig;
 import it.geosolutions.geogwt.gui.client.widget.map.MapLayoutWidget;
+import it.geosolutions.geogwt.gui.client.widget.map.WMSLayer;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -48,6 +49,7 @@ import java.util.Set;
 import org.gwtopenmaps.openlayers.client.Bounds;
 import org.gwtopenmaps.openlayers.client.LonLat;
 import org.gwtopenmaps.openlayers.client.MapOptions;
+import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.control.Control;
 import org.gwtopenmaps.openlayers.client.control.ZoomBox;
 import org.gwtopenmaps.openlayers.client.geometry.Geometry;
@@ -252,8 +254,9 @@ public class MapView extends View {
 
         GetFeatureInfoDetails details = (GetFeatureInfoDetails) event.getData();
 
+        
         if (details != null) {
-
+            
             //
             // Filter WMS here using SLD
             //
@@ -266,24 +269,29 @@ public class MapView extends View {
                 Geometry geometry = Geometry.fromWKT(selectionWKT);
                 Bounds bounds = geometry.getBounds();
 
-                String upper = bounds.getUpperRightX() + "," + bounds.getUpperRightY();
-                String lower = bounds.getLowerLeftX() + "," + bounds.getLowerLeftY();
-
                 while (iterator.hasNext()) {
                     String layerName = iterator.next();
                     
-                    WMS layer = getLayerByName(layerName);
-                    
+                    WMSLayer layer = getLayerByName(layerName);
+                  
                     String style = null;
                     if(layer != null)
                         style = layer.getParams().getStyles();
                     
                     WMSParams wmsParams = new WMSParams();
+                    
+                    String proj = this.mapLayout.getMap().getProjection();
+                    
+                    if(!proj.contains(layer.getCrs()) && details.isClientReprojectBounds())
+                        bounds.transform(new Projection(proj), new Projection(layer.getCrs()));
+                    
                     if(style != null && !style.isEmpty()){
+                        String bound = bounds.toBBox(null);
+                        
                         //
                         // Build CQL_FILTER
                         //
-                        String cql = getCQLFilter(upper, lower);
+                        String cql = getCQLFilter(bound);
                         
                         wmsParams.setParameter("CQL_FILTER", cql);
                         wmsParams.setFormat("image/gif");
@@ -294,11 +302,14 @@ public class MapView extends View {
                         wmsParams.setStyles(style + "_selected");
                         wmsParams.setLayers(layerName);
                         wmsParams.setTransparent(true);
-                    }else{
+                    }else{     
+                        String upper = bounds.getUpperRightX() + "," + bounds.getUpperRightY();
+                        String lower = bounds.getLowerLeftX() + "," + bounds.getLowerLeftY();
+                        
                         //
                         // Build SLD_BODY
                         //
-                        String sldBody = getSLDBody(layerName, upper, lower, details);
+                        String sldBody = getSLDBody(layerName, upper, lower, details, layer.getCrs());
                         
                         wmsParams.setParameter("SLD_BODY", sldBody);
                         wmsParams.setFormat("image/gif");
@@ -307,6 +318,10 @@ public class MapView extends View {
                     }
                     
                     WMSOptions wmsOptions = new WMSOptions();
+                    
+                    Bounds b = this.mapLayout.getMap().getExtent();
+                    wmsOptions.setMaxExtent(b);
+                    
                     wmsOptions.setTransitionEffect(TransitionEffect.RESIZE);
                     wmsOptions.setIsBaseLayer(false);
 
@@ -325,16 +340,16 @@ public class MapView extends View {
      * @param string
      * @return WMS
      */
-    private WMS getLayerByName(String layerName) {
+    private WMSLayer getLayerByName(String layerName) {
         List<Layer> layers = this.mapLayout.getLayers();
         Iterator<Layer> iterator = layers.iterator();
         
-        WMS match = null;
+        WMSLayer match = null;
         while(iterator.hasNext()){
             Layer l = iterator.next();
             
-            if (l instanceof WMS) {
-                WMS wmsLayer = (WMS) l;                
+            if (l instanceof WMS || l instanceof WMSLayer) {
+                WMSLayer wmsLayer = (WMSLayer) l;                
                 String wms = wmsLayer.getParams().getLayers();
                 
                 if(!wms.contains(",") && wms.equals(layerName))
@@ -350,8 +365,9 @@ public class MapView extends View {
      * @param lower
      * @return String
      */
-    private String getCQLFilter(String upper, String lower) {
-        String cql = "BBOX(the_geom, " + lower + ", " + upper  + ")";
+    private String getCQLFilter(String bound) {
+        
+        String cql = "BBOX(the_geom, " + bound  + ")";
         return cql;
     }
 
@@ -363,18 +379,22 @@ public class MapView extends View {
      * @return String
      */
     private String getSLDBody(String layerName, String upper, String lower,
-            GetFeatureInfoDetails details) {
+            GetFeatureInfoDetails details, String crs) {
+     
         String sldBody = "";
 
         List<LayerFeature> list = details.getInfoDetails().get(layerName);
         if (list.size() > 0) {
+            
+            if(crs.contains(":"))
+                crs = crs.split(":")[1];
 
             if (list.get(0).getGeomType().equals(Geometry.POLYGON_CLASS_NAME)) {
                 sldBody = "<StyledLayerDescriptor version=\"1.0.0\"><UserLayer><Name>"
                         + layerName
                         + "</Name><UserStyle><Name>UserSelection</Name><FeatureTypeStyle><Rule>"
                         + "<Filter xmlns:gml=\"http://www.opengis.net/gml\">"
-                        + "<BBOX><PropertyName>the_geom</PropertyName><Box srsName=\"http://www.opengis.net/gml/srs/epsg.xml#4326\">"
+                        + "<BBOX><PropertyName>the_geom</PropertyName><Box srsName=\"http://www.opengis.net/gml/srs/epsg.xml#" + crs + "\">"
                         + "<coordinates>" + lower + " " + upper
                         + "</coordinates></Box></BBOX></Filter><PolygonSymbolizer><Fill>"
                         + "<CssParameter name=\"fill\">#FF0000</CssParameter>"
@@ -389,7 +409,7 @@ public class MapView extends View {
                         + "</Name><UserStyle><Name>UserSelection</Name><FeatureTypeStyle><Rule>"
                         + "<Filter xmlns:gml=\"http://www.opengis.net/gml\"><BBOX>"
                         + "<PropertyName>the_geom</PropertyName>"
-                        + "<Box srsName=\"http://www.opengis.net/gml/srs/epsg.xml#4326\"><coordinates>"
+                        + "<Box srsName=\"http://www.opengis.net/gml/srs/epsg.xml#" + crs + "\"><coordinates>"
                         + lower
                         + " "
                         + upper
@@ -405,7 +425,7 @@ public class MapView extends View {
                         + layerName
                         + "</Name><UserStyle><Name>UserSelection</Name><FeatureTypeStyle><Rule>"
                         + "<Filter xmlns:gml=\"http://www.opengis.net/gml\"><BBOX><PropertyName>the_geom</PropertyName>"
-                        + "<Box srsName=\"http://www.opengis.net/gml/srs/epsg.xml#4326\"><coordinates>"
+                        + "<Box srsName=\"http://www.opengis.net/gml/srs/epsg.xml#" + crs + "\"><coordinates>"
                         + lower + " " + upper
                         + "</coordinates></Box></BBOX></Filter><LineSymbolizer>"
                         + "<Stroke><CssParameter name=\"stroke\">#FFFFFF</CssParameter>"

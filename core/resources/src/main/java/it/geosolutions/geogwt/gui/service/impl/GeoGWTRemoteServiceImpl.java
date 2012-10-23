@@ -67,6 +67,7 @@ import org.geotools.factory.CommonFactoryFinder;
 import org.geotools.factory.GeoTools;
 import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
+import org.geotools.geometry.jts.JTS;
 import org.geotools.geometry.jts.ReferencedEnvelope;
 import org.geotools.gml2.GMLConfiguration;
 import org.geotools.ows.ServiceException;
@@ -81,6 +82,7 @@ import org.opengis.filter.FilterFactory2;
 import org.opengis.filter.spatial.BBOX;
 import org.opengis.geometry.MismatchedDimensionException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
+import org.opengis.referencing.operation.MathTransform;
 import org.xml.sax.SAXException;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
@@ -122,6 +124,11 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
     private final WKTReader reader;
     
     private int bufferRange = 2;
+    
+    /*
+     * Use "EPSG:3857" for Google CRS 900913
+     */
+    private String getFeatureCRS = "EPSG:4326";
 
     /**
      * 
@@ -145,8 +152,11 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
 
         if(logger.isLoggable(Level.INFO))
             logger.info(logMsg);
-
-        final CoordinateReferenceSystem crs = CRS.decode(crsCode, true);
+ 
+        // ////////////////////////////////////////////////////////
+        // Use GT compliant "EPSG:3857" for Google CRS 900913
+        // ////////////////////////////////////////////////////////
+        final CoordinateReferenceSystem crs = this.getFeatureCRS.equals("EPSG:900913") ? CRS.decode("EPSG:3857", true) : CRS.decode(this.getFeatureCRS, true);
 
         //
         // Build WFS capabilities url string.
@@ -177,17 +187,35 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
                 //
                 Geometry geometry = reader.read(geometryWKT);
                 
-                //
-                // take only the CRS integer code.
-                //
-                geometry.setSRID((crsCode.indexOf(":") != -1) ? Integer.valueOf(crsCode.split(":")[1]) : Integer.valueOf(crsCode));
+                if(!this.getFeatureCRS.equals(crsCode)){
+                    boolean lenient = true; // allow for some error due to different datums
+                    
+                    crsCode = crsCode.equals("EPSG:900913") ? "EPSG:3857" : crsCode;
+                    MathTransform transform = CRS.findMathTransform(CRS.decode(crsCode, true), crs, lenient);
+                    
+                    geometry = JTS.transform(geometry, transform);
+                    
+                    //
+                    // take only the CRS integer code.
+                    //
+                    geometry.setSRID((this.getFeatureCRS.indexOf(":") != -1) ? Integer.valueOf(this.getFeatureCRS.split(":")[1]) : Integer.valueOf(this.getFeatureCRS));   
+                    geometry = geometry.getEnvelope();
+                }else{
+                    //
+                    // take only the CRS integer code.
+                    //
+                    geometry.setSRID((crsCode.indexOf(":") != -1) ? Integer.valueOf(crsCode.split(":")[1]) : Integer.valueOf(crsCode));                    
+                }
 
                 Envelope envelope = geometry.getEnvelopeInternal();
                 ReferencedEnvelope bbox = new ReferencedEnvelope(envelope.getMinX(),
                         envelope.getMaxX(), envelope.getMinY(), envelope.getMaxY(), crs);
+                
+                // ///////////////////////////////////////////////////////////////////////////
                 // ReferencedEnvelope bbox = new ReferencedEnvelope(envelope.getMinX(),
                 // envelope.getMaxX(), envelope.getMinY(), envelope.getMaxY(),
                 // DefaultGeographicCRS.WGS84);
+                // ///////////////////////////////////////////////////////////////////////////
 
                 //
                 // One cycle for each layer
@@ -223,8 +251,11 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
 
                         Query query = new Query(layerName, filter, new String[] { geomName });
                         query.setCoordinateSystem(crs);
+                        
+                        // ///////////////////////////////////////////////////////////////////////////
                         // Query query = new Query(layerName, filter, new String[] { geomName });
                         // query.setCoordinateSystem(DefaultGeographicCRS.WGS84);
+                        // ///////////////////////////////////////////////////////////////////////////
 
                         FeatureCollection<SimpleFeatureType, SimpleFeature> features = source
                                 .getFeatures(query);
@@ -258,8 +289,8 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
                 //
                 // Instantiate the info details
                 //
-                details = new GetFeatureInfoDetails(geometryWKT, this.geoServerUrl, infoDetails);
-
+                details = new GetFeatureInfoDetails(geometry.toText(), this.geoServerUrl, infoDetails);
+                details.setClientReprojectBounds(false);
             }
 
         } catch (ParseException e) {
@@ -422,6 +453,7 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
 
                 details = new GetFeatureInfoDetails(geometry.toText(), this.geoServerUrl,
                         infoDetails);
+                details.setClientReprojectBounds(true);
             }
 
         } catch (IOException e) {
@@ -575,4 +607,18 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
         this.bufferRange = bufferRange;
     }
 
+    /**
+     * @return the getFeatureCRS
+     */
+    public String getGetFeatureCRS() {
+        return getFeatureCRS;
+    }
+
+    /**
+     * @param getFeatureCRS the getFeatureCRS to set
+     */
+    public void setGetFeatureCRS(String getFeatureCRS) {
+        this.getFeatureCRS = getFeatureCRS;
+    }
+    
 }

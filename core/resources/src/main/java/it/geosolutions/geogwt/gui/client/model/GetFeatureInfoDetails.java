@@ -54,6 +54,8 @@ public class GetFeatureInfoDetails extends BeanModel{
     private String geoserverURL;
     
     private Map<String, List<LayerFeature>> infoDetails;
+    
+    private boolean clientReprojectBounds = false;
 
     
     /**
@@ -124,7 +126,20 @@ public class GetFeatureInfoDetails extends BeanModel{
     public void setInfoDetails(Map<String, List<LayerFeature>> infoDetails) {
         this.infoDetails = infoDetails;
     }
+    
+    /**
+     * @return the clientReprojectBounds
+     */
+    public boolean isClientReprojectBounds() {
+        return clientReprojectBounds;
+    }
 
+    /**
+     * @param clientReprojectBounds the clientReprojectBounds to set
+     */
+    public void setClientReprojectBounds(boolean clientReprojectBounds) {
+        this.clientReprojectBounds = clientReprojectBounds;
+    }
 
     @Override
     public int hashCode() {

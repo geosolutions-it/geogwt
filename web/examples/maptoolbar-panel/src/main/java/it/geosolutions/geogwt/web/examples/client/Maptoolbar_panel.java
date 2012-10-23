@@ -37,15 +37,17 @@ import it.geosolutions.geogwt.gui.client.GeoGWTEvents;
 import it.geosolutions.geogwt.gui.client.GeoGWTUtils;
 import it.geosolutions.geogwt.gui.client.configuration.GeoGWTConfiguration;
 import it.geosolutions.geogwt.gui.client.service.GeoGWTConfigurationRemote;
+import it.geosolutions.geogwt.gui.client.widget.map.WMSLayer;
 import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteService;
 import it.geosolutions.geogwt.web.examples.client.service.SessionControllerRemoteServiceAsync;
 
 import org.gwtopenmaps.openlayers.client.MapOptions;
-import org.gwtopenmaps.openlayers.client.MapUnits;
-import org.gwtopenmaps.openlayers.client.layer.Layer;
-import org.gwtopenmaps.openlayers.client.layer.OSM;
-import org.gwtopenmaps.openlayers.client.layer.OSMOptions;
+import org.gwtopenmaps.openlayers.client.layer.GoogleV3;
+import org.gwtopenmaps.openlayers.client.layer.GoogleV3MapType;
+import org.gwtopenmaps.openlayers.client.layer.GoogleV3Options;
 import org.gwtopenmaps.openlayers.client.layer.TransitionEffect;
+import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
+import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 import com.extjs.gxt.ui.client.GXT;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
@@ -253,19 +255,19 @@ public class Maptoolbar_panel implements EntryPoint {
         maptoolbar_panel.setHeaderVisible(false);
         maptoolbar_panel.setHeading("GeoGWT MapView");
         maptoolbar_panel.addListener(Events.Resize, new Listener<BaseEvent>()
-            {
-                public void handleEvent(BaseEvent be)
                 {
-                    Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
-                }
-            });
+            public void handleEvent(BaseEvent be)
+            {
+                Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
+            }
+                });
         maptoolbar_panel.addListener(Events.Move, new Listener<BaseEvent>()
-            {
-                public void handleEvent(BaseEvent be)
                 {
-                    Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
-                }
-            });
+            public void handleEvent(BaseEvent be)
+            {
+                Dispatcher.forwardEvent(GeoGWTEvents.UPDATE_MAP_SIZE);
+            }
+                });
 
         /* ********************************************* */
 
@@ -308,47 +310,36 @@ public class Maptoolbar_panel implements EntryPoint {
         // add center panel to center region of viewport
         main.add(center, data);
 
-        /* map options */
+        /* 
+        // map options
         MapOptions mapOptions = new MapOptions();
         mapOptions.setUnits(MapUnits.DEGREES);
         mapOptions.setProjection("EPSG:4326");
 
         Dispatcher.forwardEvent(GeoGWTEvents.INIT_MAPS_UI_MODULE, mapOptions);
 
-        /* base layer */
-//        WMSParams wmsParams = new WMSParams();
-//        wmsParams.setFormat("image/png");
-//        wmsParams.setLayers("basic");
-//        wmsParams.setStyles("");
-//
-//        WMSOptions wmsLayerParams = new WMSOptions();
-//        wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
-//
-//        String[] urlArray = new String[] {
-//                "http://vmap0.tiles.osgeo.org/wms/vmap0?test=${x}",
-//                "http://vmap0.tiles.osgeo.org/wms/vmap0?test=${y}",
-//                "http://vmap0.tiles.osgeo.org/wms/vmap0?test=${z}"
-//        };
-//        
-//        WMS layer = new WMS("OpenLayers Base Map", urlArray, wmsParams,
-//                wmsLayerParams);
-        
+        // base layer
+        WMSParams wmsParams = new WMSParams();
+        wmsParams.setFormat("image/png");
+        wmsParams.setLayers("basic");
+        wmsParams.setStyles("");
+
+        WMSOptions wmsLayerParams = new WMSOptions();
+        wmsLayerParams.setTransitionEffect(TransitionEffect.RESIZE);
+
         String[] urlArray = new String[] {
-                        "http://a.tile.openstreetmap.org/${z}/${x}/${y}.png",
-                        "http://b.tile.openstreetmap.org/${z}/${x}/${y}.png",
-                        "http://c.tile.openstreetmap.org/${z}/${x}/${y}.png"};
-        
-        OSMOptions osmOptions = new OSMOptions();
-        osmOptions.setTransitionEffect(TransitionEffect.RESIZE);
-        
-        Layer layer = new OSM(
-                "OSM", 
-                urlArray, 
-                osmOptions
-        );
-        
-        /* overlay layer */
-/*        wmsParams = new WMSParams();
+                "http://vmap0.tiles.osgeo.org/wms/vmap0?test=${x}",
+                "http://vmap0.tiles.osgeo.org/wms/vmap0?test=${y}",
+                "http://vmap0.tiles.osgeo.org/wms/vmap0?test=${z}"
+        };
+
+        WMS layer = new WMS("OpenLayers Base Map", urlArray, wmsParams,
+                wmsLayerParams);
+
+        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
+
+        // overlay layer 
+        wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
         wmsParams.setLayers("topp:states");
         wmsParams.setStyles("polygon");
@@ -360,16 +351,42 @@ public class Maptoolbar_panel implements EntryPoint {
 
         layer = new WMS("States", "http://localhost:8080/geoserver/wms", wmsParams,
                 wmsLayerParams);
-        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer); */
+        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);*/
         
-        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);
+        // /////////////////////////////////////
+        // new code
+        // /////////////////////////////////////
+        
+        //Definizione WMS data layer
+        WMSParams wmsP = new WMSParams();
+        wmsP.setFormat("image/png");
+        wmsP.setLayers("topp:states");
+        wmsP.setTransparent(true);
+        wmsP.setStyles("");
 
+        WMSOptions wmsO = new WMSOptions();
+        wmsO.setSingleTile(true);
+        wmsO.setTransitionEffect(TransitionEffect.RESIZE);
+
+        WMSLayer layer = new WMSLayer("States", "http://localhost:8181/geoserver/wms", wmsP, wmsO, "EPSG:4326");
+        
+        //Definizione GOOGLE layer
+        GoogleV3Options gOpt = new GoogleV3Options();
+        gOpt.setType(GoogleV3MapType.G_HYBRID_MAP);
+        GoogleV3 gLayer = new GoogleV3("Hybrid Map", gOpt);
+
+        //Definizione MAPOPTIONS
+        MapOptions mapOptions = new MapOptions();
+        mapOptions.setNumZoomLevels(25);
+
+        Dispatcher.forwardEvent(GeoGWTEvents.INIT_MAPS_UI_MODULE, mapOptions);
+        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, gLayer);   
+        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);    
+        
         Dispatcher.forwardEvent(GeoGWTEvents.ATTACH_MAP_WIDGET, maptoolbar_panel);
 
         // Adjusting the Zoom level
-        // Dispatcher.forwardEvent(GeoGWTEvents.ZOOM_TO_MAX_EXTENT);
-        Dispatcher.forwardEvent(GeoGWTEvents.SET_MAP_CENTER, new Double[] { 13.0, 42.0 });
-        Dispatcher.forwardEvent(GeoGWTEvents.ZOOM, 5);
+        Dispatcher.forwardEvent(GeoGWTEvents.ZOOM_TO_MAX_EXTENT);
     }
 
     /**
@@ -395,15 +412,15 @@ public class Maptoolbar_panel implements EntryPoint {
                 MessageBox.alert("Session Timeout",
                         "Your session is about to timeout. Please press \"OK\" to keep working.",
                         new Listener<MessageBoxEvent>() {
-                            public void handleEvent(MessageBoxEvent be) {
-                                // User responded before the response timer elapsed, so keep session
-                                // by calling the service.
-                                sessionTimeoutResponseTimer.cancel();
-                                sessionTimeoutTimer.cancel();
-                                sessionTimeoutTimer.schedule(x);
-                                keepUserSessionAlive();
-                            }
-                        });
+                    public void handleEvent(MessageBoxEvent be) {
+                        // User responded before the response timer elapsed, so keep session
+                        // by calling the service.
+                        sessionTimeoutResponseTimer.cancel();
+                        sessionTimeoutTimer.cancel();
+                        sessionTimeoutTimer.schedule(x);
+                        keepUserSessionAlive();
+                    }
+                });
             }
         };
         sessionTimeoutTimer.schedule(x);
@@ -422,10 +439,10 @@ public class Maptoolbar_panel implements EntryPoint {
             public void onFailure(final Throwable caught) {
                 MessageBox.alert("Session Timeout", caught.toString() + THE_APP_WILL_CLOSE,
                         new Listener<MessageBoxEvent>() {
-                            public void handleEvent(MessageBoxEvent be) {
-                                closeBrowser();
-                            }
-                        });
+                    public void handleEvent(MessageBoxEvent be) {
+                        closeBrowser();
+                    }
+                });
             }
         };
         service.keepUserSessionAlive(callback);
@@ -437,10 +454,10 @@ public class Maptoolbar_panel implements EntryPoint {
     private void displaySessionTimedOut() {
         MessageBox.alert("Session Timeout", "Your session has timed out." + THE_APP_WILL_CLOSE,
                 new Listener<MessageBoxEvent>() {
-                    public void handleEvent(MessageBoxEvent be) {
-                        closeBrowser();
-                    }
-                });
+            public void handleEvent(MessageBoxEvent be) {
+                closeBrowser();
+            }
+        });
     }
 
     /**
@@ -469,10 +486,10 @@ public class Maptoolbar_panel implements EntryPoint {
             public void onFailure(final Throwable caught) {
                 MessageBox.alert("Error", caught.toString() + THE_APP_WILL_CLOSE,
                         new Listener<MessageBoxEvent>() {
-                            public void handleEvent(MessageBoxEvent be) {
-                                closeBrowser();
-                            }
-                        });
+                    public void handleEvent(MessageBoxEvent be) {
+                        closeBrowser();
+                    }
+                });
             }
         };
         service.getUserSessionTimeoutMillis(callback);

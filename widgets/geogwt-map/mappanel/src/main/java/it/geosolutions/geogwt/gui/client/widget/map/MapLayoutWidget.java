@@ -367,17 +367,19 @@ public class MapLayoutWidget extends LayoutContainer {
                         && !Double.valueOf(bounds.getUpperRightX()).isNaN()
                         && !Double.valueOf(bounds.getUpperRightY()).isNaN()) {
 
-                    // MessageBox.alert("", bounds.toBBox(4).toString(), null);
+//                    MessageBox.alert("", bounds.toBBox(4).toString(), null);
 
-                    if (isGoogle) {
-                        bounds.transform(new Projection("EPSG:900913"), new Projection("EPSG:4326"));
-                    }
+//                    if (isGoogle) {
+//                        bounds.transform(new Projection("EPSG:900913"), new Projection("EPSG:4326"));
+//                    }
 
                     List<String> layersToQuery = getQueryLayerList();
 
                     String crsCode = map.getProjection();
+                    String wkt = bounds.toGeometry().toString();
+                    
                     GeoGWTRemoteService.Util.getInstance().getFeatures(
-                            bounds.toGeometry().toString(), layersToQuery, crsCode,
+                            wkt, layersToQuery, crsCode,
                             new AsyncCallback<GetFeatureInfoDetails>() {
 
                                 public void onFailure(Throwable caught) {
@@ -417,8 +419,8 @@ public class MapLayoutWidget extends LayoutContainer {
             for (int i = 0; i < size; i++) {
                 Layer l = layers.get(i);
 
-                if (l instanceof WMS) {
-                    WMS wmsLayer = (WMS) l;
+                if (l instanceof WMS || l instanceof WMSLayer) {
+                    WMSLayer wmsLayer = (WMSLayer) l;
 
                     //
                     // Only the visible layers should be taken
@@ -455,13 +457,13 @@ public class MapLayoutWidget extends LayoutContainer {
         PointSelectListener listener = new PointSelectListener() {
 
             public void onPointSelected(LonLat lonlat) {
-
-                // MessageBox.alert("", "Lon: " + lonlat.lon() + "  Lat: " + lonlat.lat(), null);
-
-                if (isGoogle) {
-                    lonlat.transform("EPSG:900913", "EPSG:4326");
-                }
-
+                
+//                MessageBox.alert("", "Lon: " + lonlat.lon() + "  Lat: " + lonlat.lat(), null);
+                
+//                if (isGoogle) {
+//                    lonlat.transform("EPSG:900913", "EPSG:4326");
+//                }
+                
                 Pixel pixel = map.getPixelFromLonLat(lonlat);
 
                 PointSelectDetails psd = new PointSelectDetails(lonlat.lon(), lonlat.lat(),
@@ -477,8 +479,7 @@ public class MapLayoutWidget extends LayoutContainer {
                     String crsCode = map.getProjection();
 
                     Bounds bounds = map.getExtent();
-                    String bbox = bounds.getLowerLeftX() + "," + bounds.getLowerLeftY() + ","
-                            + bounds.getUpperRightX() + "," + bounds.getUpperRightY();
+                    String bbox = bounds.toBBox(null);
 
                     int mapHeight = (int) map.getSize().getHeight();
                     int mapWidth = (int) map.getSize().getWidth();
@@ -627,7 +628,11 @@ public class MapLayoutWidget extends LayoutContainer {
      */
     public void activateBoxSelect() {
         if (this.boxSelect == null) {
-            initBoxSelectControl(false);
+            String proj = this.mapWidget.getMap().getProjection();
+            if(proj.equals("EPSG:900913"))
+                initBoxSelectControl(true);
+            else
+                initBoxSelectControl(false);
         }
 
         this.boxSelect.activate();
@@ -638,7 +643,11 @@ public class MapLayoutWidget extends LayoutContainer {
      */
     public void deactivateBoxSelect() {
         if (this.boxSelect == null) {
-            initBoxSelectControl(false);
+            String proj = this.mapWidget.getMap().getProjection();
+            if(proj.equals("EPSG:900913"))
+                initBoxSelectControl(true);
+            else
+                initBoxSelectControl(false);
         }
 
         this.boxSelect.deactivate();
@@ -649,7 +658,11 @@ public class MapLayoutWidget extends LayoutContainer {
      */
     public void activatePointSelect() {
         if (this.pointSelect == null) {
-            initPointSelectControl(false);
+            String proj = this.mapWidget.getMap().getProjection();
+            if(proj.equals("EPSG:900913"))
+                initPointSelectControl(true);
+            else
+                initPointSelectControl(false);
         }
 
         this.pointSelect.activate();
@@ -660,7 +673,11 @@ public class MapLayoutWidget extends LayoutContainer {
      */
     public void deactivatePointSelect() {
         if (this.pointSelect == null) {
-            initPointSelectControl(false);
+            String proj = this.mapWidget.getMap().getProjection();
+            if(proj.equals("EPSG:900913"))
+                initPointSelectControl(true);
+            else
+                initPointSelectControl(false);
         }
 
         this.pointSelect.deactivate();
