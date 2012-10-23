@@ -282,8 +282,12 @@ public class MapView extends View {
                     
                     String proj = this.mapLayout.getMap().getProjection();
                     
-                    if(!proj.contains(layer.getCrs()) && details.isClientReprojectBounds())
-                        bounds.transform(new Projection(proj), new Projection(layer.getCrs()));
+                    String layerCRS = layer.getCrs();
+                    if(layerCRS == null)
+                        layerCRS = "EPSG:4326";
+                    
+                    if(!proj.contains(layerCRS) && details.isClientReprojectBounds())
+                        bounds.transform(new Projection(proj), new Projection(layerCRS));
                     
                     if(style != null && !style.isEmpty()){
                         String bound = bounds.toBBox(null);
