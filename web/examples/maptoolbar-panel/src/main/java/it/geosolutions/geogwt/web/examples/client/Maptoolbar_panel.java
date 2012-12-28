@@ -368,7 +368,19 @@ public class Maptoolbar_panel implements EntryPoint {
         wmsO.setSingleTile(true);
         wmsO.setTransitionEffect(TransitionEffect.RESIZE);
 
-        WMSLayer layer = new WMSLayer("States", "http://localhost:8181/geoserver/wms", wmsP, wmsO, "EPSG:4326");
+        WMSLayer layer = new WMSLayer("States", "http://localhost:8080/geoserver/wms", wmsP, wmsO, "EPSG:4326");
+        
+        WMSParams wmsG = new WMSParams();
+        wmsG.setFormat("image/png");
+        wmsG.setLayers("tiger:poi");
+        wmsG.setTransparent(true);
+        wmsG.setStyles("");
+
+        WMSOptions wmsI = new WMSOptions();
+        wmsI.setSingleTile(true);
+        wmsI.setTransitionEffect(TransitionEffect.RESIZE);
+
+        WMSLayer layerA = new WMSLayer("Poi", "http://localhost:8080/geoserver/wms", wmsG, wmsI, "EPSG:4326");
         
         //Definizione GOOGLE layer
         GoogleV3Options gOpt = new GoogleV3Options();
@@ -382,6 +394,7 @@ public class Maptoolbar_panel implements EntryPoint {
         Dispatcher.forwardEvent(GeoGWTEvents.INIT_MAPS_UI_MODULE, mapOptions);
         Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, gLayer);   
         Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layer);    
+        Dispatcher.forwardEvent(GeoGWTEvents.ADD_LAYER, layerA);   
         
         Dispatcher.forwardEvent(GeoGWTEvents.ATTACH_MAP_WIDGET, maptoolbar_panel);
 

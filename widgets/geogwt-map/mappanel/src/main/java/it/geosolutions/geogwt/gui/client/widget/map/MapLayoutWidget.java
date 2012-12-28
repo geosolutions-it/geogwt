@@ -448,7 +448,7 @@ public class MapLayoutWidget extends LayoutContainer {
 
         return layersToQuery;
     }
-
+    
     /**
      * @param isGoogle the is google
      */

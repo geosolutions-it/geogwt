@@ -43,6 +43,7 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -75,10 +76,12 @@ import org.geotools.referencing.CRS;
 import org.geotools.xml.Configuration;
 import org.geotools.xml.Parser;
 import org.opengis.feature.Feature;
+import org.opengis.feature.GeometryAttribute;
 import org.opengis.feature.Property;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.GeometryType;
+import org.opengis.feature.type.Name;
 import org.opengis.filter.FilterFactory2;
 import org.opengis.filter.spatial.BBOX;
 import org.opengis.geometry.MismatchedDimensionException;
@@ -131,7 +134,7 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
      */
     private String getFeatureCRS = "EPSG:4326";
     
-    private String propertyNames;
+    // private String propertyNames;
 
     /**
      * 
@@ -255,19 +258,10 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
                         //
                         // set properties to get
                         //
-                        String[] properties = this.propertyNames.split(",");
-                        int size = properties.length;
+                        //String props = this.propertyNames + "," + geomName;
+                        //String[] properties = props.split(",");
                         
-                        String[] p = new String[size + 1];
-                        p[0] = geomName;
-                        
-                        for(int i=1; i<size; i++){
-                            if(properties[i] != null){
-                                p[i] = properties[i];
-                            }
-                        }
-                        
-                        Query query = new Query(layerName, filter, p);
+                        Query query = new Query(layerName, filter/*, properties*/);
                         query.setCoordinateSystem(crs);
                         
                         // ///////////////////////////////////////////////////////////////////////////
@@ -304,6 +298,8 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
                     }
                 }
 
+//                System.out.println(":::::::::::::::::::::::::::::infoDetails  " + infoDetails);
+                
                 //
                 // Instantiate the info details
                 //
@@ -469,6 +465,7 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
                 Geometry geometry = reader.read(wkt);
                 geometry = geometry.buffer(bufferRange * resolution);
 
+                //System.out.println(":::::::::::::::::::::::::::::infoDetails  " + infoDetails);
                 details = new GetFeatureInfoDetails(geometry.toText(), this.geoServerUrl,
                         infoDetails);
                 details.setClientReprojectBounds(true);
@@ -505,10 +502,10 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
         //
         String geomWKT = ((Geometry) feature.getDefaultGeometryProperty().getValue()).getCentroid()
                 .toText();
-        // String geomWKT = feature.getDefaultGeometryProperty().getValue()
-        // .toString();
-
-        GeometryType geomType = feature.getDefaultGeometryProperty().getType();
+        
+        GeometryAttribute geomAttribute = feature.getDefaultGeometryProperty();
+        GeometryType geomType = geomAttribute.getType();
+        Name geomPropName = geomAttribute.getName();
 
         String type = null;
         if (geomType.getBinding().equals(Point.class)
@@ -523,22 +520,26 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
 
         LayerFeature layerFeature = new LayerFeature(featureId, geomWKT, type);
         
-        if(this.propertyNames != null){
+//        if(this.propertyNames != null){
             Map<String, Object> featureProperties = new HashMap<String, Object>();
             
-            String[] pnames = this.propertyNames.split(",");
-            int size = pnames.length;
-            for(int i=0; i< size; i++){
-                Property p = feature.getProperty(pnames[i]);
-                if(p != null)
-                    featureProperties.put(p.getName().toString(), p.getValue());
-            } 
+            Collection<Property> properties = feature.getProperties();
+
+            Iterator<Property> iterator = properties.iterator();
             
+            //
+            // We select all properties except the_geom
+            //
+            while(iterator.hasNext()){
+                Property p = iterator.next();
+                if(p != null && !p.getName().equals(geomPropName))
+                    featureProperties.put(p.getName().toString(), p.getValue());
+            }
+
             if(featureProperties.size() > 0)
                 layerFeature.setFeatureProperties(featureProperties); 
-        }
+//        }
 
-        
         return layerFeature;
     }
     
@@ -655,18 +656,18 @@ public class GeoGWTRemoteServiceImpl implements IGeoGWTRemoteService {
         this.getFeatureCRS = getFeatureCRS;
     }
 
-    /**
-     * @return the propertyNames
-     */
-    public String getPropertyNames() {
-        return propertyNames;
-    }
-
-    /**
-     * @param propertyNames the propertyNames to set
-     */
-    public void setPropertyNames(String propertyNames) {
-        this.propertyNames = propertyNames;
-    }
+//    /**
+//     * @return the propertyNames
+//     */
+//    public String getPropertyNames() {
+//        return propertyNames;
+//    }
+//
+//    /**
+//     * @param propertyNames the propertyNames to set
+//     */
+//    public void setPropertyNames(String propertyNames) {
+//        this.propertyNames = propertyNames;
+//    }
 
 }

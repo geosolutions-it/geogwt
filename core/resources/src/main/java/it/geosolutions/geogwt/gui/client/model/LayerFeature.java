@@ -140,6 +140,7 @@ public class LayerFeature  extends BeanModel{
         result = prime * result + ((featureId == null) ? 0 : featureId.hashCode());
         result = prime * result + ((geomType == null) ? 0 : geomType.hashCode());
         result = prime * result + ((geomWKT == null) ? 0 : geomWKT.hashCode());
+        result = prime * result + ((featureProperties == null) ? 0 : featureProperties.hashCode());
         return result;
     }
 
@@ -167,13 +168,18 @@ public class LayerFeature  extends BeanModel{
                 return false;
         } else if (!geomWKT.equals(other.geomWKT))
             return false;
+        if (featureProperties == null) {
+            if (other.featureProperties != null)
+                return false;
+        } else if (!featureProperties.equals(other.featureProperties))
+            return false;
         return true;
     }
 
     @Override
     public String toString() {
         return "LayerFeature [featureId=" + featureId + ", geomWKT=" + geomWKT + ", geomType="
-                + geomType + "]";
+                + geomType +  ", featureProperties=" + featureProperties.toString() + "]";
     }
 
 }

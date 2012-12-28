@@ -21,7 +21,7 @@
 	<!-- Remote service -->
 	<bean id="geoGWTRemoteService"
 		class="it.geosolutions.geogwt.gui.service.impl.GeoGWTRemoteServiceImpl">
-		<property name="geoServerUrl" value="http://localhost:8181/geoserver" />
+		<property name="geoServerUrl" value="http://localhost:8080/geoserver" />
 		<property name="geoServerUser" value="" />
 		<property name="geoServerPassword" value="" />
 		<property name="wmsVersion" value="1.1.1" />
@@ -29,7 +29,7 @@
 		<property name="featureInfoCount" value="20" />
 		<property name="bufferRange" value="2" />
 		<property name="getFeatureCRS" value="EPSG:4326" />
-		<property name="propertyNames" value="STATE_NAME,STATE_ABBR" />
+		<!-- property name="propertyNames" value="state_fips,sub_region,state_name,state_abbr" / -->
 	</bean>
 
 	<!-- Toolbar configuration -->
