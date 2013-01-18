@@ -1,23 +1,19 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-
-	<parent>
-		<groupId>it.geosolutions.geogwt.web.examples</groupId>
-        <artifactId>geogwt-web-examples</artifactId>
-        <version>0.2-SNAPSHOT</version>
-	</parent>
-
-	<groupId>it.geosolutions.geogwt.web.examples</groupId>
-    <artifactId>gridwidget</artifactId>
-	<packaging>war</packaging>
-    <name>GeoGWT - Web - Examples - gridwidget</name>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-<!--	<pluginRepositories>
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>it.geosolutions.geogwt.web.examples</groupId>
+    <artifactId>geogwt-web-examples</artifactId>
+    <version>0.3-SNAPSHOT</version>
+  </parent>
+  <groupId>it.geosolutions.geogwt.web.examples</groupId>
+  <artifactId>gridwidget</artifactId>
+  <packaging>war</packaging>
+  <name>GeoGWT - Web - Examples - gridwidget</name>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <!--	<pluginRepositories>
 		<pluginRepository>
 			<id>gwt-maven</id>
 			<url>http://gwt-maven.googlecode.com/svn/trunk/mavenrepo</url>
@@ -31,267 +27,244 @@
           </url>
 		</repository>
 	</repositories>-->
-
-
-	<dependencies>
-
-		<!-- =============================================================== -->
-		<!-- 4J UTILS -->
-		<!-- =============================================================== -->
-		<dependency>
-			<groupId>dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-		</dependency>
-		
-	    <!-- =============================================================== -->
-	    <!-- GeoGWT Core                                                         -->
-	    <!-- =============================================================== -->
-	
-	    <dependency>
-			<groupId>it.geosolutions.geogwt.core</groupId>
-	        <artifactId>geogwt-resources</artifactId>
-		</dependency>
-
-    	<!-- =============================================================== -->
-
-		<!-- GeoGWT -->
-		<dependency>
-			<groupId>it.geosolutions.geogwt.widgets.map</groupId>
-			<artifactId>mappanel</artifactId>
-		</dependency>
-	
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-servlet</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		
-		<!-- GXT -->
-		<dependency>
-			<groupId>com.extjs</groupId>
-			<artifactId>gxt</artifactId>
-		</dependency>
-
-		<!-- dependency>
+  <dependencies>
+    <!-- =============================================================== -->
+    <!-- 4J UTILS -->
+    <!-- =============================================================== -->
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+    </dependency>
+    <!-- =============================================================== -->
+    <!-- GeoGWT Core                                                         -->
+    <!-- =============================================================== -->
+    <dependency>
+      <groupId>it.geosolutions.geogwt.core</groupId>
+      <artifactId>geogwt-resources</artifactId>
+    </dependency>
+    <!-- =============================================================== -->
+    <!-- GeoGWT -->
+    <dependency>
+      <groupId>it.geosolutions.geogwt.widgets.map</groupId>
+      <artifactId>mappanel</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-servlet</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- GXT -->
+    <dependency>
+      <groupId>com.extjs</groupId>
+      <artifactId>gxt</artifactId>
+    </dependency>
+    <!-- dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-incubator</artifactId>
 		</dependency -->
-
-		<!-- GWT-OL Resources -->
-		<!-- dependency>
+    <!-- GWT-OL Resources -->
+    <!-- dependency>
 			<groupId>org.gwtopenmaps.openlayers</groupId>
 			<artifactId>openlayers_gwt</artifactId>
 		</dependency -->
-		<dependency>
-			<groupId>org.gwtopenmaps.openlayers</groupId>
-			<artifactId>gwt-openlayers-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.gwtopenmaps.openlayers</groupId>
-			<artifactId>gwt-openlayers-server</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-		</dependency>
-						
-		<!-- SCOPE TEST -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-collections</groupId>
-					<artifactId>commons-collections</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>xerces</groupId>
-					<artifactId>xercesImpl</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.7</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
-
-		<finalName>gridwidget</finalName>
-		
-		<outputDirectory>war/WEB-INF/classes</outputDirectory>
-
-		<plugins>
-			<!-- ... or ask the plugin to detect them based on gwt modules files and 
+    <dependency>
+      <groupId>org.gwtopenmaps.openlayers</groupId>
+      <artifactId>gwt-openlayers-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.gwtopenmaps.openlayers</groupId>
+      <artifactId>gwt-openlayers-server</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+    </dependency>
+    <!-- SCOPE TEST -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-collections</groupId>
+          <artifactId>commons-collections</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xerces</groupId>
+          <artifactId>xercesImpl</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.7</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <finalName>gridwidget</finalName>
+    <outputDirectory>war/WEB-INF/classes</outputDirectory>
+    <plugins>
+      <!-- ... or ask the plugin to detect them based on gwt modules files and 
 				copy the required java sources -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>${gwt.version}</version>
-				<configuration>
-					<inplace>true</inplace>
-					<warSourceDirectory>war</warSourceDirectory>
-					<disableCastChecking>true</disableCastChecking>
-					<disableClassMetadata>true</disableClassMetadata>
-					<extraJvmArgs>-Xmx1024M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
-				</configuration>
-				<executions>
-					<!-- GWT version detected from dependencyManagement -->
-					<execution>
-						<goals>
-							<goal>resources</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>compile</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>generateAsync</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generateAsync</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-				<configuration>
-					<warSourceExcludes>.gwt-tmp/**</warSourceExcludes>
-					<warSourceDirectory>war</warSourceDirectory>
-					<webXml>war/WEB-INF/web.xml</webXml>
-				</configuration>
-			</plugin>
-			
-			<!-- Run the application using "mvn jetty:run" -->
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.20</version>
-				<configuration>
-					<webAppSourceDirectory>${basedir}/war</webAppSourceDirectory>
-					<webAppConfig>
-						<contextPath>/</contextPath>
-					</webAppConfig>
-					<connectors>
-						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>9191</port>
-							<maxIdleTime>60000</maxIdleTime>
-						</connector>
-					</connectors>
-					<reload>manual</reload>
-				</configuration>
-			</plugin>
-			
-			<!-- tell the compiler we can use 1.5 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-			</plugin>
-		</plugins>
-
-		<!-- TODO: the resources stuff hardcodes paths to source + test directories, 
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <version>${gwt.version}</version>
+        <configuration>
+          <inplace>true</inplace>
+          <warSourceDirectory>war</warSourceDirectory>
+          <disableCastChecking>true</disableCastChecking>
+          <disableClassMetadata>true</disableClassMetadata>
+          <extraJvmArgs>-Xmx1024M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
+        </configuration>
+        <executions>
+          <!-- GWT version detected from dependencyManagement -->
+          <execution>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>generateAsync</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>generateAsync</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.1.1</version>
+        <configuration>
+          <warSourceExcludes>.gwt-tmp/**</warSourceExcludes>
+          <warSourceDirectory>war</warSourceDirectory>
+          <webXml>war/WEB-INF/web.xml</webXml>
+        </configuration>
+      </plugin>
+      <!-- Run the application using "mvn jetty:run" -->
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>maven-jetty-plugin</artifactId>
+        <version>6.1.20</version>
+        <configuration>
+          <webAppSourceDirectory>${basedir}/war</webAppSourceDirectory>
+          <webAppConfig>
+            <contextPath>/</contextPath>
+          </webAppConfig>
+          <connectors>
+            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+              <port>9191</port>
+              <maxIdleTime>60000</maxIdleTime>
+            </connector>
+          </connectors>
+          <reload>manual</reload>
+        </configuration>
+      </plugin>
+      <!-- tell the compiler we can use 1.5 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+      </plugin>
+    </plugins>
+    <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
 			we should be able to use some properties here -->
-		<resources>
-			<resource>
-				<directory>${basedir}/src/main/java</directory>
-				<includes>
-					<include>**/*.txt</include>
-					<include>**/*.sql</include>
-					<include>**/*.html</include>
-					<include>**/*.xml</include>
-					<include>**/*.utf</include>
-					<include>**/*.properties</include>
-					<include>**/*.serialized</include>
-					<include>**/*.xsd</include>
-					<include>META-INF/*.jai</include>
-					<include>META-INF/mailcap</include>
-					<include>META-INF/services/**</include>
-					<include>applicationContext.xml</include>
-					<include>**/*.ftl</include>
-					<include>**/*.css</include>
-					<include>**/*.js</include>
-					<include>**/*.png</include>
-					<include>**/*.gif</include>
-					<include>**/*.sld</include>
-					<include>**/*.ico</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-				<includes>
-					<include>**/*</include>
-				</includes>
-			</resource>
-		</resources>
-
-	</build>
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/java</directory>
+        <includes>
+          <include>**/*.txt</include>
+          <include>**/*.sql</include>
+          <include>**/*.html</include>
+          <include>**/*.xml</include>
+          <include>**/*.utf</include>
+          <include>**/*.properties</include>
+          <include>**/*.serialized</include>
+          <include>**/*.xsd</include>
+          <include>META-INF/*.jai</include>
+          <include>META-INF/mailcap</include>
+          <include>META-INF/services/**</include>
+          <include>applicationContext.xml</include>
+          <include>**/*.ftl</include>
+          <include>**/*.css</include>
+          <include>**/*.js</include>
+          <include>**/*.png</include>
+          <include>**/*.gif</include>
+          <include>**/*.sld</include>
+          <include>**/*.ico</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
 </project>
