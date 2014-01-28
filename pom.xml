@@ -7,17 +7,18 @@
   <packaging>pom</packaging>
   <name>GeoGWT</name>
   <properties>
-    <geogwt-version>0.2-SNAPSHOT</geogwt-version>
-    <gwtopenmaps-version>0.8</gwtopenmaps-version>
-    <gwt.version>2.4.0</gwt.version>
+    <geogwt-version>${project.version}</geogwt-version>
+    <gwtopenmaps-version>1.0-SNAPSHOT</gwtopenmaps-version>
+    <gwt.version>2.5.1</gwt.version>
     <extjs.version>2.2.5-gwt22</extjs.version>
     <spring.version>3.0.4.RELEASE</spring.version>
-    <gt-version>8-SNAPSHOT</gt-version>
+    <gt-version>10-SNAPSHOT</gt-version>
     <commonsFileuploadVersion>1.2.1</commonsFileuploadVersion>
     <commonsIoVersion>1.4</commonsIoVersion>
-    <geosolutions-gsmanager-version>1.3.3-SNAPSHOT</geosolutions-gsmanager-version>
+    <geosolutions-gsmanager-version>1.5.2</geosolutions-gsmanager-version>
     <jaxws-version>2.1</jaxws-version>
     <cxf-version>2.3.2</cxf-version>
+	<slf4j.version>1.6.1</slf4j.version>
   </properties>
   <profiles>
     <profile>
@@ -481,6 +482,11 @@
         <artifactId>dom4j</artifactId>
         <version>1.6.1</version>
       </dependency>
+	  <dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>${slf4j.version}</version>
+	  </dependency>
       <!-- =========================================================== -->
       <!--     JAVAX SERVLET                                           -->
       <!-- =========================================================== -->
