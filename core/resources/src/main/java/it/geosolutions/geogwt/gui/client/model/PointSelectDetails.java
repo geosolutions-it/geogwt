@@ -142,4 +142,77 @@ public class PointSelectDetails extends BeanModel{
         this.scale = scale;
     }
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PointSelectDetails [lon=");
+		builder.append(lon);
+		builder.append(", lat=");
+		builder.append(lat);
+		builder.append(", x=");
+		builder.append(x);
+		builder.append(", y=");
+		builder.append(y);
+		builder.append(", scale=");
+		builder.append(scale);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(lat);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(lon);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(scale);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof PointSelectDetails)) {
+			return false;
+		}
+		PointSelectDetails other = (PointSelectDetails) obj;
+		if (Double.doubleToLongBits(lat) != Double.doubleToLongBits(other.lat)) {
+			return false;
+		}
+		if (Double.doubleToLongBits(lon) != Double.doubleToLongBits(other.lon)) {
+			return false;
+		}
+		if (Double.doubleToLongBits(scale) != Double
+				.doubleToLongBits(other.scale)) {
+			return false;
+		}
+		if (x != other.x) {
+			return false;
+		}
+		if (y != other.y) {
+			return false;
+		}
+		return true;
+	}
+
 }
