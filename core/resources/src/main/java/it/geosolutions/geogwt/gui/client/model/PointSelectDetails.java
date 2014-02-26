@@ -170,11 +170,11 @@ public class PointSelectDetails extends BeanModel{
 		final int prime = 31;
 		int result = 1;
 		long temp;
-		temp = Double.doubleToLongBits(lat);
+		temp = (long) lat;
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(lon);
+		temp = (long) lon;
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(scale);
+		temp = (long) scale;
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + x;
 		result = prime * result + y;
