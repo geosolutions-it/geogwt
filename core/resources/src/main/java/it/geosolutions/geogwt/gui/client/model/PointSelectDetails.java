@@ -196,14 +196,13 @@ public class PointSelectDetails extends BeanModel{
 			return false;
 		}
 		PointSelectDetails other = (PointSelectDetails) obj;
-		if (Double.doubleToLongBits(lat) != Double.doubleToLongBits(other.lat)) {
+		if ((long) lat != (long) other.lat) {
 			return false;
 		}
-		if (Double.doubleToLongBits(lon) != Double.doubleToLongBits(other.lon)) {
+		if ((long) lon != (long) other.lon) {
 			return false;
 		}
-		if (Double.doubleToLongBits(scale) != Double
-				.doubleToLongBits(other.scale)) {
+		if ((long) scale != (long) other.scale) {
 			return false;
 		}
 		if (x != other.x) {
