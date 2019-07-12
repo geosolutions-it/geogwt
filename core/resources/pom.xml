@@ -4,7 +4,7 @@
   <parent>
     <groupId>it.geosolutions.geogwt.core</groupId>
     <artifactId>geogwt-core</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.4-SNAPSHOT</version>
   </parent>
   <groupId>it.geosolutions.geogwt.core</groupId>
   <artifactId>geogwt-resources</artifactId>
@@ -45,16 +45,6 @@
       <groupId>javax.annotation</groupId>
       <artifactId>jsr250-api</artifactId>
       <version>1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-user</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <!-- GXT -->
-    <dependency>
-      <groupId>com.extjs</groupId>
-      <artifactId>gxt</artifactId>
     </dependency>
     <!-- dependency>
 			<groupId>com.google.gwt</groupId>
