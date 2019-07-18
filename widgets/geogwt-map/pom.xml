@@ -4,7 +4,7 @@
   <parent>
     <groupId>it.geosolutions.geogwt.widgets</groupId>
     <artifactId>geogwt-widgets</artifactId>
-    <version>0.2</version>
+    <version>0.2-SNAPSHOT</version>
   </parent>
   <groupId>it.geosolutions.geogwt.widgets.map</groupId>
   <artifactId>geogwt-widgets-map</artifactId>
