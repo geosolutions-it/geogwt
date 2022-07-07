@@ -17,7 +17,7 @@
     <commonsIoVersion>1.4</commonsIoVersion>
     <geosolutions-gsmanager-version>1.5.2</geosolutions-gsmanager-version>
     <jaxws-version>2.1</jaxws-version>
-    <cxf-version>2.3.2</cxf-version>
+    <cxf-version>2.6.11</cxf-version>
 	<slf4j.version>1.6.1</slf4j.version>
   </properties>
   <profiles>
